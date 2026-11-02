@@ -1,0 +1,37 @@
+{
+  "mcpServers" : {
+    "Notion" : {
+      "createdAt" : 1793593303.072254,
+      "enabled" : true,
+      "note" : "Notion 官方 MCP（OAuth 动态注册）",
+      "oauth" : {
+        "authorizationEndpoint" : "https://mcp.notion.com/authorize",
+        "clientId" : "Xaxw618D7xj2olKu",
+        "mode" : "static",
+        "redirectURI" : "http://localhost:54546/callback",
+        "scopes" : "default",
+        "tokenEndpoint" : "https://mcp.notion.com/token"
+      },
+      "updatedAt" : 1793593386.39872,
+      "url" : "https://mcp.notion.com/mcp"
+    },
+    "Todo" : {
+      "createdAt" : 1793593251.325155,
+      "enabled" : true,
+      "headers" : {
+        "Authorization" : "Bearer fak_K0GuNeBaZo5q1rOtzGNly3ctukdWmgxla4bMDpaRps0"
+      },
+      "note" : "青蛙todo（Bearer 认证）",
+      "url" : "https://frogtodo.shuge888.com/mcp"
+    },
+    "github" : {
+      "createdAt" : 1793593161.8843188,
+      "enabled" : true,
+      "headers" : {
+        "Authorization" : "Bearer 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"
+      },
+      "note" : "GitHub 官方 MCP（PAT 认证）",
+      "url" : "https://api.githubcopilot.com/mcp/"
+    }
+  }
+}
