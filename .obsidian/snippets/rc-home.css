@@ -1,0 +1,194 @@
+/* ==========================================================================
+   reading-collector · 本地样式
+   配合 Minimal 主题使用（https://github.com/kepano/obsidian-minimal）
+
+   设计原则：
+   1. 只复用 Minimal 的变量，不写死颜色 —— 自动跟随主题与深浅色模式
+   2. 不重复实现 Minimal 已有的能力（Dataview cards 用它自带的 .cards 类）
+   3. 本文件只解决 Minimal 没覆盖的：普通 Markdown 表格的卡片化
+
+   用法：把 cssclasses 写进笔记 front-matter
+     ---
+     cssclasses: rc-home
+     ---
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. 阅读收集首页 · 普通表格 → 卡片
+   -------------------------------------------------------------------------- */
+
+.rc-home table {
+  border-collapse: separate;
+  border-spacing: 0 6px;      /* 行间 6px 缝隙，列间 0 */
+  width: 100%;
+  margin: 0.5em 0 1.75em;
+  font-size: var(--font-text-size);
+}
+
+/* 表头：弱化成列标签，不参与卡片外观 */
+.rc-home thead th {
+  font-size: 0.72em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  text-align: left;
+  padding: 0 0.9em 0.35em;
+  border: none;
+  background: transparent;
+}
+
+/* 每行一张卡片：td 只画上下左右边框，首尾 td 各负责一半圆角 */
+.rc-home tbody td {
+  border-top: 1px solid var(--background-modifier-border);
+  border-bottom: 1px solid var(--background-modifier-border);
+  border-left: none;
+  border-right: none;
+  padding: 0.72em 0.9em;
+  vertical-align: middle;
+  background: var(--background-primary);
+  transition: background-color 120ms ease;
+}
+
+.rc-home tbody td:first-child {
+  border-left: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s) 0 0 var(--radius-s);
+}
+
+.rc-home tbody td:last-child {
+  border-right: 1px solid var(--background-modifier-border);
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  text-align: right;
+  color: var(--text-faint);
+  font-size: 0.86em;
+  white-space: nowrap;
+}
+
+/* 悬停时整行一起变色 */
+.rc-home tbody tr:hover td {
+  background: var(--background-secondary-alt);
+}
+
+/* 标题列：整块可点，去掉下划线 */
+.rc-home tbody td:first-child a {
+  display: block;
+  color: var(--text-normal);
+  font-weight: 500;
+  text-decoration: none;
+  line-height: 1.45;
+}
+
+.rc-home tbody tr:hover td:first-child a {
+  color: var(--text-accent);
+}
+
+/* 来源、作者列弱化 */
+.rc-home tbody td:nth-child(2),
+.rc-home tbody td:nth-child(3) {
+  color: var(--text-muted);
+  font-size: 0.88em;
+}
+
+.rc-home tbody td:nth-child(2) {
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   2. 移动端：卡片化后列会挤，把次要列收掉
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+
+  /* 表格在窄屏下退回 block 布局：每个 td 变成一行 */
+  .rc-home table,
+  .rc-home tbody,
+  .rc-home tbody tr,
+  .rc-home tbody td {
+    display: block;
+    width: auto;
+  }
+
+  .rc-home thead {
+    display: none;              /* 表头隐藏，靠内容自己区分 */
+  }
+
+  .rc-home table {
+    border-spacing: 0;
+  }
+
+  /* 每张卡片：整体一个圆角盒子 */
+  .rc-home tbody tr {
+    margin-bottom: 8px;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: var(--radius-m);
+    background: var(--background-primary);
+    overflow: hidden;
+  }
+
+  .rc-home tbody td {
+    border: none !important;
+    border-radius: 0 !important;
+    text-align: left !important;
+    padding: 0.55em 0.9em;
+    white-space: normal !important;
+  }
+
+  /* 标题行：字号大一点，上下留白多一点 */
+  .rc-home tbody td:first-child {
+    padding-top: 0.75em;
+    font-size: 1em;
+    font-weight: 500;
+  }
+
+  .rc-home tbody td:first-child a {
+    font-size: 1em;
+    line-height: 1.5;
+  }
+
+  /* 来源 + 日期并排显示在标题下方 */
+  .rc-home tbody td:nth-child(2) {
+    display: inline-block;
+    padding-bottom: 0.75em;
+    font-size: 0.82em;
+    color: var(--text-faint);
+  }
+
+  .rc-home tbody td:nth-child(3) {
+    display: none;               /* 作者列手机上不显示 */
+  }
+
+  .rc-home tbody td:last-child {
+    display: inline-block;
+    padding: 0.55em 0 0.75em 0.6em;
+    font-size: 0.82em;
+    color: var(--text-faint);
+  }
+
+  .rc-home tbody tr:hover td {
+    background: transparent;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. 正文排版微调（跟 Minimal 的 body 字号联动）
+   -------------------------------------------------------------------------- */
+
+/* 首段略大，作为导语 */
+.rc-home .markdown-preview-section > div:first-of-type p,
+.rc-home .markdown-reading-view > div > p:first-of-type {
+  color: var(--text-muted);
+  font-size: 0.94em;
+  line-height: 1.7;
+}
+
+/* 二级标题（月份）做成分组标签 */
+.rc-home h2 {
+  font-size: 0.78em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin: 2em 0 0.6em;
+  padding-bottom: 0.35em;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
