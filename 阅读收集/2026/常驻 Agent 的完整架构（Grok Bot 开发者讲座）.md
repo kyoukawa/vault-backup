@@ -5,7 +5,7 @@ author: "Lee Robinson（Stanford CS146S）"
 url: "https://www.bilibili.com/video/BV1wWJa61Ee3"
 collected: "2026-11-01"
 tags:
-  - 阅读收集
+  - 阅读收集/2026/11
   - 公众号
 ---
 

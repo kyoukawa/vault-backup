@@ -5,7 +5,7 @@ author: "DeepSeek"
 url: "https://mp.weixin.qq.com/s/zoS7GlReWPhfCjENGxXCdg"
 collected: "2026-11-01"
 tags:
-  - 阅读收集
+  - 阅读收集/2026/11
   - 公众号
 ---
 

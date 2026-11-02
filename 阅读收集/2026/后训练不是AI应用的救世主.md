@@ -5,7 +5,7 @@ author: "elsewhere"
 url: "https://mp.weixin.qq.com/s/bYMedAuiowu1NlZZrXsZGA"
 collected: "2026-10-26"
 tags:
-  - 阅读收集
+  - 阅读收集/2026/10
   - 公众号
 ---
 
