@@ -9,13 +9,6 @@ tags:
   - 公众号
 ---
 
-来源：微信公众号
-作者：elsewhere
-链接：[https://mp.weixin.qq.com/s/9h8AqDouRxBdfbK9GQlCvA](https://mp.weixin.qq.com/s/9h8AqDouRxBdfbK9GQlCvA)
-收集日期：2026-10-26
-
----
-
 @陈之琰
 上周在[Personal Agent](https://mp.weixin.qq.com/s?__biz=MzYzNTA3NTgwNQ==&mid=2247484563&idx=1&sn=a9541b19883488f32080a4e988de46f8&scene=21#wechat_redirect)的留言里，很多读者反复提到：“人民需要 Personal Agent 吗？”
 的确，这一轮AI应用的产品几乎都在服务所谓知识工作者：写代码的、做 ppt 的、做研究的、排日程的。在 Personal Agent 概念被单独拎出来之前，就普通人的AI产品而言，大家的第一反应还是豆包。

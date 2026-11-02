@@ -9,13 +9,6 @@ tags:
   - 公众号
 ---
 
-来源：微信公众号
-作者：elsewhere
-链接：[https://mp.weixin.qq.com/s/bYMedAuiowu1NlZZrXsZGA](https://mp.weixin.qq.com/s/bYMedAuiowu1NlZZrXsZGA)
-收集日期：2026-10-26
-
----
-
 @郭允骁
 最近几个月，市场没什么主题。具身陷入低谷，互动游戏数据很差，世界模型全球 Top1 只卖了80多亿美金，Personal Agent 创业公司很难进入，RSI 也是和大部分人没什么关系。也就擦边陪伴还有水花。
 AI应用依然处于一个较为尴尬的周期。

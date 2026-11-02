@@ -9,17 +9,6 @@ tags:
   - 公众号
 ---
 
-来源：Bilibili / YouTube
-作者：Lee Robinson（Stanford CS146S）
-链接：[https://www.bilibili.com/video/BV1wWJa61Ee3](https://www.bilibili.com/video/BV1wWJa61Ee3)
-收集日期：2026-11-01
-
----
-
-# 斯坦福 CS146S｜Grok Bot 开发者：常驻 Agent 的完整架构
-
-> 讲者：Lee Robinson（SpaceX AI / Grok） · 课程：Stanford CS146S · 时长 45 分钟
-
 ## 一句话结论
 
 常驻 agent 并不改变「模型在循环里调用工具」这个内核，只是把它从笔记本搬到了云端：一个瘦客户端加固定服务器，外面挂上按需唤醒的 Firecracker 机器、可恢复的 Temporal durable workflow、subagent 分身和一堆省 token 的上下文工程手段，让 agent 能在你关掉电脑之后继续跑几周甚至几个月。

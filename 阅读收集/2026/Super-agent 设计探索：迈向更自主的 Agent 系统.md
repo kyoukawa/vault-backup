@@ -9,13 +9,6 @@ tags:
   - 公众号
 ---
 
-来源：微信公众号
-作者：DeepSeek
-链接：[https://mp.weixin.qq.com/s/zoS7GlReWPhfCjENGxXCdg](https://mp.weixin.qq.com/s/zoS7GlReWPhfCjENGxXCdg)
-收集日期：2026-11-01
-
----
-
 本文是一篇面向工程实践的架构思路探讨，并非对 DeepSeek Harness 现有产品功能的介绍。
 
 1. Super-agent
