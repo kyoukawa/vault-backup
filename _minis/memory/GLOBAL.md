@@ -91,7 +91,7 @@ minis-sessions-cli search --keywords "<主题>"
 
 ## Obsidian vault
 
-根目录：`/var/minis/mounts/dev/TheBook`
+根目录：`/var/minis/mounts/知识库`
 **根目录只允许文件夹，不放零散文件。** 现有：`语料库/`、`语文语料库/`、`阅读收集/`
 
 阅读收集结构：`首页.md`（自动重建的索引）+ `<年>/<日期>-<标题>.md` + `附件/`
@@ -116,37 +116,20 @@ minis-sessions-cli search --keywords "<主题>"
 
 ---
 
-# 三、环境事实（2026-11-03 迁到一加 Android 16）
-
-> 从 iOS + iSH 迁移到 **一加 PLZ110 / Android 17 (sdk 37) / ColorOS**，
-> Alpine 3.21 PRoot。旧 iSH 的限制大部分消失了，但出现了新问题。
+# 三、环境事实（Minis / iSH / Alpine）
 
 | 项 | 事实 |
 |---|---|
-| 硬件 | 8 核 aarch64，15G 内存，455G 磁盘（余 393G） |
-| Python | 系统 `python3` 3.12，需 `apk add` |
-| Shell | BusyBox ash |
-| **`/dev/fd` 仍然不可用** | 进程替换 `<(...)` 还是不能用，走管道或临时文件 |
-| `/var/minis` 符号链接 | 迁移后未验证，venv 仍放 `/opt` 更稳 |
-| **沙箱看不到手机存储** | `/storage/emulated/0` 在 PRoot 内不存在，需在 App 里挂载外部文件夹 |
-| **沙箱无 `/dev/snd`** | ffmpeg 无法直接录音，必须靠 App 侧 API |
+| Python | 系统 `python3` 3.12，`/usr/bin/python3` |
+| Shell | 默认 BusyBox ash，无 bash 特性保证 |
+| 包管理 | `apk add py3-<name>` 优先；纯 Python 才用 `pip` |
+| **`/var/minis` 不支持符号链接** | venv 不能建在里面，放 `/opt` |
+| **无 `/dev/fd`** | 进程替换 `<(...)` 不可用，走管道或临时文件 |
+| **`chmod` 无效** | 设执行位用 `git update-index --chmod=+x` |
+| 磁盘 | 约 30G 可用，注意大文件 |
+| **Minis 定时任务不持久** | App 重启会丢；当前 reading-collector 全手动触发 |
 
-**依赖（2026-11-03 重装）**：`python3`、`git`、`ripgrep`、`ffmpeg`、`curl`、
-`yt-dlp 2026.10.26`、`py3-requests`、`whisper.cpp`（源码编译）。
-
-### 语音识别：三台机器的三种答案
-
-| 方案 | 状态 | 原因 |
-|---|---|---|
-| apple-speech | ❌ 不存在 | iOS 专属，Android 无此命令 |
-| android-speech | ❌ 不可用 | 这台一加没有装系统语音识别服务 |
-| faster-whisper | ❌ 不可用 | ctranslate2 只有 glibc 版，musl 符号缺失 |
-| **whisper.cpp** | ✅ **可用** | 纯 C++ 编译，实测 60 秒音频 14 秒转完 |
-
-whisper.cpp 装在 `/opt/whisper.cpp`，模型 `models/ggml-small.bin`（465MB），
-`whisper-cli` 已软链到 `/usr/local/bin/`。转写脚本自动优先选这个后端。
-
-**录音**：沙箱拿不到麦克风，用户用系统录音 App 录，然后发文件过来转。
+**依赖**：`yt-dlp`、`ffmpeg`、`ffprobe`、`apple-speech`、系统 `python3` 都在 PATH。**不建 venv、不 pip install。**
 
 `apk` 报锁错误：`kill -9 $(pgrep apk); rm -f /lib/apk/db/lock`
 
@@ -172,7 +155,7 @@ git clone https://github.com/kyoukawa/agent-system.git
 凭据在 `/root/.config/reading-collector/git-credentials`（通常能幸存；丢了从 `/var/minis/shared/.credentials/` 拷回）。
 
 ### 第三步：补 reading-collector 的运行时配置（**这两个文件不在仓库里**，必须手写）
-- `config/config.toml`：vault path = `/var/minis/mounts/dev/TheBook`，folder = `阅读收集`，group_by_year = true，index = `首页.md`，todo.category = `阅读收集`，todo.server = `Todo`
+- `config/config.toml`：vault path = `/var/minis/mounts/知识库`，folder = `阅读收集`，group_by_year = true，index = `首页.md`，todo.category = `阅读收集`，todo.server = `Todo`
 - `config/notion-map.json`：URL → page_id 映射。丢了不影响功能，只是「📇 索引」会漏掉老页面。
   补救：`notion.py list` 拿现网页面 → 用笔记 front-matter 的 `url:` 做 key 补录 → `notion.py rebuild-index`。
 
@@ -193,6 +176,43 @@ cd /var/minis/workspace/reading-collector && python3 scripts/notion.py check
 —— 但也别全指望，`/root` 重启会被清。
 
 ---
+
+## 服务器 SSH（已配置免密，所有 agent 可用）
+
+```bash
+ssh gx            # = gxwtf@39.105.54.184 -p 6000，密钥 ~/.ssh/id_ed25519
+ssh reading       # 同一个主机，别名而已
+```
+
+- 别名写在 `~/.ssh/config`，密钥由 minis 生成并已加入服务器 `authorized_keys`
+- **无需密码、无需授权**；`ssh gx '<命令>'` 或 `scp -P 6000 ... gxwtf@39.105.54.184:~/`
+- **sudo 已配置受限免密**（`/etc/sudoers.d/gxwtf-nopasswd`），可直接执行：
+  `systemctl {start,stop,restart,status,is-active,enable,disable,daemon-reload} gx*`、
+  `journalctl`、`gxwtf-systemctl`、`nginx -t` / `nginx -s reload`、
+  `cp|install *.service /etc/systemd/system/`
+- **其余 root 操作（apt/pnpm 全局安装/改 nginx 配置）仍需密码**，遇到就停下来问用户
+- 常用：`gxreading` / `gxreading-worker` / `gxwriting` / `gxexercise` / `gxaccount`；
+  站点目录 `~/gxwtf_*`，库名 `gxwtf_*`
+
+## 云端优先（2026-11-07 起，老大定的）
+
+**默认把任务派给云端 agent 跑，端上只做收尾。**
+
+```sh
+minis-cloud agent "<任务>" -p gxwtf_reading --wait --brief   # 派单并收结果（-p 已修好，2026-11-07）
+minis-cloud agent ls / show <run_id>
+```
+
+- 适合云端：改代码、批量重构、跑构建、写文档、只读体检
+- 留在端上：需要 `sudo`、需要 `git push`、需要问老大、需要看截图
+- 派单要**小且可验收**、只改指定文件；`--max-steps 15` 够文档类，重构给 40
+- 远程 agent **已获全权**（2026-11-07）：可自己 git add/commit/push（服务器 SSH key 对 gxwtf/reading-collector 有写权限）、可 `sudo -n systemctl restart gxreading`；端上只保留装系统包、改 nginx/sudoers、动数据库、需要老大拍板的事
+- agent API 就在本机：代码 `~/agent-cloud`，user systemd 单元 `gxagent`（127.0.0.1:3006），重启：
+  `ssh gx 'export XDG_RUNTIME_DIR=/run/user/$(id -u); systemctl --user restart gxagent'`
+  环境变量在 `~/.config/agent-cloud/env`（**不要手动 nohup 起，会丢 token**）
+- `-p` 曾 400 的根因：`app/main.py:agent_run` 用 `_safe_path(project)` 解析，而 `_safe_path` 以全局 `WORKDIR`（上次运行残留）为基准 → 路径二次拼接。已改为相对 `Path.home()` 解析
+- CLI 丢了就从服务器恢复：`scp gxwtf@39.105.54.184:~/agent-cloud/cli/minis_cloud.py /var/minis/workspace/agent-cloud/cli/`
+- 交接文档：`/var/minis/shared/handoff/reading-collector-20261107.md`（仓库 `docs/HANDOFF.md`）
 
 # 四、GitHub 免密推送（已配置，不要再授权）
 
@@ -318,3 +338,21 @@ cd /var/minis/workspace/reading-collector && python3 scripts/notion.py check
 - **工作前先读本文件**；有进展就更新「进展记录」。
 - 可复用的知识写进第一~六节，流水写进第七节。**第一节到第六节要精简，别变成日志堆。**
 - 本文件与 `/var/minis/shared/COLLAB.md` 是同一份（互为副本），改完两边同步。
+
+## Readest 书库同步（2026-11-07）
+
+- WebDAV 端点：`https://reading.gxwtf.cn/dav/`，用户 `reader`，密码 `9AlegLaV1wsJtNr8`（存在 `~/gxwtf_reading/.env` 的 `WEBDAV_PASSWORD`）
+- 目录：服务器 `/home/gxwtf/reading-books`，服务 `gxreading-dav.service`（wsgidav，127.0.0.1:3011）
+- nginx：reading.gxwtf.cn 的 http 与 https 两个 server 块里各有一段 `location /dav/`，改配置两处都要加
+- Readest 配置：设置 → 同步 → WebDAV 填地址与账号；笔记/进度后续走 Grimmory 兼容 API
+- 坑：3010 被 gxwtf_dev 占用改用 3011；`sudo -S` 要 `printf '%s\n' "$PASS" | sudo -S -p ""`；nginx 插 location 必须放在 `location / {` 之前，插在 `{` 后面会嵌套进 location
+
+## 自建 Readest 上线（2026-11-07）
+
+- 网页版：https://reading.gxwtf.cn/readest（`gxreadest.service`，3020，`READEST_BASE_PATH=/readest`）
+- 同步设置页：https://reading.gxwtf.cn/readest-setup（WebDAV + Grimmory 账号密码，带复制按钮）
+- 书库：https://reading.gxwtf.cn/books（导航已加入口）
+- 源码 `~/readest-web`，开关 `src/utils/access.ts` 的 `CLOUD_SYNC_REQUIRES_PREMIUM = false`
+- 构建：`BUILD_STANDALONE=true READEST_BASE_PATH=/readest pnpm build-web`，产物 `.next/standalone/apps/readest-app`，需手动拷 `.next/static` 与 `public`
+- nginx 必须用 `location ~ ^/readest(/|$)`，用 `location /readest` 会吞掉 `/readest-setup`
+- 手册：仓库 `docs/READEST-SELFHOST.md`

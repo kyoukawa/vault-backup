@@ -4,13 +4,14 @@ description: 语文作文语料库维护。用户发来作文稿/批阅单，或
 ---
 
 > **开工前先读 `/var/minis/memory/GLOBAL.md`**，读完再动手。
+> **代写/批改/评分作文时，先读同目录的 [写作基线](写作基线.md)**——那是从三篇四稿倒推出的个人判据，不要用通用模板。
 
 # corpus-zh
 
 语文作文语料库的执行 SOP。**规范源是 `PROMPT.md`，不要改。**
 
 ```bash
-CORPUS=/var/minis/mounts/dev/TheBook/语文语料库
+CORPUS=/var/minis/mounts/知识库/语文语料库
 INTAKE=/Note/语文                   # 投料口（iOS 文件 App 里的 Note/语文）
 ```
 

@@ -10,7 +10,7 @@ description: 英语作文语料库维护。用户发来版书图片/作文/批�
 英语作文语料库的执行 SOP。**规范源是 vault 里的 `PROMPT.md`，那是判定标准，不要改。**
 
 ```bash
-CORPUS=/var/minis/mounts/dev/TheBook/语料库
+CORPUS=/var/minis/mounts/知识库/语料库
 INTAKE=/var/minis/mounts/Note/En/收集      # 投料口
 ```
 
