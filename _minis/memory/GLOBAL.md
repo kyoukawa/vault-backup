@@ -341,7 +341,7 @@ minis-cloud agent ls / show <run_id>
 
 ## Readest 书库同步（2026-11-07）
 
-- WebDAV 端点：`https://reading.gxwtf.cn/dav/`，用户 `reader`，密码 `9AlegLaV1wsJtNr8`（存在 `~/gxwtf_reading/.env` 的 `WEBDAV_PASSWORD`）
+- WebDAV 端点：`https://reading.gxwtf.cn/dav/`，用户 `reader`，密码存在 `~/gxwtf_reading/.env` 的 `WEBDAV_PASSWORD`（不写值）
 - 目录：服务器 `/home/gxwtf/reading-books`，服务 `gxreading-dav.service`（wsgidav，127.0.0.1:3011）
 - nginx：reading.gxwtf.cn 的 http 与 https 两个 server 块里各有一段 `location /dav/`，改配置两处都要加
 - Readest 配置：设置 → 同步 → WebDAV 填地址与账号；笔记/进度后续走 Grimmory 兼容 API

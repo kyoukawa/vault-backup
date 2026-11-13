@@ -2,3 +2,6 @@
 .obsidian/workspace.json
 .trash/
 .stignore
+
+# 含 OAuth / API 令牌，禁止入库
+_minis/mcp-servers/
