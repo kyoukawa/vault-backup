@@ -1,0 +1,232 @@
+/* ==========================================================================
+   home-dashboard · 知识库总导航页样式
+   配合 Minimal 主题，复用其 CSS 变量，自动跟随深浅色
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. 顶部标题区
+   -------------------------------------------------------------------------- */
+
+.home-dashboard h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.4em;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid var(--background-modifier-border);
+}
+
+.home-dashboard h2 {
+  font-size: 0.78em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin: 2.4em 0 0.9em;
+  padding-bottom: 0.4em;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.home-dashboard h3 {
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--text-accent);
+  margin: 1.6em 0 0.4em;
+}
+
+/* --------------------------------------------------------------------------
+   2. 表格 → 卡片（同 rc-home 的思路，独立命名以免互相影响）
+   -------------------------------------------------------------------------- */
+
+.home-dashboard table {
+  border-collapse: separate;
+  border-spacing: 0 6px;
+  width: 100%;
+  margin: 0.5em 0 1.5em;
+  font-size: var(--font-text-size);
+}
+
+.home-dashboard thead th {
+  font-size: 0.72em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  text-align: left;
+  padding: 0 0.9em 0.3em;
+  border: none;
+  background: transparent;
+}
+
+.home-dashboard tbody td {
+  border-top: 1px solid var(--background-modifier-border);
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding: 0.8em 0.9em;
+  vertical-align: middle;
+  background: var(--background-primary);
+  transition: background-color 120ms ease;
+}
+
+.home-dashboard tbody td:first-child {
+  border-left: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s) 0 0 var(--radius-s);
+  font-weight: 500;
+}
+
+.home-dashboard tbody td:last-child {
+  border-right: 1px solid var(--background-modifier-border);
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.home-dashboard tbody tr:hover td {
+  background: var(--background-secondary-alt);
+}
+
+/* 表格里的链接：去掉下划线，悬停变色 */
+.home-dashboard tbody td a {
+  text-decoration: none;
+  color: var(--text-accent);
+  font-weight: 500;
+}
+
+.home-dashboard tbody tr:hover td a {
+  text-decoration: underline;
+}
+
+/* 库名加粗，第一列更醒目 */
+.home-dashboard tbody td:first-child strong,
+.home-dashboard tbody td:first-child {
+  color: var(--text-normal);
+}
+
+/* --------------------------------------------------------------------------
+   3. 引用块（说明文字）
+   -------------------------------------------------------------------------- */
+
+.home-dashboard blockquote {
+  border-left: 3px solid var(--text-accent);
+  background: var(--background-secondary);
+  padding: 0.75em 1em;
+  margin: 1em 0;
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  color: var(--text-muted);
+  font-size: 0.94em;
+}
+
+.home-dashboard blockquote p {
+  margin: 0;
+}
+
+/* 紧跟 h3 的引用块（判据说明）弱化一些 */
+.home-dashboard h3 + blockquote {
+  border-left-color: var(--background-modifier-border);
+  background: transparent;
+  font-size: 0.88em;
+  padding: 0.4em 0 0.4em 0.9em;
+}
+
+/* --------------------------------------------------------------------------
+   4. 代码块（备份命令）
+   -------------------------------------------------------------------------- */
+
+.home-dashboard pre {
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  padding: 0.9em 1em;
+  font-size: 0.84em;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+.home-dashboard code {
+  font-size: 0.9em;
+  background: var(--background-secondary);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+.home-dashboard pre code {
+  background: none;
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   5. 列表分隔线
+   -------------------------------------------------------------------------- */
+
+.home-dashboard ul li,
+.home-dashboard ol li {
+  padding: 0.2em 0;
+}
+
+/* 目录树用等宽字体展示更整齐 */
+.home-dashboard pre {
+  font-family: var(--font-monospace);
+}
+
+/* --------------------------------------------------------------------------
+   6. 移动端适配
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+
+  .home-dashboard h1 {
+    font-size: 1.55rem;
+  }
+
+  .home-dashboard table,
+  .home-dashboard tbody,
+  .home-dashboard tbody tr,
+  .home-dashboard tbody td {
+    display: block;
+    width: auto;
+  }
+
+  .home-dashboard thead {
+    display: none;
+  }
+
+  .home-dashboard tbody tr {
+    margin-bottom: 8px;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: var(--radius-m);
+    background: var(--background-primary);
+    overflow: hidden;
+  }
+
+  .home-dashboard tbody td {
+    border: none !important;
+    border-radius: 0 !important;
+    text-align: left !important;
+    white-space: normal !important;
+    padding: 0.5em 0.9em;
+  }
+
+  .home-dashboard tbody td:first-child {
+    padding-top: 0.75em;
+    font-size: 1.02em;
+  }
+
+  /* 规模列保留，缩小字号放在标题下方 */
+  .home-dashboard tbody td:nth-child(3) {
+    padding-top: 0;
+    font-size: 0.82em;
+    color: var(--text-faint);
+  }
+
+  .home-dashboard tbody td:last-child {
+    padding: 0 0.9em 0.8em;
+    text-align: left !important;
+  }
+
+  .home-dashboard tbody td:last-child a {
+    display: inline-block;
+    padding: 0.25em 0.7em;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 999px;
+    font-size: 0.86em;
+  }
+}

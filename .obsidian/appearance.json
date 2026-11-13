@@ -1,7 +1,9 @@
 {
   "cssTheme": "Minimal",
   "enabledCssSnippets": [
-    "rc-home"
+    "rc-home",
+    "home-dashboard"
   ],
+  "textFontFamily": "Arial",
   "showRibbon": true
 }

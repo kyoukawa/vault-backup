@@ -1,24 +1,34 @@
 {
   "main": {
-    "id": "95bd8891e1342a82",
+    "id": "0abb209ead1cb22f",
     "type": "split",
     "children": [
       {
-        "id": "7e8009cde3397c0d",
+        "id": "c442058303c3cb40",
         "type": "tabs",
         "children": [
           {
-            "id": "3d251f04ecd8751c",
+            "id": "d3b2132886ea75f2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "阅读收集/2026/常驻 Agent 的完整架构（Grok Bot 开发者讲座）.md",
+                "file": "英语语料库/考场速查一页纸.md",
                 "mode": "preview",
-                "source": false
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
-              "title": "常驻 Agent 的完整架构（Grok Bot 开发者讲座）"
+              "title": "考场速查一页纸"
             }
           }
         ]
@@ -27,11 +37,11 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "d3f42d175045f297",
+    "id": "40bd9f9f9d6d19fe",
     "type": "mobile-drawer",
     "children": [
       {
-        "id": "64f4e5fa0be71702",
+        "id": "8756f50ecacc0831",
         "type": "leaf",
         "state": {
           "type": "file-explorer",
@@ -46,7 +56,7 @@
         }
       },
       {
-        "id": "f55a905c95b15b63",
+        "id": "ad1c6cbe211ebe64",
         "type": "leaf",
         "state": {
           "type": "search",
@@ -63,7 +73,7 @@
         }
       },
       {
-        "id": "21903f64e8bcc49c",
+        "id": "e4be9992650d58e3",
         "type": "leaf",
         "state": {
           "type": "tag",
@@ -78,7 +88,7 @@
         }
       },
       {
-        "id": "1248dbbafbcbbb69",
+        "id": "cd53101fc945b74b",
         "type": "leaf",
         "state": {
           "type": "all-properties",
@@ -92,7 +102,7 @@
         }
       },
       {
-        "id": "0d109462a3a83c1a",
+        "id": "cfbf959de5d1d592",
         "type": "leaf",
         "state": {
           "type": "bookmarks",
@@ -108,16 +118,16 @@
     "currentTab": 0
   },
   "right": {
-    "id": "411206dfdf69bb81",
+    "id": "1553697071aac2b1",
     "type": "mobile-drawer",
     "children": [
       {
-        "id": "3c4a502b72e3f252",
+        "id": "fe3faa690d2a2d6e",
         "type": "leaf",
         "state": {
           "type": "backlink",
           "state": {
-            "file": "阅读收集/首页.md",
+            "file": "英语语料库/考场速查一页纸.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -131,12 +141,12 @@
         }
       },
       {
-        "id": "a4a42a38db4c68f7",
+        "id": "6ea168d4af6ac908",
         "type": "leaf",
         "state": {
           "type": "outgoing-link",
           "state": {
-            "file": "阅读收集/2026/时文三则（2026-10-30）：三件正在被重新定价的事.md",
+            "file": "阅读收集/首页.md",
             "linksCollapsed": false,
             "unlinkedCollapsed": true
           },
@@ -145,12 +155,12 @@
         }
       },
       {
-        "id": "32ec0cf7abfc4f89",
+        "id": "82df00b2c56140bb",
         "type": "leaf",
         "state": {
           "type": "outline",
           "state": {
-            "file": "阅读收集/2026/时文三则（2026-10-30）：三件正在被重新定价的事.md",
+            "file": "阅读收集/首页.md",
             "followCursor": false,
             "showSearch": false,
             "searchQuery": ""
@@ -173,39 +183,43 @@
       "bases:新建数据库": false
     }
   },
-  "active": "3d251f04ecd8751c",
+  "active": "d3b2132886ea75f2",
   "lastOpenFiles": [
+    "英语语料库/INDEX.md",
+    "语文语料库/INDEX.md",
+    "化学错题本/bank-选择题.md",
+    "化学错题本/化学错题本.md",
+    "英语语料库/corpus/05-家庭与情感.md",
+    "英语语料库/proposals/2026-11-09-家庭与情感候选.md",
+    "英语语料库/proposals/已定案/2026-11-09-家庭与情感候选.md",
+    "英语语料库/备考方向.md",
     "阅读收集/首页.md",
-    "语料库/INDEX.md",
-    "阅读收集/2026/常驻 Agent 的完整架构（Grok Bot 开发者讲座）.md",
-    "阅读收集/2026/时文三则（2026-10-29 · 第三版）：三处不能加速的地方.md",
-    "阅读收集/2026/时文三则（2026-10-30）：三件正在被重新定价的事.md",
     "阅读收集/2026/后训练不是AI应用的救世主.md",
     "阅读收集/2026/Super-agent 设计探索：迈向更自主的 Agent 系统.md",
-    "语文语料库/INDEX.md",
-    "语文语料库/corpus/00-跨篇通用招法.md",
-    "语文语料库/corpus/01-说论辩.md",
-    "语文语料库/corpus/02-说迭代.md",
-    "语料库/corpus/00-跨主题句式库.md",
-    "语料库/corpus/02-劳动与社会实践.md",
-    "语料库/corpus/01-科技与城市生活.md",
-    "语文语料库/REVIEW/recall-queue.md",
+    "化学错题本/topics/反应原理-热化学与速率.md",
+    "化学错题本/topics/阿伏加德罗常数.md",
+    "化学错题本/topics/实验-装置与操作.md",
+    "化学错题本/topics/离子方程与化学用语.md",
+    "化学错题本/topics/实验-定量与滴定.md",
+    "化学错题本/topics/有机-高分子与水解.md",
+    "化学错题本/topics/电化学-电极与方向.md",
+    "化学错题本/topics/速查-沉淀溶解平衡表.md",
+    "英语语料库/考场速查一页纸.md",
+    "英语语料库/五年真题规律.md",
+    "英语语料库/proposals/已定案/2026-11-04-传统文化候选2.md",
+    "英语语料库/proposals/已定案/2026-11-04-科技体育候选.md",
+    "英语语料库/proposals/已定案/2026-11-04-科技候选.md",
+    "英语语料库/proposals/已定案/2026-11-04-健康候选.md",
+    "英语语料库/corpus/04-文化与传承.md",
+    "英语语料库/proposals/已定案",
+    "英语语料库/proposals",
+    "英语语料库/corpus",
+    "英语语料库/REVIEW",
+    "英语语料库",
     "语文语料库/REVIEW/due.sh",
-    "语文语料库/WORKFLOW.md",
-    "语文语料库/PROMPT.md",
-    "语料库/REVIEW/recall-queue.md",
-    "语料库/REVIEW/due.sh",
-    "语料库/WORKFLOW.md",
-    "语料库/PROMPT.md",
-    "语料库/REVIEW",
-    "语料库/proposals",
-    "语料库/corpus",
-    "语料库/images",
-    "语料库",
+    "语文语料库/corpus",
     "语文语料库/REVIEW",
-    "语文语料库/proposals",
-    "语文语料库/作文",
-    "阅读收集/2026/如果Personal Agent不只属于一个人.md",
-    "阅读收集/2026/索引.md"
+    "语文语料库",
+    "语料库/REVIEW/due.sh"
   ]
 }
