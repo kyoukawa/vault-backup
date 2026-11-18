@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>知识库</title>
+<script src="assets/marked.min.js"></script>
+<style>
+  body{max-width:900px;margin:0 auto;padding:1.5rem 1.2rem 4rem;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.75;color:#222;word-wrap:break-word}
+  h1,h2,h3{line-height:1.35}
+  h1{border-bottom:2px solid #4a7;padding-bottom:.3rem}
+  h2{margin-top:2rem;border-bottom:1px solid #e4e8ec;padding-bottom:.25rem}
+  h3{margin-top:1.5rem}
+  table{border-collapse:collapse;width:100%;margin:1rem 0}
+  th,td{border:1px solid #ddd;padding:.45rem .6rem;text-align:left}
+  th{background:#f3f6f9}
+  a{color:#26a;text-decoration:none}
+  a:hover{text-decoration:underline}
+  code,pre{background:#f5f6f7;border-radius:4px;font-family:Consolas,monospace}
+  code{padding:.1rem .35rem}
+  pre{padding:.8rem;overflow-x:auto}
+  blockquote{border-left:4px solid #4a7;margin:1rem 0;padding:.3rem 1rem;color:#556;background:#f8fafb}
+  img{max-width:100%}
+  .crumb{font-size:.85rem;color:#779;margin-bottom:1rem}
+  .crumb a{color:#58a}
+  .note{background:#fff8e6;border-left:4px solid #d9a400;padding:.4rem 1rem;margin:1rem 0;font-size:.9rem}
+  #err{color:#b33}
+</style>
+</head>
+<body>
+<div class="crumb"><a href="index.html">首页</a> / <span id="title">加载中…</span></div>
+<div id="err"></div>
+<article id="md"></article>
+<script>
+function resolveWikilink(raw){
+  // raw = target part before | ; strip leading #/! and anchors
+  let t=raw.trim().replace(/^[#!]+/,'').split('#')[0].trim();
+  if(!t) return null;
+  let keys=[t, t.endsWith('.md')?t:t+'.md', './'+t, '/'+t];
+  for(const k of keys){ if(linkmap[k]) return linkmap[k]; }
+  // basename fallback
+  const base=t.split('/').pop();
+  for(const k in linkmap){ if(k.split('/').pop()===base || k.split('/').pop()===base+'.md') return linkmap[k]; }
+  return t.endsWith('.md')?t:t+'.md';
+}
+function mdLink(href,label){ return '<a href="view.html?file='+encodeURIComponent(href)+'">'+label+'</a>'; }
+function convertObsidian(text){
+  // [[target|label]] and [[target]]  (allow escaped \| inside tables as literal pipe in target)
+  text=text.replace(/\[\[([^\]\n]+?)\]\]/g,(m,inner)=>{
+    let parts=inner.split(/(?<!\\)\|/); // split on unescaped |
+    let target=parts[0].replace(/\\\|/g,'|').trim();
+    let label=(parts[1]||parts[0]).replace(/\\\|/g,'|').trim();
+    let href=resolveWikilink(target);
+    return href?mdLink(href,label):label;
+  });
+  // markdown images ![[file.png]] -> raw file (no embed rendering)
+  text=text.replace(/!\[\[([^\]\n]+?)\]\]/g,(m,f)=>'<img alt="'+f+'" src="'+encodeURIComponent(f)+'">');
+  return text;
+}
+async function main(){
+  const params=new URLSearchParams(location.search);
+  const file=params.get('file');
+  if(!file){ document.getElementById('err').innerHTML='缺少 file 参数'; return; }
+  try{
+    const lm=await fetch('assets/linkmap.json').then(r=>r.json());
+    window.linkmap=lm;
+    let path=lm[file]||file;
+    const resp=await fetch(encodeURI(path).replace(/%2F/g,'/'));
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
+    let text=await resp.text();
+    document.title=(path.split('/').pop()||'知识库')+' · 知识库';
+    document.getElementById('title').textContent=path;
+    // strip YAML frontmatter
+    if(text.startsWith('---')){ let e=text.indexOf('\n---'); if(e>0) text=text.slice(e+4); }
+    document.getElementById('md').innerHTML=marked.parse(convertObsidian(text));
+  }catch(e){ document.getElementById('err').innerHTML='加载失败: '+e.message; }
+}
+main();
+</script>
+</body>
+</html>
