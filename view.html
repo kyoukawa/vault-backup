@@ -6,11 +6,11 @@
 <title>知识库</title>
 <script src="assets/marked.min.js"></script>
 <style>
-  body{max-width:900px;margin:0 auto;padding:1.5rem 1.2rem 4rem;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.75;color:#222;word-wrap:break-word}
-  h1,h2,h3{line-height:1.35}
+  body{max-width:920px;margin:0 auto;padding:1.5rem 1.2rem 5rem;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.8;color:#222;word-wrap:break-word}
+  h1,h2,h3,h4{line-height:1.35}
   h1{border-bottom:2px solid #4a7;padding-bottom:.3rem}
   h2{margin-top:2rem;border-bottom:1px solid #e4e8ec;padding-bottom:.25rem}
-  h3{margin-top:1.5rem}
+  h3{margin-top:1.6rem;color:#2b4a6b}
   table{border-collapse:collapse;width:100%;margin:1rem 0}
   th,td{border:1px solid #ddd;padding:.45rem .6rem;text-align:left}
   th{background:#f3f6f9}
@@ -19,12 +19,28 @@
   code,pre{background:#f5f6f7;border-radius:4px;font-family:Consolas,monospace}
   code{padding:.1rem .35rem}
   pre{padding:.8rem;overflow-x:auto}
-  blockquote{border-left:4px solid #4a7;margin:1rem 0;padding:.3rem 1rem;color:#556;background:#f8fafb}
+  blockquote{border-left:4px solid #9ab;margin:1rem 0;padding:.3rem 1rem;color:#556;background:#f6f9fa}
   img{max-width:100%}
   .crumb{font-size:.85rem;color:#779;margin-bottom:1rem}
   .crumb a{color:#58a}
-  .note{background:#fff8e6;border-left:4px solid #d9a400;padding:.4rem 1rem;margin:1rem 0;font-size:.9rem}
   #err{color:#b33}
+  /* ==== 题集 callout 框 ==== */
+  details.callout{border-radius:8px;margin:.9rem 0;overflow:hidden;border:1px solid #d8e2ea;box-shadow:0 1px 3px rgba(20,50,80,.05)}
+  details.callout>summary{cursor:pointer;list-style:none;padding:.55rem .9rem;font-weight:600;font-size:.92rem;user-select:none;display:flex;align-items:center;gap:.5rem}
+  details.callout>summary::-webkit-details-marker{display:none}
+  details.callout>summary::before{content:"▸";font-size:.85rem;transition:transform .15s;display:inline-block}
+  details.callout[open]>summary::before{transform:rotate(90deg)}
+  details.callout.q{background:#f2f8ff;border-left:4px solid #3b82f6}
+  details.callout.q>summary{color:#1d4ed8;background:#e8f2ff}
+  details.callout.q[open]>summary{border-bottom:1px solid #d0e2f7}
+  details.callout.a{background:#f2fbf5;border-left:4px solid #22a06b}
+  details.callout.a>summary{color:#137a4e;background:#e6f7ee}
+  details.callout.a[open]>summary{border-bottom:1px solid #cceede}
+  details.callout .callout-body{padding:.7rem 1rem;font-size:.95rem}
+  details.callout .callout-body p{margin:.45rem 0}
+  details.callout .callout-body p:first-child{margin-top:0}
+  /* 题干里的填空下划线更醒目 */
+  .callout.q .callout-body{letter-spacing:.01em}
 </style>
 </head>
 <body>
@@ -33,27 +49,37 @@
 <article id="md"></article>
 <script>
 function resolveWikilink(raw){
-  // raw = target part before | ; strip leading #/! and anchors
   let t=raw.trim().replace(/^[#!]+/,'').split('#')[0].trim();
   if(!t) return null;
   let keys=[t, t.endsWith('.md')?t:t+'.md', './'+t, '/'+t];
   for(const k of keys){ if(linkmap[k]) return linkmap[k]; }
-  // basename fallback
   const base=t.split('/').pop();
   for(const k in linkmap){ if(k.split('/').pop()===base || k.split('/').pop()===base+'.md') return linkmap[k]; }
   return t.endsWith('.md')?t:t+'.md';
 }
 function mdLink(href,label){ return '<a href="view.html?file='+encodeURIComponent(href)+'">'+label+'</a>'; }
 function convertObsidian(text){
-  // [[target|label]] and [[target]]  (allow escaped \| inside tables as literal pipe in target)
+  // ---- 1. Obsidian callouts -> collapsible boxes (must run before wikilinks) ----
+  // match a run of '> [!type] title' / '> [!type]- title' lines with their '> ...' body,
+  // optionally preceded/followed by blank quoted lines.
+  text=text.replace(/(^|\n)(> \[!(\w+)\]([-+])?[^\n]*\n(?:>[^\n]*\n)*)/g,(m,pre,block,type,fold)=>{
+    const lines=block.split('\n').filter(l=>l.startsWith('>'));
+    const head=lines[0].replace(/^>\s*/,'');
+    const kind=head.replace(/^\[!\w+\]([-+])?\s*/,'').trim()|| ({question:'题目',success:'参考答案',note:'笔记',tip:'提示',warning:'注意'}[type]||type);
+    const body=lines.slice(1).map(l=>l.replace(/^>\s?/,'')).join('\n').replace(/\n{2,}/g,'\n\n').trim();
+    const cls=(type==='question')?'q':(type==='success')?'a':'n';
+    const open=(type==='question'||fold==='+' || (type!=='question'&&type!=='success'))?' open':'';
+    return pre+'<details class="callout '+cls+'"'+open+'><summary>'+kind+'</summary><div class="callout-body">'+marked.parse(body)+'</div></details>\n';
+  });
+  // ---- 2. [[target|label]] and [[target]] ----
   text=text.replace(/\[\[([^\]\n]+?)\]\]/g,(m,inner)=>{
-    let parts=inner.split('|'); // split on every pipe (table escapes are just extra backslashes)
+    let parts=inner.split('|');
     let target=parts[0].replace(/\\/g,'').trim();
     let label=(parts[1]||parts[0]).replace(/\\/g,'').trim();
     let href=resolveWikilink(target);
     return href?mdLink(href,label):label;
   });
-  // markdown images ![[file.png]] -> raw file (no embed rendering)
+  // ---- 3. ![[file.png]] ----
   text=text.replace(/!\[\[([^\]\n]+?)\]\]/g,(m,f)=>'<img alt="'+f+'" src="'+encodeURIComponent(f)+'">');
   return text;
 }
@@ -70,9 +96,11 @@ async function main(){
     let text=await resp.text();
     document.title=(path.split('/').pop()||'知识库')+' · 知识库';
     document.getElementById('title').textContent=path;
-    // strip YAML frontmatter
     if(text.startsWith('---')){ let e=text.indexOf('\n---'); if(e>0) text=text.slice(e+4); }
-    document.getElementById('md').innerHTML=marked.parse(convertObsidian(text));
+    const converted=convertObsidian(text);
+    const html=marked.parse(converted);
+    document.getElementById('md').innerHTML=html;
+    // re-open any <details> that marked may have wrapped in <p> (none expected), no-op safeguard
   }catch(e){ document.getElementById('err').innerHTML='加载失败: '+e.message; }
 }
 main();
