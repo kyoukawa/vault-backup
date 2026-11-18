@@ -47,9 +47,9 @@ function mdLink(href,label){ return '<a href="view.html?file='+encodeURIComponen
 function convertObsidian(text){
   // [[target|label]] and [[target]]  (allow escaped \| inside tables as literal pipe in target)
   text=text.replace(/\[\[([^\]\n]+?)\]\]/g,(m,inner)=>{
-    let parts=inner.split(/(?<!\\)\|/); // split on unescaped |
-    let target=parts[0].replace(/\\\|/g,'|').trim();
-    let label=(parts[1]||parts[0]).replace(/\\\|/g,'|').trim();
+    let parts=inner.split('|'); // split on every pipe (table escapes are just extra backslashes)
+    let target=parts[0].replace(/\\/g,'').trim();
+    let label=(parts[1]||parts[0]).replace(/\\/g,'').trim();
     let href=resolveWikilink(target);
     return href?mdLink(href,label):label;
   });
