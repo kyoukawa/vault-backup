@@ -1,3 +1,5 @@
+↑ [[知识库导航|总导航]]
+
 # 英语语料库 · 索引
 
 > 规范见 [PROMPT](PROMPT.md) ｜ 流程见 [WORKFLOW](WORKFLOW.md)
