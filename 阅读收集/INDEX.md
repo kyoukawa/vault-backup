@@ -10,12 +10,16 @@ cssclasses:
 > 收集到的网页 / 公众号 / X / 播客 / 视频等有价值内容，一条一篇。
 > 由 reading-collector 自动生成，请勿手工编辑本文件的表格区。
 
-## ⚡ 时文快捷入口（固定短链，收藏这些不会 404）
+## ⚡ 时文快捷入口（全英文地址，可放心收藏转发）
 
-- 冷门绝学 · 假忙与实干 → `kyoukawa.github.io/vault-backup/sw-1.html`
-- 科研评价 · 敦煌守护 → `kyoukawa.github.io/vault-backup/sw-2.html`
-- 三处不能加速的地方 → `kyoukawa.github.io/vault-backup/sw-3.html`
-- 三件正在被重新定价的事 → `kyoukawa.github.io/vault-backup/sw-4.html`
+| 内容 | 英文长链（view.html?file=ID） | 短链 |
+|---|---|---|
+| 冷门绝学 · 假忙与实干 | `view.html?file=cold-studies` | `sw-1.html` |
+| 科研评价 · 敦煌守护 | `view.html?file=research-dunhuang` | `sw-2.html` |
+| 三处不能加速的地方 | `view.html?file=cannot-hurry` | `sw-3.html` |
+| 三件正在被重新定价的事 | `view.html?file=repriced` | `sw-4.html` |
+
+> 完整前缀：`https://kyoukawa.github.io/vault-backup/`。全部 ID（92 个，含每篇笔记）见 [[阅读收集/英文ID对照表|英文ID对照表]]。
 
 共 **9** 篇，按收集时间倒序。
 
