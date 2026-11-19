@@ -57,6 +57,12 @@ function resolveWikilink(raw){
   for(const k of keys){ if(linkmap[k]) return linkmap[k]; }
   const base=t.split('/').pop();
   for(const k in linkmap){ if(k.split('/').pop()===base || k.split('/').pop()===base+'.md') return linkmap[k]; }
+  // ids.json 回退：按文件名 basename 找完整路径（新笔记可能未在 linkmap 中）
+  if(window.idmap){
+    for(const [id,full] of Object.entries(window.idmap)){
+      if(full.split('/').pop()===base || full.split('/').pop()===base+'.md') return full;
+    }
+  }
   return t.endsWith('.md')?t:t+'.md';
 }
 function idForPath(p){
