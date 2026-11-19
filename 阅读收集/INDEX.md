@@ -10,6 +10,13 @@ cssclasses:
 > 收集到的网页 / 公众号 / X / 播客 / 视频等有价值内容，一条一篇。
 > 由 reading-collector 自动生成，请勿手工编辑本文件的表格区。
 
+## ⚡ 时文快捷入口（固定短链，收藏这些不会 404）
+
+- 冷门绝学 · 假忙与实干 → `kyoukawa.github.io/vault-backup/sw-1.html`
+- 科研评价 · 敦煌守护 → `kyoukawa.github.io/vault-backup/sw-2.html`
+- 三处不能加速的地方 → `kyoukawa.github.io/vault-backup/sw-3.html`
+- 三件正在被重新定价的事 → `kyoukawa.github.io/vault-backup/sw-4.html`
+
 共 **9** 篇，按收集时间倒序。
 
 ## 2026-11
