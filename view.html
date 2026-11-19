@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>知识库</title>
 <script src="assets/marked.min.js"></script>
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<script defer src="assets/katex/katex.min.js"></script>
 <style>
   body{max-width:920px;margin:0 auto;padding:1.5rem 1.2rem 5rem;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.8;color:#222;word-wrap:break-word}
   h1,h2,h3,h4{line-height:1.35}
@@ -58,6 +60,15 @@ function resolveWikilink(raw){
   return t.endsWith('.md')?t:t+'.md';
 }
 function mdLink(href,label){ return '<a href="view.html?file='+encodeURIComponent(href)+'">'+label+'</a>'; }
+function convertChem(s){
+  // 化学离子/分子式：Fe3+ -> $\mathrm{Fe}^{3+}$；跳过 ______ 填空；Unicode 上下标保留
+  // 仅转换「元素符号+数字+正负」这种紧凑式，避免误伤普通文本
+  s=s.replace(/\\_/g,'__KATEXESC__');
+  s=s.replace(/(\b[A-Z][a-z]?)(\d+)([+-])/g,(m,el,n,sg)=>'$\\mathrm{'+el+'}^{'+n+sg+'}$');
+  s=s.replace(/(\b[A-Z][a-z]?)(\d+)(?=[^\\w\\d]|$)/g,(m,el,n)=>'$\\mathrm{'+el+'}_'+n+'$');
+  s=s.replace(/__KATEXESC__/g,'\\_');
+  return s;
+}
 function convertObsidian(text){
   // ---- 1. Obsidian callouts -> collapsible boxes (must run before wikilinks) ----
   // match a run of '> [!type] title' / '> [!type]- title' lines with their '> ...' body,
@@ -67,6 +78,7 @@ function convertObsidian(text){
     const head=lines[0].replace(/^>\s*/,'');
     const kind=head.replace(/^\[!\w+\]([-+])?\s*/,'').trim()|| ({question:'题目',success:'参考答案',note:'笔记',tip:'提示',warning:'注意'}[type]||type);
     const body=lines.slice(1).map(l=>l.replace(/^>\s?/,'')).join('\n').replace(/\n{2,}/g,'\n\n').trim();
+    // (chem conversion applied globally below instead)
     const cls=(type==='question')?'q':(type==='success')?'a':'n';
     const open=(type==='question'||fold==='+' || (type!=='question'&&type!=='success'))?' open':'';
     return pre+'<details class="callout '+cls+'"'+open+'><summary>'+kind+'</summary><div class="callout-body">'+marked.parse(body)+'</div></details>\n';
@@ -82,6 +94,31 @@ function convertObsidian(text){
   // ---- 3. ![[file.png]] ----
   text=text.replace(/!\[\[([^\]\n]+?)\]\]/g,(m,f)=>'<img alt="'+f+'" src="'+encodeURIComponent(f)+'">');
   return text;
+}
+function renderMath(root){
+  function go(){
+    if(!window.katex) return setTimeout(go,100);
+    root.querySelectorAll(':not(script):not(style)').forEach(()=>{});
+    // text nodes: find $...$ segments and render
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+    const nodes=[]; let n;
+    while((n=walker.nextNode())) nodes.push(n);
+    nodes.forEach(node=>{
+      const txt=node.nodeValue;
+      if(!txt || txt.indexOf('$')<0) return;
+      const frag=document.createDocumentFragment();
+      let i=0, re=/\$([^$\n]+)\$/g, m, last=0;
+      while((m=re.exec(txt))){
+        if(m.index>last) frag.appendChild(document.createTextNode(txt.slice(last,m.index)));
+        try{ const span=document.createElement('span'); katex.render(m[1],span,{throwOnError:false,displayMode:false}); frag.appendChild(span); }
+        catch(e){ frag.appendChild(document.createTextNode(m[0])); }
+        last=m.index+m[0].length;
+      }
+      if(last<txt.length) frag.appendChild(document.createTextNode(txt.slice(last)));
+      if(last>0) node.parentNode.replaceChild(frag,node);
+    });
+  }
+  go();
 }
 async function main(){
   const params=new URLSearchParams(location.search);
@@ -100,6 +137,7 @@ async function main(){
     const converted=convertObsidian(text);
     const html=marked.parse(converted);
     document.getElementById('md').innerHTML=html;
+    renderMath(document.getElementById('md'));
     // re-open any <details> that marked may have wrapped in <p> (none expected), no-op safeguard
   }catch(e){ document.getElementById('err').innerHTML='加载失败: '+e.message; }
 }
