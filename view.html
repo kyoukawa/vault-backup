@@ -59,7 +59,13 @@ function resolveWikilink(raw){
   for(const k in linkmap){ if(k.split('/').pop()===base || k.split('/').pop()===base+'.md') return linkmap[k]; }
   return t.endsWith('.md')?t:t+'.md';
 }
-function mdLink(href,label){ return '<a href="view.html?file='+encodeURIComponent(href)+'">'+label+'</a>'; }
+function idForPath(p){
+  // 真实路径 -> 英文 ID（优先短 ID），没有则返回原路径（兼容）
+  if(!window.idmap) return p;
+  for(const [id,path] of Object.entries(window.idmap)){ if(path===p) return id; }
+  return p;
+}
+function mdLink(href,label){ return '<a href="view.html?file='+encodeURIComponent(idForPath(href))+'">'+label+'</a>'; }
 function convertChem(s){
   // 化学离子/分子式：Fe3+ -> $\mathrm{Fe}^{3+}$；跳过 ______ 填空；Unicode 上下标保留
   // 仅转换「元素符号+数字+正负」这种紧凑式，避免误伤普通文本
@@ -125,9 +131,13 @@ async function main(){
   const file=params.get('file');
   if(!file){ document.getElementById('err').innerHTML='缺少 file 参数'; return; }
   try{
+    // 支持纯英文 ID：?file=cold-studies 等；同时兼容原中文路径
+    let idmap={};
+    try{ idmap=await fetch('assets/ids.json').then(r=>r.json()); window.idmap=idmap; }catch(e){}
+    let resolved=idmap[file]||file;
     const lm=await fetch('assets/linkmap.json').then(r=>r.json());
     window.linkmap=lm;
-    let path=lm[file]||file;
+    let path=lm[resolved]||resolved;
     const resp=await fetch(encodeURI(path).replace(/%2F/g,'/'));
     if(!resp.ok) throw new Error('HTTP '+resp.status);
     let text=await resp.text();
