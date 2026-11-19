@@ -2,6 +2,8 @@
 <html lang="zh-CN"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>每日一题 · 2026-11-19</title>
+<link rel="stylesheet" href="../assets/katex/katex.min.css">
+<script defer src="../assets/katex/katex.min.js"></script>
 <style>
 *{box-sizing:border-box}
 body{max-width:860px;margin:0 auto;padding:1.4rem 1.2rem 5rem;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.85;color:#222;background:#fcfdfd}
@@ -95,7 +97,7 @@ footer{color:#9aa5b1;font-size:.78rem;margin-top:3rem;text-align:center}
 </section><section class="card" id="q3">
 <div class="qhead"><span class="qno">3</span><h2>2025北京朝阳高三一模</h2><span class="tag">化学实验-探究与测定</span></div>
 <div class="qbody">19．（13 分）
-实验小组探究 Cl 对 KMnO4 测定 Fe2+含量的影响。
+实验小组探究 Cl 对 KMnO4 测定 $\mathrm{Fe}^{2+}$含量的影响。
 －
 
 
@@ -108,8 +110,8 @@ footer{color:#9aa5b1;font-size:.78rem;margin-top:3rem;text-align:center}
 
 －
 
-与 Fe2+ 的还原性能为测定条件的选择提供参考，设计实验：
-取少量 MnO2，加入 2 mL 物质 A 的溶液，A 是<span class="blank">＿＿＿＿</span>。经检验，证实了 Fe2+ 的还原性强于
+与 $\mathrm{Fe}^{2+}$ 的还原性能为测定条件的选择提供参考，设计实验：
+取少量 MnO2，加入 2 mL 物质 A 的溶液，A 是<span class="blank">＿＿＿＿</span>。经检验，证实了 $\mathrm{Fe}^{2+}$ 的还原性强于
 －
 
 Cl 。
@@ -160,19 +162,19 @@ Cl 。
 
 证实 Cl 浓度大更易被氧化。
 
-（4）根据Ⅰ、Ⅱ的结果，进一步探究 Cl 对 KMnO4 测定 Fe2+的影响。实验如下：把 FeSO4
+（4）根据Ⅰ、Ⅱ的结果，进一步探究 Cl 对 KMnO4 测定 $\mathrm{Fe}^{2+}$的影响。实验如下：把 FeSO4
 －
 
 溶液加入到Ⅰ、Ⅱ实验后的混合液中，用湿润的碘化钾淀粉试纸检验气体。
 
 出 a、b 中沉淀，分别加入稀硫酸，沉淀均溶解，取少量溶液加入 KSCN 溶液，溶液变红。解释实
-验 b 中产生 Cl2 的原因：<span class="blank">＿＿＿＿</span>。
+验 b 中产生 $\mathrm{Cl}_2$ 的原因：<span class="blank">＿＿＿＿</span>。
 
-（5）应用：测定水样（含 Cl ）中 Fe2+ 的含量
+（5）应用：测定水样（含 Cl ）中 $\mathrm{Fe}^{2+}$ 的含量
 －
 
 取 10 mL 水样，配制成 100 mL 溶液。准确量取 5 mL 溶液，向其中加入 H2SO4、H3PO4 和
-MnSO4 溶液，再用 KMnO4 滴定 Fe2+。
+MnSO4 溶液，再用 KMnO4 滴定 $\mathrm{Fe}^{2+}$。
 ① 解释 MnSO4 的作用：<span class="blank">＿＿＿＿</span>。
 ② 将 10 mL 水样配制成 100 mL 溶液，这种做法的优点是<span class="blank">＿＿＿＿</span>。</div>
 <details class="orig"><summary>原题原图（含图表，点开放大）</summary><a href="img/2026-11-19/q3.png" target="_blank"><img src="img/2026-11-19/q3.png" alt="原题原图" loading="lazy"></a></details>
@@ -211,8 +213,8 @@ MnSO4 溶液，再用 KMnO4 滴定 Fe2+。
 －
 
 
-（4）MnO－4 氧化 Fe2+的过程中产生 H+，溶液酸性增强，MnO－4 氧化性增强；c(Cl ) 浓度大，
-Cl－的还原性增强；Fe2+ 促进了 MnO－4 与 Cl－的反应
+（4）MnO－4 氧化 $\mathrm{Fe}^{2+}$的过程中产生 H+，溶液酸性增强，MnO－4 氧化性增强；c(Cl ) 浓度大，
+Cl－的还原性增强；$\mathrm{Fe}^{2+}$ 促进了 MnO－4 与 Cl－的反应
 
 
 （5）① 降低 MnO－4 的氧化性，防止氧化 Cl
@@ -267,4 +269,25 @@ NH2 的 N—H 键易发生断裂,原因
 (7)醛基的吸电子作用使得醛基相连的 C-H 键极性增强,易断裂;氮的电负性较大,N-H 极性较强,易断裂</div></details>
 </section>
 <footer>由 vault 题集自动生成 · kyoungawa/vault-backup</footer>
+<script>
+function renderMath(){
+  if(!window.katex){ setTimeout(renderMath,100); return; }
+  document.querySelectorAll('#md, .qbody, .abody').forEach(root=>{});
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  const nodes=[];let n;while((n=walker.nextNode()))nodes.push(n);
+  nodes.forEach(node=>{
+    const t=node.nodeValue; if(!t||t.indexOf('$')<0)return;
+    const frag=document.createDocumentFragment();let i=0,re=/\$([^$]+?)\$/g,m,last=0;
+    while((m=re.exec(t))){
+      if(m.index>last)frag.appendChild(document.createTextNode(t.slice(last,m.index)));
+      try{const sp=document.createElement('span');katex.render(m[1],sp,{throwOnError:false});frag.appendChild(sp);}
+      catch(e){frag.appendChild(document.createTextNode(m[0]));}
+      last=m.index+m[0].length;
+    }
+    if(last<t.length)frag.appendChild(document.createTextNode(t.slice(last)));
+    if(last>0)node.parentNode.replaceChild(frag,node);
+  });
+}
+renderMath();
+</script>
 </body></html>

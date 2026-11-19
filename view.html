@@ -107,7 +107,7 @@ function renderMath(root){
       const txt=node.nodeValue;
       if(!txt || txt.indexOf('$')<0) return;
       const frag=document.createDocumentFragment();
-      let i=0, re=/\$([^$\n]+)\$/g, m, last=0;
+      let i=0, re=/\$([^$]+?)\$/g, m, last=0;
       while((m=re.exec(txt))){
         if(m.index>last) frag.appendChild(document.createTextNode(txt.slice(last,m.index)));
         try{ const span=document.createElement('span'); katex.render(m[1],span,{throwOnError:false,displayMode:false}); frag.appendChild(span); }
