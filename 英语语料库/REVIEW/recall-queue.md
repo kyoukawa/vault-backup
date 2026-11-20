@@ -1,5 +1,8 @@
 # Recall Queue · 遗忘曲线复习队列
 
+> ⚠️ **已停用（2026-11-20）**：复习改为对话学习，本表仅作历史存档，不再新增/更新。
+> 说「复习 / 抽卡」时，我从 `corpus/` 里挑 3 条在对话里抽背、当场给反馈。
+
 > 间隔：1d → 3d → 7d → 15d → 30d → 毕业（移出队列）
 > 自评：solid 熟练 / fuzzy 模糊（同间隔重排）/ blank 空白（重置 1d）
 > **复习形式：抽卡背诵。每张卡直接给中英对照，用户自己背；下次抽到时先让默写、再给对照。不搞翻译/改错式提问。**
@@ -45,3 +48,28 @@
 | fm-limit | reason ★★★ | 05-家庭与情感.md | love is not limited to special occasions or grand gestures | 2026-11-09 | 1d | 2026-11-10 | — | — |
 | fm-matter | reason ★★★ | 05-家庭与情感.md | what truly matters is how we treat each other in daily life | 2026-11-09 | 3d | 2026-11-12 | — | — |
 | fm-task | sentence ★★★ | 05-家庭与情感.md | Although everyone had a different task, we ... together | 2026-11-09 | 1d | 2026-11-10 | — | — |
+| lb-shape-open | sentence ★★★ | 02-劳动与社会实践.md | When asked what has truly shaped me into who I am today, I wouldn't hesitate to say ... | 2026-11-20 | 1d | 2026-11-21 | — | 开头点题 |
+| lb-as | sentence ★★★ | 02-劳动与社会实践.md | Exhausted and breathless as I often was, I kept pushing forward | 2026-11-20 | 1d | 2026-11-21 | — | 让步倒装 |
+| lb-before | sentence ★★★ | 02-劳动与社会实践.md | Before ..., I used to think ... But now ... | 2026-11-20 | 1d | 2026-11-21 | — | 认知转变 |
+| lb-yet | sentence ★★★ | 02-劳动与社会实践.md | I used to believe that greatness only came from grand achievements. Yet ... | 2026-11-20 | 1d | 2026-11-21 | — | 对比升华 |
+| lb-justas | sentence ★★ | 02-劳动与社会实践.md | Just as clay needs to be kneaded ..., I realized ... | 2026-11-20 | 1d | 2026-11-21 | — | 只借骨架，原句华丽 |
+| lb-furnace | sentence ★★ | 02-劳动与社会实践.md | That is how labor shaped me | 2026-11-20 | 1d | 2026-11-21 | — | 点题收尾 |
+| lb-kindness | sentence ★★★ | 02-劳动与社会实践.md | when we pass kindness on to others, we also become warmer | 2026-11-20 | 1d | 2026-11-21 | — | 志愿结尾 |
+| lb-rollup | reason ★★ | 02-劳动与社会实践.md | roll up one's sleeves | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| lb-back | reason ★★ | 02-劳动与社会实践.md | put one's back into it | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| lb-sweat | reason ★★ | 02-劳动与社会实践.md | sweat streaming down one's face | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| lb-trial | reason ★★★ | 02-劳动与社会实践.md | trial and error | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| lb-bone | reason ★★ | 02-劳动与社会实践.md | be exhausted to the bone | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| lb-handsfull | reason ★★ | 02-劳动与社会实践.md | have one's hands full | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| lb-patience | reason ★★★ | 02-劳动与社会实践.md | cultivate my patience | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| lb-edges | reason ★★★ | 02-劳动与社会实践.md | smooth my rough edges | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| lb-firsthand | reason ★★★ | 02-劳动与社会实践.md | gain first-hand knowledge of ... | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| lb-respect | reason ★★★ | 02-劳动与社会实践.md | harbor a newfound respect for ... | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| lb-granted | reason ★★★ | 02-劳动与社会实践.md | no longer take ... for granted | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| lb-respons | reason ★★ | 02-劳动与社会实践.md | instill a sense of responsibility in me | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| lb-appreciate | reason ★★ | 02-劳动与社会实践.md | learn to appreciate the value of ... | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| lb-tangible | reason ★★★ | 02-劳动与社会实践.md | bring a tangible sense of achievement | 2026-11-20 | 1d | 2026-11-21 | — | — |
+| ex-farm | example ★★★ | 02-劳动与社会实践.md | 农场插秧除草：从怕脏怕累→尊重/感恩/毅力 | 2026-11-20 | 1d | 2026-11-21 | — | 最易迁移 |
+| ex-delivery | example ★★★ | 02-劳动与社会实践.md | 社区送餐独居老人：劳动建立人际纽带、传递善意 | 2026-11-20 | 1d | 2026-11-21 | — | 配 lb-kindness |
+| ex-eco | example ★★ | 02-劳动与社会实践.md | 社区环保：捡垃圾+废品改手工艺品售卖 | 2026-11-20 | 1d | 2026-11-21 | — | 劳动×环保 |
+| ex-workshop | example ★★ | 02-劳动与社会实践.md | 学校劳动工坊体验保洁：平凡工作也有尊严 | 2026-11-20 | 1d | 2026-11-21 | — | 配 lb-yet |

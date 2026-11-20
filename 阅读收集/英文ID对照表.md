@@ -24,6 +24,9 @@ tags:
 | `exam-index` | 试卷库/INDEX.md | `view.html?file=exam-index` |
 | `chem-index` | 化学错题本/INDEX.md | `view.html?file=chem-index` |
 | `cold-studies` | 阅读收集/2026/时文两则（2026-11）：冷门绝学 · 假忙与实干.md | `view.html?file=cold-studies` |
+| `wang-hong` | 阅读收集/2026/时文两则（2026-11 · 王虹专题）：挂谷猜想 · 选专业.md | `view.html?file=wang-hong` |
+| `slow-fast` | 阅读收集/2026/时文两则（2026-11 · 快与慢）：鼓浪屿 · 深潜疾驰.md | `view.html?file=slow-fast` |
+| `own-pace` | 阅读收集/2026/时文（2026-11 · 快与慢）：找到自己的节奏.md | `view.html?file=own-pace` |
 | `research-dunhuang` | 阅读收集/2026/时文两则（2026-11 · 续）：科研评价 · 敦煌守护.md | `view.html?file=research-dunhuang` |
 | `cannot-hurry` | 阅读收集/2026/时文三则（2026-10-29 · 第三版）：三处不能加速的地方.md | `view.html?file=cannot-hurry` |
 | `repriced` | 阅读收集/2026/时文三则（2026-10-30）：三件正在被重新定价的事.md | `view.html?file=repriced` |
