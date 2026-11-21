@@ -92,3 +92,36 @@ img{max-width:100%}
 .sub{color:var(--muted);font-size:.88rem;margin-bottom:1.2rem}
 footer{color:var(--dim);font-size:.78rem;margin-top:3rem;text-align:center}
 #err{color:var(--err)}
+
+/* ---- 移动端优化（2026-11-21）---- */
+/* 渲染器给表格包 .table-wrap，窄屏可左右滑，不再挤压竖排表头 */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1rem 0}
+.table-wrap table{margin:0;min-width:max-content}
+/* 兜底：任何未经渲染器包装的静态表（如首页）也能横滑 */
+table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
+.table-wrap table{display:table}
+.table-hint{display:none;color:var(--dim);font-size:.78rem;margin:-.4rem 0 .8rem}
+@media (max-width:600px){
+  h1{font-size:1.3rem}
+  .table-wrap{position:relative}
+  .table-wrap::after{content:"";position:absolute;top:0;right:0;bottom:0;width:28px;pointer-events:none;background:linear-gradient(90deg,transparent,var(--panel2));border-radius:4px}
+  .table-hint{display:block}
+  body{padding:0 .85rem 3.5rem;font-size:16px;line-height:1.75}
+  body::before{margin:0 -.85rem 1.2rem;padding:.55rem .85rem}
+  /* 触摸目标：正文双链与面包屑撑到 ~44px，避免手指点偏 */
+  a{padding:.45rem .1rem;display:inline-block}
+  .crumb{padding:.35rem 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  h2{font-size:1.15rem;margin-top:1.8rem}
+  h3{font-size:1.02rem}
+  /* 表格：不再压缩文字，交给 .table-wrap 横向滚动；首页静态表不 nowrap */
+  table{font-size:.9rem}
+  .table-wrap th,.table-wrap td{padding:.45rem .55rem;white-space:nowrap}
+  /* 每日一题：原题图链接加大触摸区 */
+  details.orig a{display:block;padding:.7rem .4rem;min-height:44px}
+  /* 折叠答案/原图的点击条加高 */
+  details summary,details.ans summary,details.orig summary,
+  details.callout>summary{padding:.75rem .9rem;font-size:.95rem}
+  .card{padding:.9rem}
+  .nav a{padding:.5rem .35rem;margin:.15rem .3rem .15rem 0}
+  pre{font-size:.85rem}
+}

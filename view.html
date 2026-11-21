@@ -117,8 +117,21 @@ async function main(){
     if(text.startsWith('---')){ let e=text.indexOf('\n---'); if(e>0) text=text.slice(e+4); }
     const converted=convertObsidian(text);
     const html=marked.parse(converted);
-    document.getElementById('md').innerHTML=html;
-    renderMath(document.getElementById('md'));
+    const mdEl=document.getElementById('md');
+    mdEl.innerHTML=html;
+    // 移动端：所有 Markdown 表格包一层可横向滚动的容器，避免窄屏竖排表头
+    mdEl.querySelectorAll('table').forEach(t=>{
+      const wrap=document.createElement('div');
+      wrap.className='table-wrap';
+      t.parentNode.insertBefore(wrap,t);
+      wrap.appendChild(t);
+      // 窄屏提示：只有真的滑不动才不显示，避免误导
+      const hint=document.createElement('div');
+      hint.className='table-hint';
+      hint.textContent='← 左右滑动查看完整表格 →';
+      wrap.parentNode.insertBefore(hint,wrap.nextSibling);
+    });
+    renderMath(mdEl);
     // re-open any <details> that marked may have wrapped in <p> (none expected), no-op safeguard
   }catch(e){ document.getElementById('err').innerHTML='加载失败: '+e.message; }
 }
