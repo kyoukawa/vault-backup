@@ -6,3 +6,6 @@
 # 含 OAuth / API 令牌，禁止入库
 _minis/mcp-servers/
 .obsidian/workspace-mobile.json
+
+# 原扫描大文件（>100MB，GitHub 拒绝；本地保留）
+语文语料库/写作经纬线二/原件/写作经纬线2.pdf

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>写作经纬线（二）· OCR 文字稿</title>
+<title>写作经纬线（二）· OCR 文字稿（全文搜索版）</title>
 <style>
 :root{--bg:#12121f;--panel:#1a1a2e;--panel2:#22223a;--gold:#FFD700;--gold2:#FFBF00;--bronze:#CD7F32;--cream:#FFF8DC;--text:#e8e4d8;--muted:#c9c4b8;--dim:#8A7A4A;--border:#3a3a55}
 *{box-sizing:border-box}
@@ -34,6 +34,24 @@ p{margin:.7rem 0;text-align:justify}
 .back-top:hover{color:var(--gold)}
 #toggle{position:fixed;left:0;top:50%;transform:translateY(-50%);width:18px;height:70px;background:var(--panel);border:1px solid var(--border);border-left:0;color:var(--gold);cursor:pointer;z-index:20;border-radius:0 6px 6px 0;writing-mode:vertical-rl;font-size:.75rem;display:none}
 @media(max-width:820px){#sidebar{position:fixed;left:-340px;z-index:40;transition:left .2s}#sidebar.open{left:0}#toggle{display:block}#main{padding:20px 1.2rem 80px}}
+
+/* === full-text search === */
+#search{position:sticky;top:0;z-index:5}
+#q{width:100%;padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font:inherit;font-size:.85rem;outline:none}
+#q:focus{border-color:var(--gold2)}
+#hint{font-size:.72rem;color:var(--dim);padding:4px 2px 0}
+#results{max-height:52vh;overflow-y:auto;margin-top:8px;display:none}
+#results .r{display:block;width:100%;text-align:left;padding:7px 9px;margin-bottom:4px;background:var(--panel2);border:1px solid var(--border);border-left:3px solid var(--gold2);border-radius:5px;color:var(--text);cursor:pointer;font-size:.78rem;line-height:1.5}
+#results .r:hover{background:#2a2a45;border-left-color:var(--gold)}
+#results .r .rp{color:var(--gold);font-weight:700;margin-right:6px}
+#results .r .rt{color:var(--cream);font-weight:700}
+#results .r .rs{display:block;color:var(--muted);font-size:.74rem;margin-top:2px}
+#results mark{background:var(--gold);color:#1a1a2e;border-radius:2px;padding:0 1px}
+#results .rn{padding:8px;color:var(--dim);font-size:.78rem}
+.mode{display:flex;gap:4px;margin-bottom:6px}
+.mode button{flex:1;padding:5px 4px;background:var(--panel2);border:1px solid var(--border);border-radius:5px;color:var(--muted);font:inherit;font-size:.72rem;cursor:pointer}
+.mode button.on{background:var(--gold2);color:#1a1a2e;font-weight:700;border-color:var(--gold2)}
+
 </style>
 </head>
 <body>
@@ -41,7 +59,12 @@ p{margin:.7rem 0;text-align:justify}
 <button id="toggle">目录</button>
 <div id="layout">
 <nav id="sidebar">
-  <div id="search"><input id="q" placeholder="筛选目录 / 搜索标题…" autocomplete="off"></div>
+  <div id="search">
+  <div class="mode"><button id="m-full" class="on" type="button">全文搜索</button><button id="m-title" type="button">目录筛选</button></div>
+  <input id="q" placeholder="搜索正文或标题…（全文搜索含所有145页）" autocomplete="off">
+  <div id="hint">输入关键词，点击结果跳转到对应页</div>
+  <div id="results"></div>
+</div>
   <a href="#p001" class="nav-item" data-page="1"><span class="num">001</span> 一、真题及例文</a>
 <a href="#p002" class="nav-item" data-page="2"><span class="num">002</span> 2.【2018北京卷】《新时代新青年——谈在祖国发展中成长》</a>
 <a href="#p003" class="nav-item" data-page="3"><span class="num">003</span> 【例文 3】</a>
@@ -1955,7 +1978,47 @@ p{margin:.7rem 0;text-align:justify}
 <script>
 
 const q=document.getElementById('q'),items=[...document.querySelectorAll('.nav-item')];
-q.addEventListener('input',()=>{const v=q.value.trim().toLowerCase();items.forEach(a=>{a.style.display=a.textContent.toLowerCase().includes(v)?'':'none'})});
+const pages=[...document.querySelectorAll('.page')];
+const rbox=document.getElementById('results'),hint=document.getElementById('hint');
+const bFull=document.getElementById('m-full'),bTitle=document.getElementById('m-title');
+let mode='full';
+function setMode(m){mode=m;bFull.classList.toggle('on',m==='full');bTitle.classList.toggle('on',m==='title');q.placeholder=m==='full'?'搜索正文或标题…（全文搜索含所有145页）':'筛选目录标题…';hint.textContent=m==='full'?'输入关键词，点击结果跳转到对应页':'只筛选左侧目录标题';doSearch();}
+bFull.onclick=()=>setMode('full');bTitle.onclick=()=>setMode('title');
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function markTxt(s,v){const i=s.toLowerCase().indexOf(v);if(i<0)return esc(s);return esc(s.slice(0,i))+'<mark>'+esc(s.slice(i,i+v.length))+'</mark>'+esc(s.slice(i+v.length));}
+function titleOf(sec){const h=sec.querySelector('h2,h3,h4,h1');return h?h.textContent.trim():('第'+(sec.dataset.page||'?')+'页');}
+function doSearch(){
+  const v=q.value.trim().toLowerCase();
+  rbox.innerHTML='';rbox.style.display=v?'block':'none';
+  items.forEach(a=>{a.style.display=(mode==='title'&&v&&!a.textContent.toLowerCase().includes(v))?'none':'';});
+  if(!v)return;
+  if(mode==='title'){
+    const hit=items.filter(a=>a.textContent.toLowerCase().includes(v));
+    rbox.innerHTML='<div class="rn">目录命中 '+hit.length+' 项（左侧已筛选）</div>';
+    return;
+  }
+  const out=[];
+  for(const sec of pages){
+    const body=(sec.textContent||'').replace(/\s+/g,' ');
+    const low=body.toLowerCase();
+    const idx=low.indexOf(v);
+    if(idx<0)continue;
+    let from=Math.max(0,idx-45),to=Math.min(body.length,idx+v.length+75);
+    const snip=(from>0?'…':'')+body.slice(from,to)+(to<body.length?'…':'');
+    out.push({p:sec.dataset.page||'?',t:titleOf(sec),s:snip});
+    if(out.length>=80)break;
+  }
+  if(!out.length){rbox.innerHTML='<div class="rn">正文无命中：“'+esc(q.value.trim())+'”</div>';return;}
+  rbox.innerHTML='<div class="rn">正文命中 '+out.length+' 页'+(out.length>=80?'（仅显示前80）':'')+'</div>'+out.map(o=>
+    '<button class="r" data-page="'+o.p+'"><span class="rp">P'+o.p+'</span><span class="rt">'+esc(o.t)+'</span><span class="rs">'+markTxt(o.s,v)+'</span></button>').join('');
+  rbox.querySelectorAll('.r').forEach(b=>b.onclick=()=>{
+    const num=String(b.dataset.page).padStart(3,'0');
+    const el=document.getElementById('p'+num)||document.getElementById('p'+b.dataset.page);
+    if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+}
+q.addEventListener('input',doSearch);
+
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const n=e.target.dataset.page;items.forEach(a=>a.classList.toggle('active',a.dataset.page===n))}})},{rootMargin:'-70px 0px -80% 0px'});
 document.querySelectorAll('.page').forEach(s=>obs.observe(s));
 const sb=document.getElementById('sidebar'),tg=document.getElementById('toggle');
