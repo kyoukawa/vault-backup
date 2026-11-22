@@ -104,9 +104,9 @@ async function main(){
   try{
     // 支持纯英文 ID：?file=cold-studies 等；同时兼容原中文路径
     let idmap={};
-    try{ idmap=await fetch('assets/ids.json').then(r=>r.json()); window.idmap=idmap; }catch(e){}
+    try{ idmap=await fetch('assets/ids.json?v='+Date.now()).then(r=>r.json()); window.idmap=idmap; }catch(e){}
     let resolved=idmap[file]||file;
-    const lm=await fetch('assets/linkmap.json').then(r=>r.json());
+    const lm=await fetch('assets/linkmap.json?v='+Date.now()).then(r=>r.json());
     window.linkmap=lm;
     let path=lm[resolved]||resolved;
     const resp=await fetch(encodeURI(path).replace(/%2F/g,'/'));
