@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>写作经纬线（二）· OCR 文字稿（全文搜索版）</title>
 <style>
-:root{--bg:#12121f;--panel:#1a1a2e;--panel2:#22223a;--gold:#FFD700;--gold2:#FFBF00;--bronze:#CD7F32;--cream:#FFF8DC;--text:#e8e4d8;--muted:#c9c4b8;--dim:#8A7A4A;--border:#3a3a55}
+:root,html[data-theme="light"]{--bg:#ffffff;--panel:#f6f8fa;--panel2:#eaeef2;--gold:#0969da;--gold2:#0550ae;--bronze:#d1d9e0;--cream:#1f2328;--text:#1f2328;--muted:#59636e;--dim:#818b98;--border:#d1d9e0}
+html[data-theme="dark"]{--bg:#0d1117;--panel:#161b22;--panel2:#21262d;--gold:#4493f8;--gold2:#58a6ff;--bronze:#30363d;--cream:#e6edf3;--text:#e6edf3;--muted:#9198a1;--dim:#6e7681;--border:#30363d}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:"SF Mono",Consolas,"PingFang SC","Microsoft YaHei",monospace,sans-serif;line-height:1.8}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.8}
 #topbar{position:fixed;top:0;left:0;right:0;height:42px;background:var(--panel);border-bottom:1px solid var(--bronze);display:flex;align-items:center;padding:0 18px;z-index:30;color:var(--gold);font-weight:700;font-size:.85rem;letter-spacing:.08em}
 #topbar .badge{color:var(--dim);font-weight:400;margin-left:auto;font-size:.75rem}
 #layout{display:flex;margin-top:42px}
@@ -53,9 +54,9 @@ p{margin:.7rem 0;text-align:justify}
 .mode button.on{background:var(--gold2);color:#1a1a2e;font-weight:700;border-color:var(--gold2)}
 
 </style>
-</head>
+<script src="assets/theme.js" defer></script></head>
 <body>
-<div id="topbar">◆ HERMES · 写作经纬线（二）<span class="badge">OCR 文字稿 · 145 页 · 侧栏目录可点击跳转</span></div>
+<div id="topbar">写作经纬线（二） · OCR 全文检索<span class="badge">OCR 文字稿 · 145 页 · 侧栏目录可点击跳转</span></div>
 <button id="toggle">目录</button>
 <div id="layout">
 <nav id="sidebar">
