@@ -25,14 +25,23 @@ cssclasses:
 ## 手动跑
 
 ```powershell
-python C:\Users\chuan\minis\shared\weread\weread_sync.py          # 同步并刷新笔记
-python C:\Users\chuan\minis\shared\weread\weread_sync.py --dry    # 只看不写
+weread                                                     # 同步并刷新笔记 + 数据
+python C:\Users\chuan\minis\shared\weread\weread_sync.py --dry   # 只看不写
 ```
 
 - 快照：`C:\Users\chuan\minis\shared\weread\snapshots\<日期>.json`
 - 章节目录缓存：`C:\Users\chuan\minis\shared\weread\chapters\<bookId>.json`（一本书只拉一次）
 - 密钥：环境变量 `WEREAD_API_KEY`（`wrk-` 开头），不进 vault、不进日志
 - 服务端限流严（HTTP 499），脚本已做 0.9 秒间隔 + 指数退避。全书架首次同步约 1 分钟，之后走缓存快很多。
+
+## 网页展示
+
+同步时还会生成一份公开数据 `assets/weread.json`（只有书名/作者/进度/时长，**不含任何账号标识**），两个页面直接读它：
+
+- 知识库首页 `https://kyoukawa.github.io/vault-backup/` 的「📖 正在读」
+- 个人主页 `https://kyoukawa.github.io/` 的「最近在读」
+
+> ⚠️ GitHub Pages **不服务 vault 根目录的裸 `.json`**（实测 404），数据必须放 `assets/` 下。`assets/ids.json`、`assets/linkmap.json` 同理。
 
 ## 关联
 

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"></head><body style="margin:0;font:13px/1.5 monospace">
+<iframe id="f" src="view.html?file=book2-index" style="width:390px;height:844px;border:1px solid red"></iframe>
+<pre id="out"></pre>
+<script>
+document.getElementById('f').onload=function(){
+  var d=this.contentDocument, w=this.contentWindow, L=[];
+  L.push('innerWidth='+w.innerWidth+' docScrollW='+d.documentElement.scrollWidth);
+  var worst=null,ww=0;
+  d.querySelectorAll('article *').forEach(function(el){
+    var r=el.getBoundingClientRect(); if(r.right>ww){ww=r.right;worst=el;}
+  });
+  L.push('最右元素='+worst.tagName+'.'+(worst.className||'-')+' right='+ww.toFixed(1));
+  L.push('溢出='+(d.documentElement.scrollWidth>w.innerWidth));
+  document.getElementById('out').textContent=L.join('\n');
+};
+</script></body></html>
