@@ -79,8 +79,8 @@ body{
 .nav-item .tt{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* ---------- 正文 ---------- */
-#main{flex:1;min-width:0;padding:36px 0 120px}
-.wrap{max-width:760px;margin:0 auto;padding:0 28px}
+#main{flex:1;min-width:0;padding:36px 0 120px;overflow-x:hidden}
+.wrap{max-width:760px;margin:0 auto;padding:0 28px;min-width:0}
 .chapter{margin-bottom:72px;scroll-margin-top:76px}
 .ch-head{margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid var(--border)}
 .ch-meta{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:.75rem}
@@ -89,8 +89,8 @@ body{
 html[data-theme="dark"] .ch-num{color:#0d1117}
 .ch-sec{color:var(--muted)}
 .ch-title{font-size:1.45rem;line-height:1.4;font-weight:650;margin:0;color:var(--text)}
-.ch-body{font-size:1.02rem;line-height:1.95;letter-spacing:.01em}
-.ch-body p{margin:0 0 1.05em;text-align:justify;text-justify:inter-ideograph}
+.ch-body{font-size:1.02rem;line-height:1.95;letter-spacing:.01em;overflow-wrap:anywhere}
+.ch-body p{margin:0 0 1.05em;text-align:justify;text-justify:inter-ideograph;word-break:normal;overflow-wrap:break-word}
 .ch-body h3{font-size:1.1rem;font-weight:650;margin:1.9em 0 .7em;color:var(--text);
   padding-left:11px;border-left:3px solid var(--accent)}
 .ch-body h4{font-size:1rem;font-weight:650;margin:1.5em 0 .5em;color:var(--muted)}
