@@ -33,3 +33,26 @@
   --serif:'Newsreader',"Songti SC","STSong","Noto Serif CJK SC","Source Han Serif SC",
     "Noto Serif SC","SimSun",Georgia,serif;
 }
+
+/* ---------- 标题书法体：Ma Shan Zheng（马善政毛笔楷书，SIL OFL 1.1） ----------
+   只用于 h1 的**中文**；拉丁字母交给 Newsreader，否则手写体的西文很难认。
+   源字体 5.6MB，已按站点实际用字子集化到 ~98KB（脚本：.tmp/make_title_font.py）。
+   unicode-range 限定 CJK 区段，这样同一个 h1 里中英文会自动分派到不同字体。
+   子集里没有的字会回退到后面的宋体，不会出现豆腐块。 */
+@font-face{
+  font-family:'Title Brush';
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url('fonts/title-calligraphy.woff2') format('woff2');
+  unicode-range:U+2E80-2FDF, U+3000-303F, U+3400-4DBF, U+4E00-9FFF,
+    U+F900-FAFF, U+FE30-FE4F, U+FF00-FFEF;
+}
+
+:root{
+  --title-brush:'Title Brush',"STXingkai","华文行楷","Kaiti SC","STKaiti","KaiTi",
+    "Noto Serif CJK SC","Songti SC","SimSun",serif;
+  /* h1 专用栈：拉丁走 Newsreader，中文走书法体 */
+  --title-h1:'Newsreader','Title Brush',"Songti SC","Noto Serif CJK SC","SimSun",serif;
+}
+
