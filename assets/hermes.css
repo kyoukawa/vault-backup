@@ -96,9 +96,9 @@ body::before{
 }
 
 /* ---------- typography: serif for headlines ---------- */
+/* 衬线栈由 fonts.css 定义（含自托管的 Newsreader），没加载成功时回落到系统宋体 */
 h1,h2,h3,h4,h5,h6{
-  font-family:Georgia,"Songti SC","Noto Serif CJK SC","Source Han Serif SC",
-    "SimSun",serif;
+  font-family:var(--serif, Georgia,"Songti SC","Noto Serif CJK SC","SimSun",serif);
   font-weight:500;line-height:1.25;color:var(--fg);
   letter-spacing:-.01em;
 }
