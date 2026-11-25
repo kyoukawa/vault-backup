@@ -37,6 +37,26 @@
    ```
    注意：`gh api -f key=value` 会报 `Invalid request`，必须用 `--input` 传 JSON。
 
+## 怎么判断域名是否已经生效
+
+**不要只看 HTTP 200**。is-a.dev 有通配解析：**未注册**的子域名也会解析到 Cloudflare，
+并返回 `302 → https://is-a.dev/available?d=<name>`——那是个"这名字可以注册"的占位页。
+
+正确判断：
+
+```powershell
+curl.exe -sI --max-time 20 https://<name>.is-a.dev/ | Select-String 'HTTP/|location'
+```
+
+| 结果 | 含义 |
+|---|---|
+| `302` + `Location: https://is-a.dev/available?d=<name>` | **未注册**（PR 还没合并） |
+| `200` 且返回你自己的页面 | 已生效 |
+| `404` / `5xx` | 注册了但源站有问题 |
+
+DNS 层面同理：`Resolve-DnsName` 对任何名字都能出结果，**不能用来判断可用性**。
+可用性只能查 `raw.githubusercontent.com/is-a-dev/register/main/domains/<name>.json` 是否 404。
+
 ## 换域名要改的地方
 
 跑 `tools/retarget_domain.py`：
