@@ -1,0 +1,827 @@
+{
+ "generated": "2026-11-25 11:14",
+ "today": "2026-11-25",
+ "daily": {
+  "latest": "2026-11-22",
+  "days_ago": 3,
+  "count": 4,
+  "total": 4
+ },
+ "exams": {
+  "done": 416,
+  "total": 428,
+  "pct": 97.2,
+  "by_subject": [
+   {
+    "name": "英语",
+    "value": 75
+   },
+   {
+    "name": "语文",
+    "value": 74
+   },
+   {
+    "name": "化学",
+    "value": 69
+   },
+   {
+    "name": "地理",
+    "value": 69
+   },
+   {
+    "name": "数学",
+    "value": 68
+   },
+   {
+    "name": "物理",
+    "value": 61
+   }
+  ]
+ },
+ "reading": {
+  "updated": "2026-11-25 08:27",
+  "shelf": 35,
+  "reading": 5,
+  "done": 1,
+  "week": 125,
+  "week_days": 3,
+  "all": 129,
+  "books": [
+   {
+    "title": "谷崎润一郎作品集：近代情痴录（新民说）",
+    "author": "[日]谷崎润一郎",
+    "progress": 20,
+    "minutes": 11
+   },
+   {
+    "title": "沙丘六部曲",
+    "author": "弗兰克·赫伯特",
+    "progress": 0,
+    "minutes": 6
+   },
+   {
+    "title": "在火焰与狂喊中去爱",
+    "author": "[法]阿尔贝·加缪",
+    "progress": 0,
+    "minutes": 4
+   },
+   {
+    "title": "我，刀枪不入：掌控心智、力克万难的奇迹人生",
+    "author": "[美]大卫·戈金斯",
+    "progress": 5,
+    "minutes": 4
+   },
+   {
+    "title": "被讨厌的勇气：“自我启发之父”阿德勒的哲学课",
+    "author": "岸见一郎 古贺史健",
+    "progress": 0,
+    "minutes": 1
+   }
+  ]
+ },
+ "coach": {
+  "state": "未开始",
+  "subject": "—",
+  "next": "任选；建议从语文·红楼梦·诗词曲赋与人物命运起手（题源 红楼梦题集）",
+  "updated": "2026-11-25T20:00"
+ },
+ "grades": {
+  "exam": "2026-11 期中（赋分前）",
+  "rows": [
+   {
+    "subject": "语文",
+    "score": 100.0,
+    "full": 150.0,
+    "rate": 66.7,
+    "z": -1.19
+   },
+   {
+    "subject": "数学",
+    "score": 113.0,
+    "full": 150.0,
+    "rate": 75.3,
+    "z": 0.04
+   },
+   {
+    "subject": "英语",
+    "score": 136.0,
+    "full": 150.0,
+    "rate": 90.7,
+    "z": 1.13
+   },
+   {
+    "subject": "物理",
+    "score": 77.0,
+    "full": 100.0,
+    "rate": 77.0,
+    "z": 0.77
+   },
+   {
+    "subject": "化学",
+    "score": 84.0,
+    "full": 100.0,
+    "rate": 84.0,
+    "z": 0.87
+   },
+   {
+    "subject": "地理",
+    "score": 77.0,
+    "full": 100.0,
+    "rate": 77.0,
+    "z": 0.11
+   },
+   {
+    "subject": "语数英",
+    "score": 349.0,
+    "full": 400.0,
+    "rate": 87.3,
+    "z": 0.16
+   },
+   {
+    "subject": "总分",
+    "score": 587.0,
+    "full": 750.0,
+    "rate": 78.3,
+    "z": 0.43
+   }
+  ]
+ },
+ "weakness": [
+  {
+   "subject": "语文",
+   "note": "选择题与细读（作文已有底子）",
+   "status": "关注"
+  },
+  {
+   "subject": "数学",
+   "note": "会做的做完，难题无进账",
+   "status": "关注"
+  }
+ ],
+ "libraries": [
+  {
+   "name": "试卷库",
+   "href": "view.html?file=exam-index",
+   "desc": "北京高考/一模/二模/期末原卷（教师版含答案）+ 分题题集",
+   "size": "416 篇题集 / 428 份原卷"
+  },
+  {
+   "name": "化学错题本",
+   "href": "view.html?file=chem-index",
+   "desc": "选择题按主题聚类 + 大题按 6 模块",
+   "size": "20 篇笔记"
+  },
+  {
+   "name": "语文语料库",
+   "href": "view.html?file=chinese-index",
+   "desc": "作文素材、六维判据、整本精读、时文批注",
+   "size": "165 篇笔记"
+  },
+  {
+   "name": "英语语料库",
+   "href": "view.html?file=english-index",
+   "desc": "作文素材，What → How → Effect → Value",
+   "size": "23 篇笔记"
+  },
+  {
+   "name": "数学",
+   "href": "view.html?file=analytic-geometry",
+   "desc": "解析几何方法总结与学案",
+   "size": "2 篇"
+  },
+  {
+   "name": "阅读收集",
+   "href": "view.html?file=reading-index",
+   "desc": "网页 / 公众号 / 视频 → 结构化笔记",
+   "size": "14 篇笔记"
+  },
+  {
+   "name": "读书",
+   "href": "view.html?file=reading-home",
+   "desc": "微信读书进度追踪，脚本自动生成",
+   "size": "3 份自动生成记录"
+  },
+  {
+   "name": "学业档案",
+   "href": "view.html?file=record",
+   "desc": "大考成绩、赋分、标准分与失分分析",
+   "size": "8 篇"
+  }
+ ],
+ "activity": {
+  "start": "2026-08-31",
+  "end": "2026-11-25",
+  "first_active": "2026-11-02",
+  "days": [
+   {
+    "date": "2026-08-31",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-01",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-02",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-03",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-04",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-05",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-06",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-07",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-08",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-09",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-10",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-11",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-12",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-13",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-14",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-15",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-16",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-17",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-18",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-19",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-20",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-21",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-22",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-23",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-24",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-25",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-26",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-27",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-28",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-29",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-09-30",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-01",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-02",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-03",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-04",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-05",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-06",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-07",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-08",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-09",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-10",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-11",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-12",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-13",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-14",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-15",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-16",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-17",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-18",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-19",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-20",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-21",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-22",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-23",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-24",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-25",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-26",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-27",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-28",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-29",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-30",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-10-31",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-01",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-02",
+    "total": 10,
+    "commit": 10,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-03",
+    "total": 2,
+    "commit": 2,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-04",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-05",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-06",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-07",
+    "total": 3,
+    "commit": 3,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-08",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-09",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-10",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-11",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-12",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-13",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-14",
+    "total": 9,
+    "commit": 9,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-15",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-16",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-17",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-18",
+    "total": 9,
+    "commit": 9,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-19",
+    "total": 23,
+    "commit": 22,
+    "daily": 1,
+    "log": 0
+   },
+   {
+    "date": "2026-11-20",
+    "total": 3,
+    "commit": 1,
+    "daily": 1,
+    "log": 1
+   },
+   {
+    "date": "2026-11-21",
+    "total": 18,
+    "commit": 17,
+    "daily": 1,
+    "log": 0
+   },
+   {
+    "date": "2026-11-22",
+    "total": 9,
+    "commit": 7,
+    "daily": 1,
+    "log": 1
+   },
+   {
+    "date": "2026-11-23",
+    "total": 0,
+    "commit": 0,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-24",
+    "total": 3,
+    "commit": 3,
+    "daily": 0,
+    "log": 0
+   },
+   {
+    "date": "2026-11-25",
+    "total": 16,
+    "commit": 15,
+    "daily": 0,
+    "log": 1
+   }
+  ]
+ }
+}

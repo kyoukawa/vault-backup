@@ -12,3 +12,6 @@ _minis/mcp-servers/
 
 # 临时脚本与检查产物（不入库）
 .tmp/
+
+# 看板的待办数据（含私人分组），只在本机 --serve 时读取
+assets/todos.local.json
