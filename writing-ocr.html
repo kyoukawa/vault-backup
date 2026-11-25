@@ -77,6 +77,12 @@ body{
 .nav-item .num{color:var(--dim);font-variant-numeric:tabular-nums;flex:0 0 26px;font-size:.75rem;padding-top:1px}
 .nav-item.active .num{color:var(--accent)}
 .nav-item .tt{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nav-sub{padding:11px 14px 4px;font-size:.74rem;font-weight:650;color:var(--text);
+  border-top:1px solid var(--border);margin-top:2px;line-height:1.45}
+.nav-sub:first-child{border-top:0}
+.nav-item.member{padding-left:24px;font-size:.8rem}
+.nav-item.topic{font-weight:600}
+.nav-item.topic .tt{color:var(--accent)}
 
 /* ---------- 正文 ---------- */
 #main{flex:1;min-width:0;padding:36px 0 120px;overflow-x:hidden}
@@ -188,139 +194,167 @@ html[data-theme="dark"] .ch-num{color:#0d1117}
     </div>
     <div id="results"></div>
     <nav id="navscroll">
-<div class="nav-group"><div class="nav-group-title">真题及例文<span class="cnt">90</span></div>
+<div class="nav-group"><div class="nav-group-title">第一部分 · 真题与模拟题<span class="cnt">84</span></div>
+<div class="nav-sub">一、真题及例文</div>
 <a href="#p001" class="nav-item" data-page="001"><span class="num">001</span><span class="tt">一、真题及例文</span></a>
-<a href="#p003" class="nav-item" data-page="003"><span class="num">003</span><span class="tt">【例文 3】</span></a>
-<a href="#p004" class="nav-item" data-page="004"><span class="num">004</span><span class="tt">3.【2019北京卷】《文明的韧性》</span></a>
-<a href="#p005" class="nav-item" data-page="005"><span class="num">005</span><span class="tt">4.【2020 北京卷】《每一颗都有自己的功用》</span></a>
-<a href="#p006" class="nav-item" data-page="006"><span class="num">006</span><span class="tt">【例文 6】</span></a>
-<a href="#p007" class="nav-item" data-page="007"><span class="num">007</span><span class="tt">【例文7】</span></a>
-<a href="#p008" class="nav-item" data-page="008"><span class="num">008</span><span class="tt">5.【2021北京卷】《论生逢其时》</span></a>
-<a href="#p009" class="nav-item" data-page="009"><span class="num">009</span><span class="tt">【例文 8】</span></a>
-<a href="#p010" class="nav-item" data-page="010"><span class="num">010</span><span class="tt">论生逢其时</span></a>
-<a href="#p011" class="nav-item" data-page="011"><span class="num">011</span><span class="tt">【例文 10】</span></a>
-<a href="#p012" class="nav-item" data-page="012"><span class="num">012</span><span class="tt">6.【2022北京卷】《学习今说》</span></a>
-<a href="#p013" class="nav-item" data-page="013"><span class="num">013</span><span class="tt">学习今说</span></a>
-<a href="#p014" class="nav-item" data-page="014"><span class="num">014</span><span class="tt">【例文 14】</span></a>
-<a href="#p015" class="nav-item" data-page="015"><span class="num">015</span><span class="tt">7. 【2023 北京卷】《续航》</span></a>
-<a href="#p016" class="nav-item" data-page="016"><span class="num">016</span><span class="tt">【例文 16】</span></a>
-<a href="#p017" class="nav-item" data-page="017"><span class="num">017</span><span class="tt">8.【2024 北京卷】《历久弥新》</span></a>
-<a href="#p018" class="nav-item" data-page="018"><span class="num">018</span><span class="tt">【例文 18】</span></a>
-<a href="#p019" class="nav-item" data-page="019"><span class="num">019</span><span class="tt">【例文 19】</span></a>
-<a href="#p020" class="nav-item" data-page="020"><span class="num">020</span><span class="tt">【例文 20】</span></a>
-<a href="#p021" class="nav-item" data-page="021"><span class="num">021</span><span class="tt">历久弥新</span></a>
-<a href="#p022" class="nav-item" data-page="022"><span class="num">022</span><span class="tt">历久弥新</span></a>
-<a href="#p023" class="nav-item" data-page="023"><span class="num">023</span><span class="tt">【例文23】</span></a>
-<a href="#p024" class="nav-item" data-page="024"><span class="num">024</span><span class="tt">历久弥新</span></a>
-<a href="#p025" class="nav-item" data-page="025"><span class="num">025</span><span class="tt">9.【2025北京卷】《由“第二次呼吸”说开去》</span></a>
-<a href="#p026" class="nav-item" data-page="026"><span class="num">026</span><span class="tt">由“第二次呼吸”说开去</span></a>
-<a href="#p027" class="nav-item" data-page="027"><span class="num">027</span><span class="tt">由“第二次呼吸”说开去</span></a>
-<a href="#p028" class="nav-item" data-page="028"><span class="num">028</span><span class="tt">【例文 28】</span></a>
-<a href="#p029" class="nav-item" data-page="029"><span class="num">029</span><span class="tt">10. 【2026 北京卷】《做规划与下功夫》</span></a>
-<a href="#p033" class="nav-item" data-page="033"><span class="num">033</span><span class="tt">【例文 29】</span></a>
-<a href="#p034" class="nav-item" data-page="034"><span class="num">034</span><span class="tt">【例文 30】</span></a>
-<a href="#p035" class="nav-item" data-page="035"><span class="num">035</span><span class="tt">【例文31】</span></a>
+<a href="#p003" class="nav-item member" data-page="003"><span class="num">003</span><span class="tt">【例文 3】</span></a>
+<div class="nav-sub">3. 【2019北京卷】《文明的韧性》</div>
+<a href="#p004" class="nav-item topic" data-page="004"><span class="num">004</span><span class="tt">题目</span></a>
+<div class="nav-sub">4. 【2020 北京卷】《每一颗都有自己的功用》</div>
+<a href="#p005" class="nav-item topic" data-page="005"><span class="num">005</span><span class="tt">题目</span></a>
+<a href="#p006" class="nav-item member" data-page="006"><span class="num">006</span><span class="tt">【例文 6】</span></a>
+<a href="#p007" class="nav-item member" data-page="007"><span class="num">007</span><span class="tt">【例文7】</span></a>
+<div class="nav-sub">5. 【2021北京卷】《论生逢其时》</div>
+<a href="#p008" class="nav-item topic" data-page="008"><span class="num">008</span><span class="tt">题目</span></a>
+<a href="#p009" class="nav-item member" data-page="009"><span class="num">009</span><span class="tt">【例文 8】</span></a>
+<a href="#p010" class="nav-item member" data-page="010"><span class="num">010</span><span class="tt">论生逢其时</span></a>
+<a href="#p011" class="nav-item member" data-page="011"><span class="num">011</span><span class="tt">【例文 10】</span></a>
+<div class="nav-sub">6. 【2022北京卷】《学习今说》</div>
+<a href="#p012" class="nav-item topic" data-page="012"><span class="num">012</span><span class="tt">题目</span></a>
+<a href="#p013" class="nav-item member" data-page="013"><span class="num">013</span><span class="tt">学习今说</span></a>
+<a href="#p014" class="nav-item member" data-page="014"><span class="num">014</span><span class="tt">【例文 14】</span></a>
+<div class="nav-sub">7. 【2023 北京卷】《续航》</div>
+<a href="#p015" class="nav-item topic" data-page="015"><span class="num">015</span><span class="tt">题目</span></a>
+<a href="#p016" class="nav-item member" data-page="016"><span class="num">016</span><span class="tt">【例文 16】</span></a>
+<div class="nav-sub">8. 【2024 北京卷】《历久弥新》</div>
+<a href="#p017" class="nav-item topic" data-page="017"><span class="num">017</span><span class="tt">题目</span></a>
+<a href="#p018" class="nav-item member" data-page="018"><span class="num">018</span><span class="tt">【例文 18】</span></a>
+<a href="#p019" class="nav-item member" data-page="019"><span class="num">019</span><span class="tt">【例文 19】</span></a>
+<a href="#p020" class="nav-item member" data-page="020"><span class="num">020</span><span class="tt">【例文 20】</span></a>
+<a href="#p021" class="nav-item member" data-page="021"><span class="num">021</span><span class="tt">历久弥新</span></a>
+<a href="#p022" class="nav-item member" data-page="022"><span class="num">022</span><span class="tt">历久弥新</span></a>
+<a href="#p023" class="nav-item member" data-page="023"><span class="num">023</span><span class="tt">【例文23】</span></a>
+<a href="#p024" class="nav-item member" data-page="024"><span class="num">024</span><span class="tt">历久弥新</span></a>
+<div class="nav-sub">9. 【2025北京卷】《由“第二次呼吸”说开去》</div>
+<a href="#p025" class="nav-item topic" data-page="025"><span class="num">025</span><span class="tt">题目</span></a>
+<a href="#p026" class="nav-item member" data-page="026"><span class="num">026</span><span class="tt">由“第二次呼吸”说开去</span></a>
+<a href="#p027" class="nav-item member" data-page="027"><span class="num">027</span><span class="tt">由“第二次呼吸”说开去</span></a>
+<a href="#p028" class="nav-item member" data-page="028"><span class="num">028</span><span class="tt">【例文 28】</span></a>
+<div class="nav-sub">10. 【2026 北京卷】《做规划与下功夫》</div>
+<a href="#p029" class="nav-item topic" data-page="029"><span class="num">029</span><span class="tt">题目</span></a>
+<a href="#p033" class="nav-item member" data-page="033"><span class="num">033</span><span class="tt">【例文 29】</span></a>
+<a href="#p034" class="nav-item member" data-page="034"><span class="num">034</span><span class="tt">【例文 30】</span></a>
+<a href="#p035" class="nav-item member" data-page="035"><span class="num">035</span><span class="tt">【例文31】</span></a>
+<div class="nav-sub">二、练习题、模拟题及例文</div>
 <a href="#p037" class="nav-item" data-page="037"><span class="num">037</span><span class="tt">二、练习题、模拟题及例文</span></a>
-<a href="#p039" class="nav-item" data-page="039"><span class="num">039</span><span class="tt">【例文 34】</span></a>
-<a href="#p040" class="nav-item" data-page="040"><span class="num">040</span><span class="tt">[例文 35]</span></a>
-<a href="#p041" class="nav-item" data-page="041"><span class="num">041</span><span class="tt">12.《兼听》</span></a>
-<a href="#p042" class="nav-item" data-page="042"><span class="num">042</span><span class="tt">【例文 37】</span></a>
-<a href="#p043" class="nav-item" data-page="043"><span class="num">043</span><span class="tt">兼听</span></a>
-<a href="#p044" class="nav-item" data-page="044"><span class="num">044</span><span class="tt">13.《说强基》</span></a>
-<a href="#p045" class="nav-item" data-page="045"><span class="num">045</span><span class="tt">说强基</span></a>
-<a href="#p046" class="nav-item" data-page="046"><span class="num">046</span><span class="tt">【例文 41】</span></a>
-<a href="#p047" class="nav-item" data-page="047"><span class="num">047</span><span class="tt">说强基</span></a>
-<a href="#p048" class="nav-item" data-page="048"><span class="num">048</span><span class="tt">14.《向内生长》</span></a>
-<a href="#p049" class="nav-item" data-page="049"><span class="num">049</span><span class="tt">【例文44】</span></a>
-<a href="#p050" class="nav-item" data-page="050"><span class="num">050</span><span class="tt">15.【2024 海淀期中】《殊途》</span></a>
-<a href="#p051" class="nav-item" data-page="051"><span class="num">051</span><span class="tt">殊途</span></a>
-<a href="#p052" class="nav-item" data-page="052"><span class="num">052</span><span class="tt">【例文 47】</span></a>
-<a href="#p053" class="nav-item" data-page="053"><span class="num">053</span><span class="tt">殊途</span></a>
-<a href="#p054" class="nav-item" data-page="054"><span class="num">054</span><span class="tt">16. “有意义与有意思”</span></a>
-<a href="#p055" class="nav-item" data-page="055"><span class="num">055</span><span class="tt">有意义与有意思</span></a>
-<a href="#p056" class="nav-item" data-page="056"><span class="num">056</span><span class="tt">有意思与有意义</span></a>
-<a href="#p057" class="nav-item" data-page="057"><span class="num">057</span><span class="tt">从意义中挖掘意思</span></a>
-<a href="#p058" class="nav-item" data-page="058"><span class="num">058</span><span class="tt">有意思，也要有意义</span></a>
-<a href="#p059" class="nav-item" data-page="059"><span class="num">059</span><span class="tt">[例文 54]</span></a>
-<a href="#p060" class="nav-item" data-page="060"><span class="num">060</span><span class="tt">17.《志气与争气》</span></a>
-<a href="#p061" class="nav-item" data-page="061"><span class="num">061</span><span class="tt">志气与争气（双栏范文二则）</span></a>
-<a href="#p062" class="nav-item" data-page="062"><span class="num">062</span><span class="tt">志气与争气</span></a>
-<a href="#p063" class="nav-item" data-page="063"><span class="num">063</span><span class="tt">志气与争气</span></a>
-<a href="#p064" class="nav-item" data-page="064"><span class="num">064</span><span class="tt">18.《规矩与天性》</span></a>
-<a href="#p065" class="nav-item" data-page="065"><span class="num">065</span><span class="tt">19. “热议‘获得感’”</span></a>
-<a href="#p066" class="nav-item" data-page="066"><span class="num">066</span><span class="tt">论获得感</span></a>
-<a href="#p067" class="nav-item" data-page="067"><span class="num">067</span><span class="tt">【例文 61】</span></a>
-<a href="#p068" class="nav-item" data-page="068"><span class="num">068</span><span class="tt">写作经纬技（二）</span></a>
-<a href="#p069" class="nav-item" data-page="069"><span class="num">069</span><span class="tt">“获得感”之我见</span></a>
-<a href="#p070" class="nav-item" data-page="070"><span class="num">070</span><span class="tt">【例文64】</span></a>
-<a href="#p071" class="nav-item" data-page="071"><span class="num">071</span><span class="tt">20.【2024 西城期末】“往哪都是往前走”</span></a>
-<a href="#p073" class="nav-item" data-page="073"><span class="num">073</span><span class="tt">他塑与自塑</span></a>
-<a href="#p074" class="nav-item" data-page="074"><span class="num">074</span><span class="tt">22.【2024西城一模】《说剪裁》</span></a>
-<a href="#p075" class="nav-item" data-page="075"><span class="num">075</span><span class="tt">【点评】</span></a>
-<a href="#p076" class="nav-item" data-page="076"><span class="num">076</span><span class="tt">【例文 70】</span></a>
-<a href="#p077" class="nav-item" data-page="077"><span class="num">077</span><span class="tt">23.《昨日之我与今日之我》</span></a>
-<a href="#p078" class="nav-item" data-page="078"><span class="num">078</span><span class="tt">昨日之我与今日之我</span></a>
-<a href="#p079" class="nav-item" data-page="079"><span class="num">079</span><span class="tt">24.《迭代》</span></a>
-<a href="#p080" class="nav-item" data-page="080"><span class="num">080</span><span class="tt">迭代</span></a>
-<a href="#p081" class="nav-item" data-page="081"><span class="num">081</span><span class="tt">【例文 75】</span></a>
-<a href="#p082" class="nav-item" data-page="082"><span class="num">082</span><span class="tt">【例文 76】</span></a>
-<a href="#p083" class="nav-item" data-page="083"><span class="num">083</span><span class="tt">25.【2027 海淀期中】《说“降噪”》</span></a>
-<a href="#p084" class="nav-item" data-page="084"><span class="num">084</span><span class="tt">2号文</span></a>
-<a href="#p085" class="nav-item" data-page="085"><span class="num">085</span><span class="tt">3 号文</span></a>
-<a href="#p086" class="nav-item" data-page="086"><span class="num">086</span><span class="tt">4 号文</span></a>
-<a href="#p087" class="nav-item" data-page="087"><span class="num">087</span><span class="tt">5 号文</span></a>
-<a href="#p088" class="nav-item" data-page="088"><span class="num">088</span><span class="tt">6 号文</span></a>
-<a href="#p089" class="nav-item" data-page="089"><span class="num">089</span><span class="tt">7号文</span></a>
-<a href="#p090" class="nav-item" data-page="090"><span class="num">090</span><span class="tt">第二部分 时文选读（总目录）</span></a>
+<a href="#p039" class="nav-item member" data-page="039"><span class="num">039</span><span class="tt">【例文 34】</span></a>
+<a href="#p040" class="nav-item member" data-page="040"><span class="num">040</span><span class="tt">【例文 35】</span></a>
+<div class="nav-sub">12. 《兼听》</div>
+<a href="#p041" class="nav-item topic" data-page="041"><span class="num">041</span><span class="tt">题目</span></a>
+<a href="#p042" class="nav-item member" data-page="042"><span class="num">042</span><span class="tt">【例文 37】</span></a>
+<a href="#p043" class="nav-item member" data-page="043"><span class="num">043</span><span class="tt">兼听</span></a>
+<div class="nav-sub">13. 《说强基》</div>
+<a href="#p044" class="nav-item topic" data-page="044"><span class="num">044</span><span class="tt">题目</span></a>
+<a href="#p045" class="nav-item member" data-page="045"><span class="num">045</span><span class="tt">说强基</span></a>
+<a href="#p046" class="nav-item member" data-page="046"><span class="num">046</span><span class="tt">【例文 41】</span></a>
+<a href="#p047" class="nav-item member" data-page="047"><span class="num">047</span><span class="tt">说强基</span></a>
+<div class="nav-sub">14. 《向内生长》</div>
+<a href="#p048" class="nav-item topic" data-page="048"><span class="num">048</span><span class="tt">题目</span></a>
+<a href="#p049" class="nav-item member" data-page="049"><span class="num">049</span><span class="tt">【例文44】</span></a>
+<div class="nav-sub">15. 【2024 海淀期中】《殊途》</div>
+<a href="#p050" class="nav-item topic" data-page="050"><span class="num">050</span><span class="tt">题目</span></a>
+<a href="#p051" class="nav-item member" data-page="051"><span class="num">051</span><span class="tt">殊途</span></a>
+<a href="#p052" class="nav-item member" data-page="052"><span class="num">052</span><span class="tt">【例文 47】</span></a>
+<a href="#p053" class="nav-item member" data-page="053"><span class="num">053</span><span class="tt">殊途</span></a>
+<div class="nav-sub">16. “有意义与有意思”</div>
+<a href="#p054" class="nav-item topic" data-page="054"><span class="num">054</span><span class="tt">题目</span></a>
+<a href="#p055" class="nav-item member" data-page="055"><span class="num">055</span><span class="tt">有意义与有意思</span></a>
+<a href="#p056" class="nav-item member" data-page="056"><span class="num">056</span><span class="tt">有意思与有意义</span></a>
+<a href="#p057" class="nav-item member" data-page="057"><span class="num">057</span><span class="tt">从意义中挖掘意思</span></a>
+<a href="#p058" class="nav-item member" data-page="058"><span class="num">058</span><span class="tt">有意思，也要有意义</span></a>
+<a href="#p059" class="nav-item member" data-page="059"><span class="num">059</span><span class="tt">【例文 54】</span></a>
+<div class="nav-sub">17. 《志气与争气》</div>
+<a href="#p060" class="nav-item topic" data-page="060"><span class="num">060</span><span class="tt">题目</span></a>
+<a href="#p061" class="nav-item member" data-page="061"><span class="num">061</span><span class="tt">志气与争气（双栏范文二则）</span></a>
+<a href="#p062" class="nav-item member" data-page="062"><span class="num">062</span><span class="tt">志气与争气</span></a>
+<a href="#p063" class="nav-item member" data-page="063"><span class="num">063</span><span class="tt">志气与争气</span></a>
+<div class="nav-sub">18. 《规矩与天性》</div>
+<a href="#p064" class="nav-item topic" data-page="064"><span class="num">064</span><span class="tt">题目</span></a>
+<div class="nav-sub">19. “热议‘获得感’”</div>
+<a href="#p065" class="nav-item topic" data-page="065"><span class="num">065</span><span class="tt">题目</span></a>
+<a href="#p066" class="nav-item member" data-page="066"><span class="num">066</span><span class="tt">论获得感</span></a>
+<a href="#p067" class="nav-item member" data-page="067"><span class="num">067</span><span class="tt">【例文 61】</span></a>
+<a href="#p068" class="nav-item member" data-page="068"><span class="num">068</span><span class="tt">写作经纬技（二）</span></a>
+<a href="#p069" class="nav-item member" data-page="069"><span class="num">069</span><span class="tt">“获得感”之我见</span></a>
+<a href="#p070" class="nav-item member" data-page="070"><span class="num">070</span><span class="tt">【例文64】</span></a>
+<div class="nav-sub">20. 【2024 西城期末】“往哪都是往前走”</div>
+<a href="#p071" class="nav-item topic" data-page="071"><span class="num">071</span><span class="tt">题目</span></a>
+<a href="#p073" class="nav-item member" data-page="073"><span class="num">073</span><span class="tt">他塑与自塑</span></a>
+<div class="nav-sub">22. 【2024西城一模】《说剪裁》</div>
+<a href="#p074" class="nav-item topic" data-page="074"><span class="num">074</span><span class="tt">题目</span></a>
+<a href="#p075" class="nav-item member" data-page="075"><span class="num">075</span><span class="tt">【点评】</span></a>
+<a href="#p076" class="nav-item member" data-page="076"><span class="num">076</span><span class="tt">【例文 70】</span></a>
+<div class="nav-sub">23. 《昨日之我与今日之我》</div>
+<a href="#p077" class="nav-item topic" data-page="077"><span class="num">077</span><span class="tt">题目</span></a>
+<a href="#p078" class="nav-item member" data-page="078"><span class="num">078</span><span class="tt">昨日之我与今日之我</span></a>
+<div class="nav-sub">24. 《迭代》</div>
+<a href="#p079" class="nav-item topic" data-page="079"><span class="num">079</span><span class="tt">题目</span></a>
+<a href="#p080" class="nav-item member" data-page="080"><span class="num">080</span><span class="tt">迭代</span></a>
+<a href="#p081" class="nav-item member" data-page="081"><span class="num">081</span><span class="tt">【例文 75】</span></a>
+<a href="#p082" class="nav-item member" data-page="082"><span class="num">082</span><span class="tt">【例文 76】</span></a>
+<div class="nav-sub">25. 【2027 海淀期中】《说“降噪”》</div>
+<a href="#p083" class="nav-item topic" data-page="083"><span class="num">083</span><span class="tt">题目</span></a>
+<a href="#p084" class="nav-item member" data-page="084"><span class="num">084</span><span class="tt">2号文</span></a>
+<a href="#p085" class="nav-item member" data-page="085"><span class="num">085</span><span class="tt">3 号文</span></a>
+<a href="#p086" class="nav-item member" data-page="086"><span class="num">086</span><span class="tt">4 号文</span></a>
+<a href="#p087" class="nav-item member" data-page="087"><span class="num">087</span><span class="tt">5 号文</span></a>
+<a href="#p088" class="nav-item member" data-page="088"><span class="num">088</span><span class="tt">6 号文</span></a>
+<a href="#p089" class="nav-item member" data-page="089"><span class="num">089</span><span class="tt">7号文</span></a>
 </div>
-<div class="nav-group"><div class="nav-group-title">时文选读<span class="cnt">34</span></div>
-<a href="#p091" class="nav-item" data-page="091"><span class="num">091</span><span class="tt">M1 家国与世界</span></a>
-</div>
-<div class="nav-group"><div class="nav-group-title">真题及例文<span class="cnt">90</span></div>
-<a href="#p092" class="nav-item" data-page="092"><span class="num">092</span><span class="tt">两类“极端”中的科学突破</span></a>
-<a href="#p093" class="nav-item" data-page="093"><span class="num">093</span><span class="tt">无名与有名</span></a>
-<a href="#p094" class="nav-item" data-page="094"><span class="num">094</span><span class="tt">挪威海底的中国盘子</span></a>
-<a href="#p096" class="nav-item" data-page="096"><span class="num">096</span><span class="tt">全人类都能读懂的品质</span></a>
-<a href="#p097" class="nav-item" data-page="097"><span class="num">097</span><span class="tt">做新时代的马可·波罗</span></a>
-<a href="#p098" class="nav-item" data-page="098"><span class="num">098</span><span class="tt">两台纤维支气管镜与一次培训</span></a>
-</div>
-<div class="nav-group"><div class="nav-group-title">时文选读<span class="cnt">34</span></div>
-<a href="#p099" class="nav-item" data-page="099"><span class="num">099</span><span class="tt">M2 传统与创新</span></a>
-<a href="#p101" class="nav-item" data-page="101"><span class="num">101</span><span class="tt">如果张仲景活在今天……</span></a>
-<a href="#p102" class="nav-item" data-page="102"><span class="num">102</span><span class="tt">文创“进化”，路在何方？</span></a>
-<a href="#p103" class="nav-item" data-page="103"><span class="num">103</span><span class="tt">天一阁里“书医生”：妙手补千年 古书焕新生</span></a>
-<a href="#p104" class="nav-item" data-page="104"><span class="num">104</span><span class="tt">M3 审美与文化</span></a>
-<a href="#p106" class="nav-item" data-page="106"><span class="num">106</span><span class="tt">没有最终的版本，只有更好的版本</span></a>
-<a href="#p108" class="nav-item" data-page="108"><span class="num">108</span><span class="tt">把创造美的能力留在乡村</span></a>
-<a href="#p109" class="nav-item" data-page="109"><span class="num">109</span><span class="tt">警惕流量逻辑带来的审美单一</span></a>
-<a href="#p111" class="nav-item" data-page="111"><span class="num">111</span><span class="tt">打卡不是终点，也可能是文化传承的起点</span></a>
-<a href="#p112" class="nav-item" data-page="112"><span class="num">112</span><span class="tt">旅途中，年轻人试图找到历史的“入口”</span></a>
-<a href="#p115" class="nav-item" data-page="115"><span class="num">115</span><span class="tt">M4 人与他人·公共生活</span></a>
-<a href="#p116" class="nav-item" data-page="116"><span class="num">116</span><span class="tt">让“边角”成为治理“金名片”</span></a>
-<a href="#p117" class="nav-item" data-page="117"><span class="num">117</span><span class="tt">M5 个体与群体</span></a>
-<a href="#p119" class="nav-item" data-page="119"><span class="num">119</span><span class="tt">极端低价不通吃</span></a>
-<a href="#p120" class="nav-item" data-page="120"><span class="num">120</span><span class="tt">M6 劳动与尊严</span></a>
-<a href="#p122" class="nav-item" data-page="122"><span class="num">122</span><span class="tt">练精准功夫 传修复技艺</span></a>
-<a href="#p123" class="nav-item" data-page="123"><span class="num">123</span><span class="tt">与AI同行，答案在人手中</span></a>
-<a href="#p125" class="nav-item" data-page="125"><span class="num">125</span><span class="tt">M7 技术与人文</span></a>
-<a href="#p126" class="nav-item" data-page="126"><span class="num">126</span><span class="tt">让“人机协同”跑赢“机器人换人”</span></a>
-<a href="#p127" class="nav-item" data-page="127"><span class="num">127</span><span class="tt">在世界机器人大会上，找“人”</span></a>
-<a href="#p128" class="nav-item" data-page="128"><span class="num">128</span><span class="tt">那么机器人究竟去哪里，她又补充道：“更多的是用于…</span></a>
-<a href="#p129" class="nav-item" data-page="129"><span class="num">129</span><span class="tt">线下逛书市，走出算法的“框”</span></a>
-<a href="#p130" class="nav-item" data-page="130"><span class="num">130</span><span class="tt">M8 自我与成长</span></a>
-<a href="#p131" class="nav-item" data-page="131"><span class="num">131</span><span class="tt">非典型“小镇做题家”</span></a>
-<a href="#p133" class="nav-item" data-page="133"><span class="num">133</span><span class="tt">第二部分 时文选拔</span></a>
-<a href="#p134" class="nav-item" data-page="134"><span class="num">134</span><span class="tt">当网红重新变成普通人</span></a>
-<a href="#p136" class="nav-item" data-page="136"><span class="num">136</span><span class="tt">M9 有用与无用</span></a>
-<a href="#p139" class="nav-item" data-page="139"><span class="num">139</span><span class="tt">破解作物“午睡”百年谜题</span></a>
-<a href="#p140" class="nav-item" data-page="140"><span class="num">140</span><span class="tt">“每一步的艰难跋涉都值得”</span></a>
-<a href="#p141" class="nav-item" data-page="141"><span class="num">141</span><span class="tt">更严重？相变在叶绿体里真的有用？</span></a>
-<a href="#p142" class="nav-item" data-page="142"><span class="num">142</span><span class="tt">M10 快与慢</span></a>
-<a href="#p143" class="nav-item" data-page="143"><span class="num">143</span><span class="tt">“深潜”方能“疾驰”</span></a>
-<a href="#p144" class="nav-item" data-page="144"><span class="num">144</span><span class="tt">找到自己的节奏</span></a>
-</div>
-<div class="nav-group"><div class="nav-group-title">真题及例文<span class="cnt">90</span></div>
-<a href="#p145" class="nav-item" data-page="145"><span class="num">145</span><span class="tt">第二部分 时文速递</span></a>
+<div class="nav-group"><div class="nav-group-title">第二部分 · 时文选读<span class="cnt">40</span></div>
+<div class="nav-sub">总目录</div>
+<a href="#p090" class="nav-item member" data-page="090"><span class="num">090</span><span class="tt">第二部分 时文选读（总目录）</span></a>
+<div class="nav-sub">M1　家国与世界</div>
+<a href="#p091" class="nav-item member" data-page="091"><span class="num">091</span><span class="tt">M1 家国与世界</span></a>
+<a href="#p092" class="nav-item member" data-page="092"><span class="num">092</span><span class="tt">两类“极端”中的科学突破</span></a>
+<a href="#p093" class="nav-item member" data-page="093"><span class="num">093</span><span class="tt">无名与有名</span></a>
+<a href="#p094" class="nav-item member" data-page="094"><span class="num">094</span><span class="tt">挪威海底的中国盘子</span></a>
+<a href="#p096" class="nav-item member" data-page="096"><span class="num">096</span><span class="tt">全人类都能读懂的品质</span></a>
+<a href="#p097" class="nav-item member" data-page="097"><span class="num">097</span><span class="tt">做新时代的马可·波罗</span></a>
+<a href="#p098" class="nav-item member" data-page="098"><span class="num">098</span><span class="tt">两台纤维支气管镜与一次培训</span></a>
+<div class="nav-sub">M2　传统与创新</div>
+<a href="#p099" class="nav-item member" data-page="099"><span class="num">099</span><span class="tt">M2 传统与创新</span></a>
+<a href="#p101" class="nav-item member" data-page="101"><span class="num">101</span><span class="tt">如果张仲景活在今天……</span></a>
+<a href="#p102" class="nav-item member" data-page="102"><span class="num">102</span><span class="tt">文创“进化”，路在何方？</span></a>
+<a href="#p103" class="nav-item member" data-page="103"><span class="num">103</span><span class="tt">天一阁里“书医生”：妙手补千年 古书焕新生</span></a>
+<div class="nav-sub">M3　审美与文化</div>
+<a href="#p104" class="nav-item member" data-page="104"><span class="num">104</span><span class="tt">M3 审美与文化</span></a>
+<a href="#p106" class="nav-item member" data-page="106"><span class="num">106</span><span class="tt">没有最终的版本，只有更好的版本</span></a>
+<a href="#p108" class="nav-item member" data-page="108"><span class="num">108</span><span class="tt">把创造美的能力留在乡村</span></a>
+<a href="#p109" class="nav-item member" data-page="109"><span class="num">109</span><span class="tt">警惕流量逻辑带来的审美单一</span></a>
+<a href="#p111" class="nav-item member" data-page="111"><span class="num">111</span><span class="tt">打卡不是终点，也可能是文化传承的起点</span></a>
+<a href="#p112" class="nav-item member" data-page="112"><span class="num">112</span><span class="tt">旅途中，年轻人试图找到历史的“入口”</span></a>
+<div class="nav-sub">M4　人与他人·公共生活</div>
+<a href="#p115" class="nav-item member" data-page="115"><span class="num">115</span><span class="tt">M4 人与他人·公共生活</span></a>
+<a href="#p116" class="nav-item member" data-page="116"><span class="num">116</span><span class="tt">让“边角”成为治理“金名片”</span></a>
+<div class="nav-sub">M5　个体与群体</div>
+<a href="#p117" class="nav-item member" data-page="117"><span class="num">117</span><span class="tt">M5 个体与群体</span></a>
+<a href="#p119" class="nav-item member" data-page="119"><span class="num">119</span><span class="tt">极端低价不通吃</span></a>
+<div class="nav-sub">M6　劳动与尊严</div>
+<a href="#p120" class="nav-item member" data-page="120"><span class="num">120</span><span class="tt">M6 劳动与尊严</span></a>
+<a href="#p122" class="nav-item member" data-page="122"><span class="num">122</span><span class="tt">练精准功夫 传修复技艺</span></a>
+<a href="#p123" class="nav-item member" data-page="123"><span class="num">123</span><span class="tt">与AI同行，答案在人手中</span></a>
+<div class="nav-sub">M7　技术与人文</div>
+<a href="#p125" class="nav-item member" data-page="125"><span class="num">125</span><span class="tt">M7 技术与人文</span></a>
+<a href="#p126" class="nav-item member" data-page="126"><span class="num">126</span><span class="tt">让“人机协同”跑赢“机器人换人”</span></a>
+<a href="#p127" class="nav-item member" data-page="127"><span class="num">127</span><span class="tt">在世界机器人大会上，找“人”</span></a>
+<a href="#p128" class="nav-item member" data-page="128"><span class="num">128</span><span class="tt">那么机器人究竟去哪里，她又补充道：“更多…</span></a>
+<a href="#p129" class="nav-item member" data-page="129"><span class="num">129</span><span class="tt">线下逛书市，走出算法的“框”</span></a>
+<div class="nav-sub">M8　自我与成长</div>
+<a href="#p130" class="nav-item member" data-page="130"><span class="num">130</span><span class="tt">M8 自我与成长</span></a>
+<a href="#p131" class="nav-item member" data-page="131"><span class="num">131</span><span class="tt">非典型“小镇做题家”</span></a>
+<a href="#p133" class="nav-item member" data-page="133"><span class="num">133</span><span class="tt">第二部分 时文选拔</span></a>
+<a href="#p134" class="nav-item member" data-page="134"><span class="num">134</span><span class="tt">当网红重新变成普通人</span></a>
+<div class="nav-sub">M9　有用与无用</div>
+<a href="#p136" class="nav-item member" data-page="136"><span class="num">136</span><span class="tt">M9 有用与无用</span></a>
+<a href="#p139" class="nav-item member" data-page="139"><span class="num">139</span><span class="tt">破解作物“午睡”百年谜题</span></a>
+<a href="#p140" class="nav-item member" data-page="140"><span class="num">140</span><span class="tt">“每一步的艰难跋涉都值得”</span></a>
+<a href="#p141" class="nav-item member" data-page="141"><span class="num">141</span><span class="tt">更严重？相变在叶绿体里真的有用？</span></a>
+<div class="nav-sub">M10　快与慢</div>
+<a href="#p142" class="nav-item member" data-page="142"><span class="num">142</span><span class="tt">M10 快与慢</span></a>
+<a href="#p143" class="nav-item member" data-page="143"><span class="num">143</span><span class="tt">“深潜”方能“疾驰”</span></a>
+<a href="#p144" class="nav-item member" data-page="144"><span class="num">144</span><span class="tt">找到自己的节奏</span></a>
+<a href="#p145" class="nav-item member" data-page="145"><span class="num">145</span><span class="tt">第二部分 时文速递</span></a>
 </div>
     </nav>
   </aside>
@@ -779,8 +813,8 @@ html[data-theme="dark"] .ch-num{color:#0d1117}
 <p>然而，只从“高风险高收益”（承上）的角度肯定深水区的价值是远远不够的。与浅水区相比，在深水区获得的成果不仅有量变更有质变（递进分析概念的更高价值）。因此，将努力投入深水区可能见效慢却有更长远的价值。//于个人，勇闯人生的深水区也许不能保证个人实际利益的增加，却能提高人生境界，惠及更多人。张桂梅放弃在普通学校的稳定工作（浅），自己筹款创办华坪女高，承担了更大风险，也更加贴近教育事业的真理，进入了事业的深水区（深）。这不仅没有为她带来收益，还增加了她身体和经济的双重压力（深的特点）。然而，她在深水区的闯荡改变了一代人的命运，更撼动了腐朽的传统观念，升华了个体生命的价值（深的价值）。//于国家甚至全人类，探索发展的深水区也许无法得到即时反馈（深的特点），却能在更大的时空范围内增进民生福祉，推动历史向前，传承精神力量（深的价值）。从碳中和的呼吁到对濒临消亡的民族语言的记录，再到一代代人在基础学科领域的攻坚克难，这些超越了短期政治经济利益的“深水作业”，是具有更深远意义的课题。</p>
 <p>由此，一个令人困扰的现实问题也就有了答案：当浅水区的收益充足稳定，进入深水区的性价比不高时，是不是就没有必要冒险进入深水区了呢？显然不是。二者的收益有着质的区别，若无纵深跃入深水区的勇气，那么无论在浅水区收获多少，都无法实现等量代换。</p>
 <p>深水区，既有狂风巨浪，也有无尽的宝藏。无论个人、社会、国家、世界，都应有“由浅入深”的魄力，成为驾浪前行的勇者。</p>
-<hr></div><nav class="pager"><a class="pg prev" href="#p037"><span class="dir">← 上一篇</span><span class="pt">二、练习题、模拟题及例文</span></a><a class="pg next" href="#p040"><span class="dir">下一篇 →</span><span class="pt">[例文 35]</span></a></nav></article>
-<article class="chapter" id="p040" data-page="040"><header class="ch-head"><div class="ch-meta"><span class="ch-num">040</span><span class="ch-sec">真题及例文</span></div><h2 class="ch-title">[例文 35]</h2></header><div class="ch-body"><h4>谈深水区</h4>
+<hr></div><nav class="pager"><a class="pg prev" href="#p037"><span class="dir">← 上一篇</span><span class="pt">二、练习题、模拟题及例文</span></a><a class="pg next" href="#p040"><span class="dir">下一篇 →</span><span class="pt">【例文 35】</span></a></nav></article>
+<article class="chapter" id="p040" data-page="040"><header class="ch-head"><div class="ch-meta"><span class="ch-num">040</span><span class="ch-sec">真题及例文</span></div><h2 class="ch-title">【例文 35】</h2></header><div class="ch-body"><h4>谈深水区</h4>
 <p>2021级 王馨仪</p>
 <p>人类对深海的探索从未停止。我国自主研发的深潜器“蛟龙号”不断创下记录，彰显出“中国深度”，展现中国科技向纵深发展的活跃生机。正如蛟龙入海，要成为人中龙凤、国中强国乃至成就一个时代，同样离不开对深水区的探索。</p>
 <p>深水区当以其“深”得名，相对于浅水区，深度更大，同时水压也更大。这就好比认知与行动发展到了更深入而重要的阶段，我们由对已知的把握转向对未知的探索。这时，深水区一方面带来更丰富的收获与成就，另一方面也隐含着更大的风险。如此，进入深水区与否的抉择便成为一道分水岭，将不同的格局与效果区别开来。</p>
@@ -803,7 +837,7 @@ html[data-theme="dark"] .ch-num{color:#0d1117}
 <p>在信息风暴的中心，“我”的原则必须是毫不动摇的，比如自尊，比如趋向正义，以此为基石，我才能形成兼听的道德方式及对任何声音予以真诚。这种真诚包括敢于认识和敢于屏蔽——认识和屏蔽是一体两面的，认识为屏蔽提供了开放的保障，而屏蔽则为认识塑造安全的保护。这一真诚法则，源于声音“质地”的良莠不齐，我们无法保证每一种声音都来自理性和善意，所以我们需要冷静的选择“声音”，并且讲求实据。</p>
 <p>海德格尔曾说，亲在只有在世间存在才构成此在。“兼听”首先否定了对异见的消灭，把更新的机会交给了我们。每一个坚持“兼听”的人，都要在时代的双刃剑下树立自我意识，是“兼听”真正的服务于“我”，而不是“我”被原本有益的敞开性奴役。在“兼听”的过程中，我的存在将会愈发坚定完整，而自我的更高完成，也将使社会里的声音更加合理，具有更好的促进意义，从而令个体和整体进入相得益彰的良性循环。不放弃“兼听”，更要坚持“我”的兼听。</p>
 <p>【评析】本文从人固有的局限性出发，分析“兼听”对于人类渺小个体克服盲点，走向智性，走进广阔天地的意义和价值；提出了处在信息社会、处在风暴中心的人们，应持有自尊和正义等毫不动摇的原则；以此为基石，形成敢于认识和敢于屏蔽的“真诚”法则，突出“我”在“兼听”中的主动性与主导地位——不放弃“兼听”，更要坚持“我”的兼听。文章思想深刻，见解独到，层次清晰，立论扎实，有较强的说服力和现实针对性。</p>
-<hr></div><nav class="pager"><a class="pg prev" href="#p040"><span class="dir">← 上一篇</span><span class="pt">[例文 35]</span></a><a class="pg next" href="#p042"><span class="dir">下一篇 →</span><span class="pt">【例文 37】</span></a></nav></article>
+<hr></div><nav class="pager"><a class="pg prev" href="#p040"><span class="dir">← 上一篇</span><span class="pt">【例文 35】</span></a><a class="pg next" href="#p042"><span class="dir">下一篇 →</span><span class="pt">【例文 37】</span></a></nav></article>
 <article class="chapter" id="p042" data-page="042"><header class="ch-head"><div class="ch-meta"><span class="ch-num">042</span><span class="ch-sec">真题及例文</span></div><h2 class="ch-title">【例文 37】</h2></header><div class="ch-body"><h4>唯兼听才能明（一类中 46）</h4>
 <h5 class="subhead">海淀例文</h5>
 <p>有人认为兼听让人迷惑，但我认为正确的思想、坚定的信念不会被其他声音所左右，只会在不同意见的淬炼下变得更加坚毅耀眼。而“兼听”作为开阔视野、试炼内心的重要工具，是我们通向明辨是非、明白晓畅的必经之路。</p>
@@ -1005,8 +1039,8 @@ html[data-theme="dark"] .ch-num{color:#0d1117}
 <p>——以上基于大众对“有意思”的一般认识讨论，以下赋予“有意思”更高境界的一种定义，再讨论——</p>
 <p>但是上述对“有意思”和“有意义”关系的探讨，以及无数前人的争论，似乎是建立在这样的概念理解上：“有意思”就是有趣味，易懂，“有意义”就是涉及更为高深的知识、美德等等，前者似乎矮一截。//但实际上，回想那些在啃大部头名著时豁然开朗的瞬间，回味思维紧跟复杂数理论证时柳暗花明的过程——探索真理，打破认知边界，叩问终极价值的“有意义”本身，何尝不是一种最引人神魂震撼的“有意思”呢？抱着克服没意思的心态去追求有意义的事物，而后惊喜地收获人格的完善和智识的拓展，我们对“有意思”的心理阈值会不断提升，对乐趣的感知也会更为饱满。</p>
 <p>有意义和有意思，两者缺一不可，且相互助力。愿人类可以在对乐趣的探寻和对意义的追索中，走向光明的未来。</p>
-<hr></div><nav class="pager"><a class="pg prev" href="#p057"><span class="dir">← 上一篇</span><span class="pt">从意义中挖掘意思</span></a><a class="pg next" href="#p059"><span class="dir">下一篇 →</span><span class="pt">[例文 54]</span></a></nav></article>
-<article class="chapter" id="p059" data-page="059"><header class="ch-head"><div class="ch-meta"><span class="ch-num">059</span><span class="ch-sec">真题及例文</span></div><h2 class="ch-title">[例文 54]</h2></header><div class="ch-body"><h4>有意义与有意思</h4>
+<hr></div><nav class="pager"><a class="pg prev" href="#p057"><span class="dir">← 上一篇</span><span class="pt">从意义中挖掘意思</span></a><a class="pg next" href="#p059"><span class="dir">下一篇 →</span><span class="pt">【例文 54】</span></a></nav></article>
+<article class="chapter" id="p059" data-page="059"><header class="ch-head"><div class="ch-meta"><span class="ch-num">059</span><span class="ch-sec">真题及例文</span></div><h2 class="ch-title">【例文 54】</h2></header><div class="ch-body"><h4>有意义与有意思</h4>
 <p>2021级 王黎仪</p>
 <p>谈到一件事“有意义”，人们往往想到它带给自身或社会的积极价值；而谈到一件事“有意思”，人们则常想起它博人一笑的一面。而将两者结合起来，衡量有意义与有意思的关系与地位高低，则是具有恒久价值的话题。（占位观点句）</p>
 <p>有意思对于有意义之事可谓“锦上添花”，而很多时候甚至可谓至关重要。（意思对意义的价值）“意思”提供了新鲜感，使有意义之事规避“无趣”的标签，而有更多受众（具体阐释“意思”的价值）。在高校中，杨振宁等一批德高望重的教授讲授的知识固然十分有意义，但恰是因为绘声绘色的描述方式、栩栩如生的事例分析，才激发了更多学子对科学的兴趣。可见，有意义之事有了意思，方显更丰富的魅力。</p>
@@ -1033,7 +1067,7 @@ html[data-theme="dark"] .ch-num{color:#0d1117}
 <h5 class="subhead">志气与争气 一类中（45-46）</h5>
 <p>钟南山院士曾说：“青年人不但要有志气，还要争气。”意为在中国梦构建的新时代，青年人应有以天下为己任的志向，也应以坚持不懈的行动将志气付诸实施。</p>
 <p>志气是一种发自内心的敢于担当的魄力，是将国家兴复的重担扛于肩上的重大责任感。“众人皆以国家为己任则国虽小而必兴。众人皆勿以国家为己任则国虽大而必亡。”于组成社会的众小人物来说，志气便是于平凡处塑造不平凡，于渺小处超越。如新冠疫情之时，白衣天使披甲上阵，道路交警于微小处指挥。他们都于自己岗位上将自己生死置于度外，把国家兴亡图存的责任肩负起来。在最平凡的职位书写最坚定的志气。新时代的青年们不用终日仰望伟大，于平凡普通处将国家负为己任便是有志气最大的体现。</p>
-<hr></div><nav class="pager"><a class="pg prev" href="#p059"><span class="dir">← 上一篇</span><span class="pt">[例文 54]</span></a><a class="pg next" href="#p061"><span class="dir">下一篇 →</span><span class="pt">志气与争气（双栏范文二则）</span></a></nav></article>
+<hr></div><nav class="pager"><a class="pg prev" href="#p059"><span class="dir">← 上一篇</span><span class="pt">【例文 54】</span></a><a class="pg next" href="#p061"><span class="dir">下一篇 →</span><span class="pt">志气与争气（双栏范文二则）</span></a></nav></article>
 <article class="chapter" id="p061" data-page="061"><header class="ch-head"><div class="ch-meta"><span class="ch-num">061</span><span class="ch-sec">真题及例文</span></div><h2 class="ch-title">志气与争气（双栏范文二则）</h2></header><div class="ch-body"><blockquote>本页为双栏对照排版，原 OCR 只取到左栏开头一句（约 330 字）。全页两栏正文于 2026-11-25 校对时按 p061 原图补录。</blockquote>
 <h3>左栏 · 志气与争气（990 字）</h3>
 <p>欲争气必当先有志气，志气为争气提供保障与正确方向指引。且看孙中山以挽救中国为志最终革除旧制推进中国近代化重要一步；且看周恩来以“为民族崛起而读书”为志，终带领人民走向幸福，打败压迫；且看邓小平以“让人民过上好日子”为志，终带领人民改革开放，迎来温饱至于富足。历史长河滚滚，给予我们无数鲜活之例，也启示吾辈唯有先立远志方能有目标，有方向，才能真正成功以为国争气。</p>
@@ -1431,7 +1465,7 @@ html[data-theme="dark"] .ch-num{color:#0d1117}
 <p>“那位来自湖北的干部，即便高原反应很严重，也没有提前离开。”和耀喜说，“如果我们能把高原适应的遗传奥秘真正解开，从基因层面找到调控因子，开发靶点药物，就能帮助很多像他这样的人。”</p>
 <p>从“空白地图”到海拔 5370 米的普玛江塘乡，和耀喜找到了自己的坐标：把科研做在国家最需要的地方。</p>
 <hr></div><nav class="pager"><a class="pg prev" href="#p090"><span class="dir">← 上一篇</span><span class="pt">第二部分 时文选读（总目录）</span></a><a class="pg next" href="#p092"><span class="dir">下一篇 →</span><span class="pt">两类“极端”中的科学突破</span></a></nav></article>
-<article class="chapter" id="p092" data-page="092"><header class="ch-head"><div class="ch-meta"><span class="ch-num">092</span><span class="ch-sec">真题及例文</span></div><h2 class="ch-title">两类“极端”中的科学突破</h2></header><div class="ch-body"><p>青藏高原的80多个县，和耀喜几乎跑遍了。</p>
+<article class="chapter" id="p092" data-page="092"><header class="ch-head"><div class="ch-meta"><span class="ch-num">092</span><span class="ch-sec">时文选读</span></div><h2 class="ch-title">两类“极端”中的科学突破</h2></header><div class="ch-body"><p>青藏高原的80多个县，和耀喜几乎跑遍了。</p>
 <p>他和团队通过大规模多组学分析，提出了一个颠覆性结论——藏族人群适应高原的核心机制，不是学界传统认为的“强化效应”，而是“钝化效应”。</p>
 <p>“不是越强越好，重点是怎么适应、怎么降低高原反应。藏族人是弱化了环境敏感性，不会有很强烈的缺氧反应。我们叫‘以退为进’。”和耀喜说。</p>
 <p>团队构建了藏族千人基因组和万人表型组数据库，定位了192个适应关键基因，打造了首个藏族高质量参考基因组“珠峰1号”，建立了国际首个全球高原人群数据库 HiLand Resource。</p>
@@ -1453,7 +1487,7 @@ html[data-theme="dark"] .ch-num{color:#0d1117}
 <p>关于以后的科研课题，他希望有机会开展双胞胎的相关研究。“我跟我弟是同卵双胞胎，除了长相，从爱好到性格都不一样，甚至声音都有很大差别。”他认为，“双胞胎蕴藏了遗传学最基本的问题。”</p>
 <p>35岁的和耀喜，其科研版图上还有大片空白等待填满。</p>
 <hr></div><nav class="pager"><a class="pg prev" href="#p091"><span class="dir">← 上一篇</span><span class="pt">M1 家国与世界</span></a><a class="pg next" href="#p093"><span class="dir">下一篇 →</span><span class="pt">无名与有名</span></a></nav></article>
-<article class="chapter" id="p093" data-page="093"><header class="ch-head"><div class="ch-meta"><span class="ch-num">093</span><span class="ch-sec">真题及例文</span></div><h2 class="ch-title">无名与有名</h2></header><div class="ch-body"><p>人民日报，2026-10-20，05版，评论员观察 http://paper.people.com.cn/rmrb/pc/content/202610/20/content_30186724.html</p>
+<article class="chapter" id="p093" data-page="093"><header class="ch-head"><div class="ch-meta"><span class="ch-num">093</span><span class="ch-sec">时文选读</span></div><h2 class="ch-title">无名与有名</h2></header><div class="ch-body"><p>人民日报，2026-10-20，05版，评论员观察 http://paper.people.com.cn/rmrb/pc/content/202610/20/content_30186724.html</p>
 <p>导读：一篇从乳名写起的评论。江西瑞金烈士陵园的墙上刻着“刘腊梨脑”“刘早狗子”这样一些名字，按当地旧俗，没成年的孩子不起大名。文章由此写到湘江血战与雪山草地，写到“三年不饮湘江水，十年不食湘江鱼”，适合“家国”“无名与有名”“奉献”“被记住”一类题。可积累的是“名字是后人给的，事迹是自己做的”这一层意思，它作分论点比作结尾更有力。</p>
 <h3>平凡岗位可建不凡之功，无名坚守可成不朽之名</h3>
 <p>刘腊梨脑、刘早狗子、吴细豆子……江西瑞金革命烈士陵园，一个个“不像名字的名字”静静镌刻在墙壁之上。这些稚气的名字，属于长征路上年少殉国的红军烈士。按当地旧俗，没成年的孩子，不起大名。这群连大名都没有的孩子，却扛起了山河的重量。</p>
@@ -1472,7 +1506,7 @@ html[data-theme="dark"] .ch-num{color:#0d1117}
 <p>从这个意义上说，新时代的无名，是坚守初心的无我境界；新时代的有名，是创造业绩的功成有我。</p>
 <p>进一步读懂无名与有名的“辩证”，方能更好树立正确的政绩观。常思长征路上的“乳名英烈”，重虚名、轻实干的想法应被摒弃，热衷于“造势出名”、不屑于默默深耕的做法该被校正。</p>
 <hr></div><nav class="pager"><a class="pg prev" href="#p092"><span class="dir">← 上一篇</span><span class="pt">两类“极端”中的科学突破</span></a><a class="pg next" href="#p094"><span class="dir">下一篇 →</span><span class="pt">挪威海底的中国盘子</span></a></nav></article>
-<article class="chapter" id="p094" data-page="094"><header class="ch-head"><div class="ch-meta"><span class="ch-num">094</span><span class="ch-sec">真题及例文</span></div><h2 class="ch-title">挪威海底的中国盘子</h2></header><div class="ch-body"><p>不同时期、各行各业的先辈用实践告诉我们：平凡岗位可建不凡之功，无名坚守可成不朽之名。抛却私心杂念、摈去浮华虚名，把青春活力注入创新事业，把个人理想融入复兴伟业，定能造就厚重且珍贵的人生。</p>
+<article class="chapter" id="p094" data-page="094"><header class="ch-head"><div class="ch-meta"><span class="ch-num">094</span><span class="ch-sec">时文选读</span></div><h2 class="ch-title">挪威海底的中国盘子</h2></header><div class="ch-body"><p>不同时期、各行各业的先辈用实践告诉我们：平凡岗位可建不凡之功，无名坚守可成不朽之名。抛却私心杂念、摈去浮华虚名，把青春活力注入创新事业，把个人理想融入复兴伟业，定能造就厚重且珍贵的人生。</p>
 <p>习近平总书记指出：“许许多多无怨无悔、倾情奉献的无名英雄，他们以普通人的平凡书写了不平凡的人生。”人民不会忘记无名者，历史终将铭记真英雄。</p>
 <p>齐心协力向前走，当赓续优良传统、传承红色基因，笃行实干、敢作善为，争做推进中国式现代化的开拓者、奉献者。瞩望未来，我们这一代人的使命，就是要让无名的选择激荡时代的回响，让无声的奔赴引燃精神的火炬，进而照亮新的长征路。</p>
 <h3>挪威海底的中国盘子</h3>
@@ -1503,7 +1537,7 @@ html[data-theme="dark"] .ch-num{color:#0d1117}
 <p>当天晚上，码头上举办了一场盛大火晚会。一位广州市民至今仍在发帖感慨：“那天，我从下午4点多一直等到晚上8点50多分的烟花表演！真是佩服年轻时的自己。”</p>
 <p>以后，这艘挪威沉船的更多故事也会“浮出水面”。接下来，考古人员会从船体结构、瓷器类型、货物标记、木材来源，以及海关账册和航海日志中寻找更多线索。由于遗址位于深海，且货物保存较完整，研究人员认为，这一发现有助于重新认识北欧海洋史和18世纪贸易网络。</p>
 <hr></div><nav class="pager"><a class="pg prev" href="#p093"><span class="dir">← 上一篇</span><span class="pt">无名与有名</span></a><a class="pg next" href="#p096"><span class="dir">下一篇 →</span><span class="pt">全人类都能读懂的品质</span></a></nav></article>
-<article class="chapter" id="p096" data-page="096"><header class="ch-head"><div class="ch-meta"><span class="ch-num">096</span><span class="ch-sec">真题及例文</span></div><h2 class="ch-title">全人类都能读懂的品质</h2></header><div class="ch-body"><p>人民日报，2026-10-20，20 版，国际副刊 http://paper.people.com.cn/rmrb/pc/content/20261020/content_30186652.html</p>
+<article class="chapter" id="p096" data-page="096"><header class="ch-head"><div class="ch-meta"><span class="ch-num">096</span><span class="ch-sec">时文选读</span></div><h2 class="ch-title">全人类都能读懂的品质</h2></header><div class="ch-body"><p>人民日报，2026-10-20，20 版，国际副刊 http://paper.people.com.cn/rmrb/pc/content/20261020/content_30186652.html</p>
 <p><strong>导读</strong>　作者是海伦·福斯特·斯诺的亲属，重走斯诺夫妇当年在中国的路。文章回答一个问题：一个外国人靠什么读懂中国。适合“理解”“倾听”“如何认识他者”一类题。可积累的是方法层面的提炼——跨文化理解的第一步是承认自己还不知道，倾听先于评价。这个说法可以移用到与人相处、读一本书、看一处风景，比空谈“要有开放心态”结实。</p>
 <p>长征，是现代人类历史上一场令人震撼的艰苦跋涉，对我而言也有着特殊意义。这份联结不仅关乎我们家族与中国近一个世纪的渊源，更源于我的姑祖母海伦·福斯特·斯诺留下的精神财富——她一生都在致力于跨越地域与偏见的隔阂，推动不同文化的相互理解。</p>
 <p>海伦是早期美国拓荒者的后代。她的先辈曾穿越荒漠、激流与群山，在未知的土地上寻求新的生活。坚韧、付出以及在困顿中前行的故事，她从小耳濡目染。多年后，她远涉重洋去往中国，与埃德加·斯诺一起，见证了另一段展现人类生存意志与决心的史诗——红军长征。</p>
@@ -1514,7 +1548,7 @@ html[data-theme="dark"] .ch-num{color:#0d1117}
 <p>习近平主席在给我的回信中这样说：“希望你和基金会继续以斯诺夫妇为榜样，为增进中美两国人民的友谊合作作出新的贡献！”海伦·福斯特·斯诺基金会会持续举办“工合”（Gung Ho）青年交流等项目，尽管文化背景不同，但大家都共享着一种朴素的信念——一个更好的未来值得去争取，而真诚的沟通能够跨越最遥远的距离。</p>
 <p>（作者为美国海伦·福斯特·斯诺基金会名誉主席）</p>
 <hr></div><nav class="pager"><a class="pg prev" href="#p094"><span class="dir">← 上一篇</span><span class="pt">挪威海底的中国盘子</span></a><a class="pg next" href="#p097"><span class="dir">下一篇 →</span><span class="pt">做新时代的马可·波罗</span></a></nav></article>
-<article class="chapter" id="p097" data-page="097"><header class="ch-head"><div class="ch-meta"><span class="ch-num">097</span><span class="ch-sec">真题及例文</span></div><h2 class="ch-title">做新时代的马可·波罗</h2></header><div class="ch-body"><p>光明日报，2026-07-01，09 版 https://news.gmw.cn/2026-07/01/content_38860113.htm</p>
+<article class="chapter" id="p097" data-page="097"><header class="ch-head"><div class="ch-meta"><span class="ch-num">097</span><span class="ch-sec">时文选读</span></div><h2 class="ch-title">做新时代的马可·波罗</h2></header><div class="ch-body"><p>光明日报，2026-07-01，09 版 https://news.gmw.cn/2026-07/01/content_38860113.htm</p>
 <p>导读 第十九届中华图书特殊贡献奖颁给了意大利翻译家李集雅。1982 年她十九岁开始学中文，后来在复旦读中国哲学，2020 年当上威尼斯大学校长。适合“翻译”“桥梁”“长期主义”“理解”一类题。可积累的判断是：翻译的成就在于让原本隐没的东西显出来，并非把原文换一种说法。这句话把“中介”这个位置讲清楚了，用在“摆渡人”“连接者”一类题上正好。</p>
 <p>“在某种程度上，我们是马可·波罗与哥伦布精神的继承者——正是他们，沿着张骞和玄奘的足迹，开创了不同文明之间富有成果的对话。”在钓鱼台国宾馆芳华苑第十九届中华图书特殊贡献奖颁奖现场，意大利翻译家、威尼斯大学校长李集雅道出了获奖心声。</p>
 <p>来自水城威尼斯的李集雅，将故乡比作“一条漂浮在海洋中的鱼”，因世界的相遇、交融与往来而生。李集雅与中国文化的相遇始于 1982 年。那年，19 岁的李集雅进入威尼斯大学学习中文。大三时，她到北京进修汉语，随后又进入复旦大学学习中国哲学。1994 年，她在荷兰莱顿大学获汉学博士学位。2020 年，李集雅当选威尼斯大学第 23 任校长，成为该校历史上首位女性校长。</p>
@@ -1524,7 +1558,7 @@ html[data-theme="dark"] .ch-num{color:#0d1117}
 <p>“翻译不应仅仅服务于那些不懂原文的读者，而应揭示原作中原本没有被看见的东西。”在李集雅眼中，这也是文化交流对话的起点。“今天，我们比以往任何时候都更需要一种新的视野——国与国、民与民之间相遇的视野。”</p>
 <p>“我衷心希望，作为‘新时代的马可·波罗’，我们能够为中国文学与哲学的创造性翻译铺就新的道路。”谈到未来的工作，李集雅计划继续深耕中国经典文献的翻译与研究工作，同时关注当代中国的文化实践，以更丰富、更精准的译介方式，让意大利乃至整个欧洲的读者读懂一个古老而又日新的中国。</p>
 <hr></div><nav class="pager"><a class="pg prev" href="#p096"><span class="dir">← 上一篇</span><span class="pt">全人类都能读懂的品质</span></a><a class="pg next" href="#p098"><span class="dir">下一篇 →</span><span class="pt">两台纤维支气管镜与一次培训</span></a></nav></article>
-<article class="chapter" id="p098" data-page="098"><header class="ch-head"><div class="ch-meta"><span class="ch-num">098</span><span class="ch-sec">真题及例文</span></div><h2 class="ch-title">两台纤维支气管镜与一次培训</h2></header><div class="ch-body"><p>人民网，2026-10-22，国际频道 https://world.people.com.cn/n1/2026/1022/c1002-40819800.html</p>
+<article class="chapter" id="p098" data-page="098"><header class="ch-head"><div class="ch-meta"><span class="ch-num">098</span><span class="ch-sec">时文选读</span></div><h2 class="ch-title">两台纤维支气管镜与一次培训</h2></header><div class="ch-body"><p>人民网，2026-10-22，国际频道 https://world.people.com.cn/n1/2026/1022/c1002-40819800.html</p>
 <p>时代 一条短消息：第 28 批援坦桑尼亚中国医疗队在穆希比利国立医院，为麻醉科全体医护做纤支镜插管培训，同时捐了两台可视化设备。当地烧伤、颌面畸形病例多，困难气道手术需求迫切。适合“帮助的方式”“留下什么”“技术与人”一类题。这条材料的价值在“留下”二字：设备会旧，技术留在人手上。写“授人以渔”时，它比泛泛的例子具体。</p>
 <p>人民网讯 内罗毕 10 月 21 日电（记者黄炜鑫）第28批援坦桑尼亚中国医疗队日前在当地穆希比利国立医院为该院麻醉科全体医护人员开展清醒状态下纤维支气管镜插管技术专项培训。</p>
 <p>据悉，当地烧伤烫伤、颌面发育畸形等病例多发，各类高风险困难气道手术患者数量较多，对精准、安全的气道管理技术需求迫切。对此，医疗队积极对接国内医疗设备企业，向医院麻醉科无偿捐赠两台可视化纤维支气管镜。</p>
