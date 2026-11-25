@@ -1,13 +1,22 @@
-/* Theme toggle: GitHub light/dark. Injected into every page via <script defer>. */
+/* Theme toggle: warm light / warm dark, following the Claude palette.
+   Injected into every page via <script defer>.
+   URL override: ?theme=light or ?theme=dark (also writes to localStorage). */
 (function(){
   function apply(t){
     document.documentElement.setAttribute('data-theme',t);
     try{localStorage.setItem('kb-theme',t);}catch(e){}
     var b=document.getElementById('theme-toggle');
-    if(b) b.textContent=(t==='dark')?'\u2600':'\u263D'; // sun in dark, moon in light
+    if(b){
+      b.textContent=(t==='dark')?'☀':'☽'; // sun in dark, moon in light
+      b.setAttribute('aria-pressed', t==='dark'?'true':'false');
+    }
   }
   function init(){
     var saved=null; try{saved=localStorage.getItem('kb-theme');}catch(e){}
+    // ?theme=light|dark wins over stored preference
+    var q=null;
+    try{ q=new URLSearchParams(location.search).get('theme'); }catch(e){}
+    if(q==='light'||q==='dark') saved=q;
     var sys=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';
     apply(saved||sys);
     if(document.getElementById('theme-toggle')) return;

@@ -5,17 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>试卷数字化 · 进度看板</title>
 <link rel="stylesheet" href="assets/hermes.css">
-<meta http-equiv="refresh" content="60">
+<script src="assets/theme.js" defer></script>
+<!-- 自动刷新用 JS 保留查询参数（meta refresh 会把 ?theme= 丢掉） -->
+<script>
+setTimeout(function(){ location.replace(location.pathname + location.search); }, 60000);
+</script>
 <style>
-body{max-width:820px;margin:0 auto;padding:16px;font-family:system-ui,-apple-system,"Microsoft YaHei",sans-serif;}
-h1{font-size:1.5rem;} h2{font-size:1.15rem;margin-top:28px;border-left:4px solid #1a73e8;padding-left:8px;}
-.card{border:1px solid #e0e0e0;border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:0 1px 3px rgba(0,0,0,.05);}
-.bar{background:#eee;border-radius:8px;height:16px;overflow:hidden;}
-.bar-in{background:linear-gradient(90deg,#1a73e8,#42a5f5);height:100%;transition:width .4s;}
-.big{font-size:2rem;font-weight:700;color:#1a73e8;}
-.muted{color:#666;font-size:.9rem;}
-table{border-collapse:collapse;width:100%;font-size:.92rem;} th,td{border:1px solid #e0e0e0;padding:6px 8px;text-align:left;} th{background:#f5f7fa;}
-.pill{display:inline-block;padding:2px 10px;border-radius:12px;background:#777;color:#fff;font-size:.85rem;}
+/* 本页专用补充；配色全部走 hermes.css 的 Claude 变量，不写死颜色 */
+h2{border-left:0;padding-left:0}
+.bar{background:var(--panel3);border-radius:2px;height:8px;overflow:hidden;}
+.bar-in{background:var(--accent);height:100%;transition:width .4s;}
+.big{font-size:2rem;font-weight:500;color:var(--accent);font-family:Georgia,serif;font-variant-numeric:tabular-nums;}
+.muted{color:var(--dim);font-size:.88rem;}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--muted);color:var(--bg);font-size:.82rem;}
 </style>
 </head>
 <body>

@@ -6,13 +6,14 @@
 <title>写作经纬线（二）· 全文阅读</title>
 <meta name="description" content="《写作经纬线（二）》124 篇全文，可搜索、可跳转、支持深浅色。">
 <style>
+/* Claude / Anthropic palette：暖纸背景 + 陶土强调，无冷色 */
 :root,html[data-theme="light"]{
-  --bg:#fff; --panel:#f6f8fa; --panel2:#eaeef2; --text:#1f2328; --muted:#59636e; --dim:#818b98;
-  --border:#d1d9e0; --accent:#0969da; --accent-hover:#0550ae; --accent-subtle:#ddf4ff; --mark:#fff8c5;
+  --bg:#f5f4ed; --panel:#faf9f5; --panel2:#f0eee6; --text:#141413; --muted:#5e5d59; --dim:#716f68;
+  --border:#e8e6dc; --accent:#c96442; --accent-hover:#a8502f; --accent-subtle:#f7ece6; --mark:#f5e6b8;
 }
 html[data-theme="dark"]{
-  --bg:#0d1117; --panel:#161b22; --panel2:#21262d; --text:#e6edf3; --muted:#9198a1; --dim:#6e7681;
-  --border:#30363d; --accent:#4493f8; --accent-hover:#58a6ff; --accent-subtle:#121b2b; --mark:#4d3800;
+  --bg:#141413; --panel:#1c1b19; --panel2:#30302e; --text:#faf9f5; --muted:#b0aea5; --dim:#87867f;
+  --border:#30302e; --accent:#d97757; --accent-hover:#e89372; --accent-subtle:#2a201c; --mark:#4a3d12;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:76px}
@@ -90,9 +91,9 @@ body{
 .chapter{margin-bottom:72px;scroll-margin-top:76px}
 .ch-head{margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid var(--border)}
 .ch-meta{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:.75rem}
-.ch-num{background:var(--accent);color:#fff;border-radius:5px;padding:1px 8px;
+.ch-num{background:var(--accent);color:var(--bg);border-radius:5px;padding:1px 8px;
   font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em}
-html[data-theme="dark"] .ch-num{color:#0d1117}
+html[data-theme="dark"] .ch-num{color:#141413}
 .ch-sec{color:var(--muted)}
 .ch-title{font-size:1.45rem;line-height:1.4;font-weight:650;margin:0;color:var(--text)}
 .ch-body{font-size:1.02rem;line-height:1.95;letter-spacing:.01em;overflow-wrap:anywhere}
