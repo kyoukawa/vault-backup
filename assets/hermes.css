@@ -94,6 +94,35 @@ pre code{background:transparent;border:0;padding:0}
 img{max-width:100%}
 footer{color:var(--dim);font-size:.82em;margin-top:3em;text-align:center;border-top:1px solid var(--border-muted);padding-top:1em}
 #err{color:var(--danger)}
+
+/* 首页「正在读」卡片（数据来自 读书/weread.json） */
+.weread{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:1em 1.1em;margin:1rem 0;box-shadow:var(--shadow)}
+.weread .muted,.wl-foot{color:var(--muted);font-size:.88em;margin:.4em 0}
+.wl-sum{margin:0 0 .8em;font-size:.95em;color:var(--muted)}
+.wl-sum b{color:var(--fg)}
+table.wl{width:100%;display:table;margin:.2em 0 .8em;font-size:.92em}
+table.wl th{background:var(--canvas-subtle);font-weight:600}
+table.wl td{border:0;border-bottom:1px solid var(--border-muted);padding:.5em .4em;vertical-align:middle}
+table.wl tr:nth-child(even) td{background:transparent}
+table.wl td.bk{width:42%;font-weight:500}
+table.wl td.bk small{color:var(--muted);font-weight:400;font-size:.85em}
+table.wl td.bar{width:24%;position:relative;min-width:80px}
+table.wl td.bar span{display:block;height:6px;border-radius:3px;background:var(--accent);opacity:.75;min-width:1px}
+table.wl td.bar::before{content:"";position:absolute;left:.4em;right:.4em;top:50%;height:6px;margin-top:-8px;border-radius:3px;background:var(--panel3);z-index:0}
+table.wl td.bar span{position:relative;z-index:1}
+table.wl td.bar i{display:block;font-style:normal;font-size:.8em;color:var(--muted);margin-top:2px}
+table.wl td.pos{width:22%;color:var(--muted);font-size:.88em}
+table.wl td.num{width:12%;text-align:right;white-space:nowrap;color:var(--muted);font-size:.88em}
+.wl-done{margin:.6em 0 .2em;font-size:.9em}
+ul.wl-list{margin:.2em 0 .6em;padding-left:1.2em;font-size:.9em;color:var(--muted)}
+ul.wl-list small{color:var(--dim)}
+.wl-foot{border-top:1px solid var(--border-muted);padding-top:.6em;margin-top:.4em}
+@media (max-width:600px){
+  table.wl{font-size:.86em}
+  table.wl td.bk{width:46%}
+  table.wl td.pos{display:none}
+  table.wl th:nth-child(3){display:none}
+}
 .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1rem 0}
 .table-wrap table{margin:0;min-width:max-content;display:table}
 .table-hint{display:none;color:var(--dim);font-size:.8em;margin:-.4em 0 .8em}

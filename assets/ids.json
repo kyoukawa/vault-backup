@@ -13,6 +13,9 @@
  "chem-index": "化学错题本/INDEX.md",
  "chinese-index": "语文语料库/INDEX.md",
  "chinese-writing": "语文语料库/corpus/00-跨篇通用招法.md",
+ "coach-review": "学业档案/带学/复习队列.md",
+ "coach-state": "学业档案/带学/状态.md",
+ "coach-wrong": "学业档案/带学/错题.md",
  "cold-studies": "阅读收集/2026/时文两则（2026-11）：冷门绝学 · 假忙与实干.md",
  "daily": "每日题目/2026-11-19.html",
  "daily-1119": "每日题目/2026-11-19.html",
@@ -108,7 +111,11 @@
  "own-pace": "阅读收集/2026/时文（2026-11 · 快与慢）：找到自己的节奏.md",
  "personal-agent": "阅读收集/2026/如果Personal Agent不只属于一个人.md",
  "post-training": "阅读收集/2026/后训练不是AI应用的救世主.md",
+ "reading-home": "读书/INDEX.md",
  "reading-index": "阅读收集/INDEX.md",
+ "reading-log": "读书/阅读日志.md",
+ "reading-progress": "读书/阅读进度.md",
+ "reading-progress-md": "读书/阅读进度.md",
  "record": "学业档案/INDEX.md",
  "record-2": "学业档案/2026/2026-11-期中考（赋分前）.md",
  "report-book-full": "语文语料库/整本精读报告-写作经纬线二.md",
@@ -122,5 +129,6 @@
  "super-agent": "阅读收集/2026/Super-agent 设计探索：迈向更自主的 Agent 系统.md",
  "theme-index": "语文语料库/主题索引.md",
  "tw-index": "语文语料库/时文批注库/INDEX.md",
- "wang-hong": "阅读收集/2026/时文两则（2026-11 · 王虹专题）：挂谷猜想 · 选专业.md"
+ "wang-hong": "阅读收集/2026/时文两则（2026-11 · 王虹专题）：挂谷猜想 · 选专业.md",
+ "weread-json": "读书/weread.json"
 }

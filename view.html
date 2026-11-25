@@ -113,6 +113,19 @@ async function main(){
     const resp=await fetch(encodeURI(path).replace(/%2F/g,'/'));
     if(!resp.ok) throw new Error('HTTP '+resp.status);
     let text=await resp.text();
+
+    // JSON 数据文件：直接展示结构，不当 Markdown 解析
+    if(/\.json$/i.test(path)){
+      document.title=(path.split('/').pop()||'数据')+' · 知识库';
+      document.getElementById('title').textContent=path;
+      let obj; try{ obj=JSON.parse(text); }catch(e){ throw new Error('JSON 解析失败: '+e.message); }
+      const mdEl=document.getElementById('md');
+      mdEl.innerHTML='<p class="sub">原始数据文件，共 '+Object.keys(obj).length+' 个顶层字段。</p>'
+        + '<pre><code></code></pre>';
+      mdEl.querySelector('code').textContent=JSON.stringify(obj,null,2);
+      return;
+    }
+
     document.title=(path.split('/').pop()||'知识库')+' · 知识库';
     document.getElementById('title').textContent=path;
     if(text.startsWith('---')){ let e=text.indexOf('\n---'); if(e>0) text=text.slice(e+4); }

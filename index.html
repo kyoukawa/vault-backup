@@ -14,10 +14,50 @@
 📊 <b>试卷数字化看板</b>：<a href="goal-board.html">进度（goal + 428 份）</a><br>
 📖 <b>《写作经纬线二》整本精读（25 题 + 37 篇时文）</b>：<a href="view.html?file=report-book-full">打开报告</a> · <a href="view.html?file=book2-index">145 章索引</a><br>
 ✍️ <b>写作经纬线（二）OCR 文字稿（145 页）</b>：<a href="writing-ocr.html">阅读器（全文搜索 · 侧栏目录）</a> · <a href="writing-ocr.md">Markdown</a><br>
-📚 <b>写作方法书籍摘要（3 本）</b>：<a href="view.html?file=books-index">总览</a> · <a href="view.html?file=book-jinnzhen">欲觅金针度与人</a> · <a href="view.html?file=book-shuoli">说理与思辨</a> · <a href="view.html?file=book-15jiang">议论文写作十五讲</a>
+📚 <b>写作方法书籍摘要（3 本）</b>：<a href="view.html?file=books-index">总览</a> · <a href="view.html?file=book-jinnzhen">欲觅金针度与人</a> · <a href="view.html?file=book-shuoli">说理与思辨</a> · <a href="view.html?file=book-15jiang">议论文写作十五讲</a><br>
+📖 <b>微信读书进度</b>：<a href="view.html?file=reading-progress">在读 / 读完 / 时长</a> · <a href="read.json">数据</a>
 </p>
 <h1>知识库 · vault-backup</h1>
 <blockquote>个人学习知识库的网页镜像：语文/英语作文语料、试卷原卷与题集、错题本、阅读笔记、学业档案。本地用 <b>Obsidian</b> 维护，本仓库由 obsidian-git 自动同步。</blockquote>
+
+<h2>📖 正在读</h2>
+<div id="weread-card" class="weread">
+  <p class="muted">加载中… <a href="read.json">原始数据</a></p>
+</div>
+<script>
+(function(){
+  var box = document.getElementById('weread-card');
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function dur(m){ if(!m) return '0 分'; var h=Math.floor(m/60), r=m%60;
+    return h ? (h+' 小时'+(r?' '+r+' 分':'')) : (r+' 分'); }
+  fetch('read.json?v='+Date.now()).then(function(r){
+    if(!r.ok) throw new Error('HTTP '+r.status); return r.json();
+  }).then(function(d){
+    var t=d.time||{}, c=d.counts||{};
+    var rows = (d.reading||[]).map(function(b){
+      var pos = b.chapter&&b.chapters ? (b.chapter+'/'+b.chapters+' 章') : '';
+      if(b.chapterName) pos += ' · '+b.chapterName;
+      var pct = b.progress||0;
+      return '<tr><td class="bk">'+esc(b.title)+'<br><small>'+esc(b.author)+'</small></td>'
+        + '<td class="bar"><span style="width:'+pct+'%"></span><i>'+pct+'%</i></td>'
+        + '<td class="pos">'+esc(pos)+'</td>'
+        + '<td class="num">'+dur(b.minutes)+'</td></tr>';
+    }).join('');
+    var done = (d.done||[]).map(function(b){
+      return '<li>'+esc(b.title)+' <small>'+esc(b.author)+' · '+dur(b.minutes)+'</small></li>';
+    }).join('');
+    box.innerHTML =
+      '<p class="wl-sum">书架上 '+d.shelf+' 本 · <b>在读 '+c.reading+'</b> · 读完 '+c.done
+      + ' · 本周 <b>'+dur(t.week)+'</b>（'+t.weekDays+' 天）· 累计 '+dur(t.all)+'</p>'
+      + (rows ? '<table class="wl"><tr><th>书</th><th>进度</th><th>位置</th><th>已读</th></tr>'+rows+'</table>' : '')
+      + (done ? '<p class="wl-done"><b>读完</b></p><ul class="wl-list">'+done+'</ul>' : '')
+      + '<p class="wl-foot">更新于 '+esc(d.updated)+' · <a href="view.html?file=reading-progress">完整页面</a> · <a href="view.html?file=reading-log">变化日志</a></p>';
+  }).catch(function(e){
+    box.innerHTML = '<p class="muted">读书数据没加载出来（'+esc(e.message)+'）。<a href="view.html?file=reading-progress">看快照页</a></p>';
+  });
+})();
+</script>
 
 <h2>🚀 直接开始</h2>
 <table>
@@ -55,6 +95,6 @@
 
 <h2>⚙️ 说明</h2>
 <p>本页是静态入口；条目经 <code>view.html?file=ID</code> 渲染（支持 <code>[[双链]]</code> 站内跳转、KaTeX 公式、表格横向滚动）。原始 Markdown 在仓库中，可用 Obsidian 打开。ID 对照见 <a href="view.html?file=id-reference">英文ID对照表</a>。</p>
-<footer>obsidian-git 自动同步 · kyoukawa/vault-backup · GitHub Pages</footer>
+<footer>obsidian-git 自动同步 · kyoukawa/vault-backup · GitHub Pages · <a href="https://kyoukawa.github.io/">个人主页</a></footer>
 </body>
 </html>
