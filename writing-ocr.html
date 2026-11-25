@@ -22,6 +22,8 @@ body{
   font-size:17px;line-height:1.85;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
 }
+/* 页面顶部的主题切换按钮（assets/theme.js 注入）避开顶栏 */
+#theme-toggle{top:69px!important;right:14px!important}
 
 /* ---------- 顶栏 ---------- */
 #topbar{
@@ -34,7 +36,8 @@ body{
 #topbar .brand{font-weight:650;font-size:.95rem;white-space:nowrap}
 #topbar .brand small{color:var(--muted);font-weight:400;margin-left:8px;font-size:.78rem}
 #topbar .spacer{flex:1}
-#topbar a.homelink{color:var(--muted);text-decoration:none;font-size:.82rem;padding:6px 10px;border-radius:6px;white-space:nowrap}
+#topbar a.homelink{color:var(--muted);text-decoration:none;font-size:.82rem;padding:6px 10px;
+  border-radius:6px;white-space:nowrap;margin-right:52px}
 #topbar a.homelink:hover{background:var(--panel2);color:var(--text)}
 #menu-btn{display:none;background:none;border:1px solid var(--border);color:var(--text);
   border-radius:6px;width:34px;height:32px;font-size:1rem;cursor:pointer;padding:0;line-height:1}
@@ -92,6 +95,11 @@ html[data-theme="dark"] .ch-num{color:#0d1117}
   padding-left:11px;border-left:3px solid var(--accent)}
 .ch-body h4{font-size:1rem;font-weight:650;margin:1.5em 0 .5em;color:var(--muted)}
 .ch-body h5,.ch-body h6{font-size:.95rem;font-weight:650;margin:1.3em 0 .4em;color:var(--muted)}
+.ch-body h5.subhead{
+  font-size:1.02rem;color:var(--text);margin:2em 0 .6em;
+  padding:5px 12px;background:var(--panel);border-radius:6px;
+  display:inline-block;font-weight:650;letter-spacing:.01em;
+}
 .ch-body blockquote{
   margin:1.2em 0;padding:.7em 1.1em;border-left:3px solid var(--border);
   background:var(--panel);color:var(--muted);font-size:.92rem;border-radius:0 6px 6px 0;
