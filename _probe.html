@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"></head><body style="margin:0">
-<iframe id="f" src="writing-ocr.html" style="width:390px;height:844px;border:0"></iframe>
-<div id="out"></div>
+<html><head><meta charset="utf-8"></head><body style="margin:0;font:13px/1.5 monospace">
+<iframe id="f" src="writing-ocr.html" style="width:390px;height:200px;border:1px solid red"></iframe>
+<pre id="out"></pre>
 <script>
 document.getElementById('f').onload=function(){
-  var d=this.contentDocument, w=this.contentWindow;
-  var L=[];
+  var d=this.contentDocument, w=this.contentWindow, L=[];
   L.push('innerWidth='+w.innerWidth);
-  L.push('docScrollW='+d.documentElement.scrollWidth+' bodyScrollW='+d.body.scrollWidth);
+  L.push('docScrollW='+d.documentElement.scrollWidth);
   var main=d.querySelector('#main'), wrap=d.querySelector('.wrap');
-  L.push('mainW='+main.getBoundingClientRect().width.toFixed(1)+' mainPad='+w.getComputedStyle(main).padding);
-  L.push('wrapW='+wrap.getBoundingClientRect().width.toFixed(1)+' wrapPad='+w.getComputedStyle(wrap).padding);
+  L.push('mainW='+main.getBoundingClientRect().width.toFixed(1));
+  L.push('wrapW='+wrap.getBoundingClientRect().width.toFixed(1)+' pad='+w.getComputedStyle(wrap).padding);
   var worst=null,ww=0;
-  d.querySelectorAll('#p001 *').forEach(function(el){var r=el.getBoundingClientRect(); if(r.right>ww){ww=r.right;worst=el;}});
-  L.push('widest='+worst.tagName+'.'+(worst.className||'')+' right='+ww.toFixed(1));
-  var p=d.querySelector('#p001 .ch-body p');
-  var r=p.getBoundingClientRect();
-  L.push('pW='+r.width.toFixed(1)+' pX='+r.x.toFixed(1)+' justify='+w.getComputedStyle(p).textAlign);
-  document.getElementById('out').setAttribute('data-r', L.join(' | '));
-  document.title=L.join(' | ');
+  d.querySelectorAll('.chapter *').forEach(function(el){
+    var r=el.getBoundingClientRect(); if(r.width>ww){ww=r.width;worst=el;}
+  });
+  L.push('最宽元素='+worst.tagName+'.'+(worst.className||'-')+' w='+ww.toFixed(1));
+  var p=d.querySelector('.ch-body p');
+  L.push('pW='+p.getBoundingClientRect().width.toFixed(1));
+  document.getElementById('out').textContent=L.join('\n');
 };
 </script></body></html>
