@@ -53,12 +53,16 @@
   .meta .clear { cursor: pointer; border: 0; background: none; color: var(--accent);
                  font: inherit; font-size: .84rem; padding: 0; }
 
-  ul.res { list-style: none; margin: 0; padding: 0; line-height: 1.35; }
-  ul.res li {
-    display: flex; align-items: center; gap: .8rem;
-    padding: .42rem .2rem; border-bottom: 1px solid var(--border-muted);
-    line-height: 1.35;
+  ul.res { list-style: none; margin: 0; padding: 0; }
+  ul.res > li {
+    display: flex !important; align-items: center; gap: .8rem;
+    padding: .34rem .2rem !important;
+    margin: 0 !important;
+    border-bottom: 1px solid var(--border-muted);
+    line-height: 1.3 !important;
+    font-size: .93rem;
   }
+  ul.res > li > .t { display: flex; gap: .55rem; align-items: baseline; flex-wrap: wrap; }
   ul.res li:last-child { border-bottom: 0; }
   ul.res li:hover { background: color-mix(in srgb, var(--panel) 60%, transparent); }
   .res .t { flex: 1 1 auto; min-width: 0; display: flex; align-items: baseline;
@@ -69,7 +73,8 @@
                  white-space: nowrap; }
   .res .badges { flex: 0 0 auto; display: flex; gap: .3rem; }
   .bdg {
-    font-size: .7rem; padding: .1rem .45rem; border-radius: 5px;
+    font-size: .7rem; padding: 0 .4rem; border-radius: 5px;
+    line-height: 1.5; display: inline-block;
     border: 1px solid var(--border); color: var(--dim); white-space: nowrap;
   }
   .bdg.on { border-color: var(--accent2); color: var(--accent2); }
