@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>试卷库 · 搜索</title>
+<link rel="stylesheet" href="assets/hermes.css">
+<link rel="stylesheet" href="assets/fonts.css">
+<script src="assets/theme.js" defer></script>
+<style>
+  /* 本页专用：筛选器 + 结果表 */
+  .filters {
+    position: sticky; top: 0; z-index: 30;
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    padding: .9rem 0 1rem; margin-bottom: .8rem;
+    border-bottom: 1px solid var(--border-muted);
+  }
+  .searchrow { display: flex; gap: .6rem; align-items: center; }
+  #q {
+    flex: 1 1 auto; min-width: 0;
+    font: inherit; font-size: 16px; color: var(--fg);
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; padding: .62rem .9rem;
+    -webkit-appearance: none; appearance: none;
+  }
+  #q:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+  #q::placeholder { color: var(--dim); }
+
+  .fc { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .65rem; }
+  .fc .lbl {
+    font-size: .74rem; color: var(--dim); align-self: center;
+    min-width: 2.4em; letter-spacing: .02em;
+  }
+  .fc button {
+    font: inherit; font-size: .82rem; cursor: pointer;
+    padding: .26rem .72rem; border-radius: 999px;
+    border: 1px solid var(--border); background: var(--panel);
+    color: var(--muted); transition: all .14s ease;
+  }
+  .fc button:hover { border-color: var(--accent); color: var(--fg); }
+  .fc button[aria-pressed="true"] {
+    background: var(--accent); border-color: var(--accent);
+    color: var(--bg); font-weight: 600;
+  }
+  .fc button .n { opacity: .6; font-size: .88em; margin-left: .2em; }
+
+  .meta { display: flex; justify-content: space-between; align-items: baseline;
+          gap: 1rem; flex-wrap: wrap; margin: .4rem 0 .9rem;
+          font-size: .84rem; color: var(--dim); }
+  .meta b { color: var(--fg); font-weight: 600; }
+  .meta .clear { cursor: pointer; border: 0; background: none; color: var(--accent);
+                 font: inherit; font-size: .84rem; padding: 0; }
+
+  ul.res { list-style: none; margin: 0; padding: 0; line-height: 1.35; }
+  ul.res li {
+    display: flex; align-items: center; gap: .8rem;
+    padding: .42rem .2rem; border-bottom: 1px solid var(--border-muted);
+    line-height: 1.35;
+  }
+  ul.res li:last-child { border-bottom: 0; }
+  ul.res li:hover { background: color-mix(in srgb, var(--panel) 60%, transparent); }
+  .res .t { flex: 1 1 auto; min-width: 0; display: flex; align-items: baseline;
+            gap: .6rem; flex-wrap: wrap; }
+  .res .t a { font-size: .93rem; color: var(--fg); text-decoration: none; }
+  .res .t a:hover { color: var(--accent); }
+  .res .t .sub { font-size: .74rem; color: var(--dim); font-family: var(--mono);
+                 white-space: nowrap; }
+  .res .badges { flex: 0 0 auto; display: flex; gap: .3rem; }
+  .bdg {
+    font-size: .7rem; padding: .1rem .45rem; border-radius: 5px;
+    border: 1px solid var(--border); color: var(--dim); white-space: nowrap;
+  }
+  .bdg.on { border-color: var(--accent2); color: var(--accent2); }
+  mark { background: color-mix(in srgb, var(--accent) 28%, transparent);
+         color: inherit; border-radius: 2px; padding: 0 .1em; }
+
+  .empty { text-align: center; color: var(--dim); padding: 3rem 1rem; font-size: .92rem; }
+  .more { display: block; width: 100%; margin: 1.2rem 0 0; padding: .7rem;
+          font: inherit; font-size: .88rem; cursor: pointer;
+          background: var(--panel); color: var(--muted);
+          border: 1px solid var(--border); border-radius: 10px; }
+  .more:hover { border-color: var(--accent); color: var(--fg); }
+  .hint { font-size: .78rem; color: var(--dim); margin: .2rem 0 0; }
+
+  @media (max-width: 600px) {
+    .fc .lbl { min-width: 100%; }
+    .res .badges { display: none; }
+    ul.res li { padding: .6rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="crumb"><a href="index.html">首页</a> / <a href="view.html?file=exam-index">试卷库</a> / 搜索</div>
+
+<h1>试卷库 · 搜索</h1>
+
+<div class="filters">
+  <div class="searchrow">
+    <input id="q" type="search" placeholder="搜卷名、区县、学科…  例：海淀 语文 一模" autocomplete="off" spellcheck="false">
+  </div>
+  <div class="fc" id="f-year"><span class="lbl">年</span></div>
+  <div class="fc" id="f-kind"><span class="lbl">卷别</span></div>
+  <div class="fc" id="f-subj"><span class="lbl">学科</span></div>
+  <div class="fc" id="f-dist"><span class="lbl">区县</span></div>
+</div>
+
+<div class="meta">
+  <span id="count">加载中…</span>
+  <button class="clear" id="clear" hidden>清空筛选</button>
+</div>
+
+<ul class="res" id="list"></ul>
+<button class="more" id="more" hidden>显示更多</button>
+<p class="hint" id="hint"></p>
+
+<script>
+(function () {
+  var PAGE = 60;
+  var state = { q: '', year: null, kind: null, subject: null, district: null, shown: PAGE };
+  var DATA = null;
+  var isLocal = /^file:/.test(location.protocol);
+
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  };
+  function hi(text, q) {
+    if (!q) return esc(text);
+    var i = text.toLowerCase().indexOf(q.toLowerCase());
+    if (i < 0) return esc(text);
+    return esc(text.slice(0, i)) + '<mark>' + esc(text.slice(i, i + q.length))
+         + '</mark>' + esc(text.slice(i + q.length));
+  }
+
+  // 本地双击打开时读本地版索引（PDF 走 file://）
+  var SRC = isLocal ? 'assets/exam-index.local.json' : 'assets/exam-index.json';
+
+  fetch(SRC + '?v=' + Date.now())
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (d) { DATA = d; boot(); })
+    .catch(function (e) {
+      $('count').textContent = '索引加载失败：' + e.message
+        + '（先跑 python tools/build_exam_index.py）';
+    });
+
+  function boot() {
+    buildFilter('f-year', 'year', DATA.years);
+    buildFilter('f-kind', 'kind', DATA.kinds);
+    buildFilter('f-subj', 'subject', DATA.subjects);
+    buildFilter('f-dist', 'district', DATA.districts);
+    $('hint').textContent = '共 ' + DATA.count + ' 份 · 索引更新于 ' + DATA.generated
+      + (isLocal ? ' · 本地模式（PDF 可直接打开）' : '');
+    render();
+
+    $('q').addEventListener('input', function (e) {
+      state.q = e.target.value.trim();
+      state.shown = PAGE;
+      render();
+    });
+    $('clear').addEventListener('click', function () {
+      state = { q: '', year: null, kind: null, subject: null, district: null, shown: PAGE };
+      $('q').value = '';
+      document.querySelectorAll('.fc button').forEach(function (b) {
+        b.setAttribute('aria-pressed', 'false');
+      });
+      render();
+    });
+    $('more').addEventListener('click', function () {
+      state.shown += PAGE; render();
+    });
+  }
+
+  function buildFilter(containerId, key, values) {
+    var box = $(containerId);
+    values.forEach(function (v) {
+      var n = DATA.rows.filter(function (r) { return r[key] === v; }).length;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-pressed', 'false');
+      b.setAttribute('data-v', v);
+      b.innerHTML = esc(v) + '<span class="n">' + n + '</span>';
+      b.addEventListener('click', function () {
+        var on = b.getAttribute('aria-pressed') === 'true';
+        box.querySelectorAll('button').forEach(function (x) {
+          x.setAttribute('aria-pressed', 'false');
+        });
+        state[key] = on ? null : v;
+        b.setAttribute('aria-pressed', on ? 'false' : 'true');
+        state.shown = PAGE;
+        render();
+      });
+      box.appendChild(b);
+    });
+  }
+
+  function match(r) {
+    if (state.year && r.year !== state.year) return false;
+    if (state.kind && r.kind !== state.kind) return false;
+    if (state.subject && r.subject !== state.subject) return false;
+    if (state.district && r.district !== state.district) return false;
+    if (state.q) {
+      var hay = (r.title + ' ' + r.district + ' ' + r.subject + ' ' + r.kind
+                 + ' ' + r.year + ' ' + r.extra).toLowerCase();
+      var terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+      for (var i = 0; i < terms.length; i++) {
+        if (hay.indexOf(terms[i]) < 0) return false;
+      }
+    }
+    return true;
+  }
+
+  function render() {
+    var rows = DATA.rows.filter(match);
+    var total = rows.length;
+    $('count').innerHTML = '找到 <b>' + total + '</b> 份'
+      + (total > state.shown ? '，显示前 ' + state.shown : '');
+    $('clear').hidden = !(state.q || state.year || state.kind || state.subject || state.district);
+
+    var page = rows.slice(0, state.shown);
+    var q = state.q.split(/\s+/)[0] || '';
+
+    $('list').innerHTML = page.map(function (r) {
+      var href, ext;
+      if (r.fileUrl) { href = r.fileUrl; ext = ''; }
+      else { href = 'https://github.com/kyoukawa/vault-backup/blob/main/试卷库/' + encodeURI(r.path); ext = ' ↗'; }
+      var tijiHref = 'view.html?file=' + encodeURIComponent(
+        'exam-' + ({ '语文': 'yw', '英语': 'yy', '化学': 'hx', '物理': 'wl', '地理': 'dl', '数学': 'sx' }[r.subject] || 'yw'));
+      return '<li>'
+        + '<span class="t"><a href="' + href + '" target="_blank" rel="noopener">'
+        + hi(r.title, q) + ext + '</a>'
+        + '<span class="sub">' + esc(r.kind) + ' · '
+        + esc(r.subject) + (r.district ? ' · ' + esc(r.district) : '') + '</span></span>'
+        + '<span class="badges">'
+        + (r.tiji ? '<a class="bdg on" href="' + tijiHref + '" title="打开分题题集">题集</a>'
+                  : '<span class="bdg">无题集</span>')
+        + '</span></li>';
+    }).join('');
+
+    if (!total) {
+      $('list').innerHTML = '<li class="empty">没有匹配的卷子。<br>试试减少筛选条件，或清空搜索词。</li>';
+    }
+    $('more').hidden = total <= state.shown;
+  }
+})();
+</script>
+
+</body>
+</html>
