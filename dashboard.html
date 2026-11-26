@@ -7,7 +7,9 @@
 <meta name="description" content="学习仪表盘：今天该干什么、备考进度、读书、活跃度、待办。">
 <link rel="stylesheet" href="assets/hermes.css">
 <link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/kb-ui.css">
 <script src="assets/theme.js" defer></script>
+<script src="assets/kb-ui.js" defer></script>
 <style>
 /* ── 本页专用；颜色全部走 hermes.css 的 Claude 变量，不写死 ────────────
    顺序色阶（活跃度热力图）经 dataviz 校验：
@@ -210,6 +212,7 @@ footer{margin-top:3.5rem;padding-top:1.2rem;border-top:1px solid var(--border-mu
 <body class="dash">
 
 <h1>看板</h1>
+<div data-kb-search></div>
 <p class="lede">今天该干什么 · 备考进度 · 在读 · 活跃度 · 待办。数据从仓库里的真实文件与 git 历史现算，不手工维护。</p>
 
 <div id="boot" class="local-note">正在读取 <code>assets/dashboard.json</code>…</div>
