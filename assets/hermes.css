@@ -38,6 +38,23 @@
   --ring:#d1cfc5;
   --shadow:0 0 0 1px var(--border);
   --shadow-lift:rgba(20,20,19,.05) 0 4px 24px;
+  /* ---------- 控件规格，对齐 gxwtf（--radius .625rem） ----------
+     这些值取自 reading.gxwtf.cn 线上样式表的实测结果：
+       按钮 rounded-md = radius - 2px = 8px
+       输入框 rounded-lg = radius = 10px
+       卡片 rounded-xl = radius + 4px = 14px
+     以后加控件一律引用这四个变量，不要再手写 px。 */
+  --radius:10px;
+  --radius-btn:8px;        /* calc(var(--radius) - 2px) */
+  --radius-input:10px;     /* = --radius */
+  --radius-card:14px;      /* calc(var(--radius) + 4px) */
+  --ctl-h:32px;            /* gxwtf h-8 */
+  --ctl-h-lg:36px;         /* gxwtf size-9 */
+  --ctl-px:12px;           /* gxwtf px-3 */
+  --ctl-text:.875rem;      /* gxwtf text-sm */
+  --ring-w:3px;            /* gxwtf focus-visible:ring-[3px] */
+  --ease:cubic-bezier(.4,0,.2,1);
+  --dur:.15s;
 }
 
 html[data-theme="dark"]{
@@ -132,6 +149,63 @@ hr{border:0;border-top:1px solid var(--border);margin:2.4em 0}
 /* ---------- navigation / breadcrumb ---------- */
 .crumb{font-size:.9rem;color:var(--dim);margin-bottom:1.6rem;padding-top:.35rem;letter-spacing:.01em}
 .crumb a{color:var(--muted)}
+
+/* ---------- 通用控件（对齐 gxwtf） ----------
+   用法：input 加 class="kb-input"，按钮加 class="kb-btn"（或 kb-btn kb-btn-on），
+   纯图标按钮加 class="kb-icon-btn"。
+   焦点一律用 3px ring（gxwtf 的 focus-visible:ring-[3px] ring-ring/50），不用 outline ——
+   outline 是方角的，会把圆角切掉一圈。 */
+.kb-input{
+  font:inherit;font-size:16px;               /* 16px 防 iOS 聚焦自动缩放 */
+  color:var(--fg);background:var(--panel);
+  border:1px solid var(--border);border-radius:var(--radius-input);
+  padding:0 var(--ctl-px);height:var(--ctl-h);
+  -webkit-appearance:none;appearance:none;
+  transition:border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.kb-input::placeholder{color:var(--dim)}
+.kb-input:focus{
+  outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 var(--ring-w) color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.kb-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.4em;
+  font:inherit;font-size:var(--ctl-text);font-weight:500;
+  height:var(--ctl-h);padding:0 var(--ctl-px);
+  color:var(--muted);background:var(--panel);
+  border:1px solid var(--border);border-radius:var(--radius-btn);
+  cursor:pointer;white-space:nowrap;
+  transition:background var(--dur) var(--ease), border-color var(--dur) var(--ease),
+             color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.kb-btn:hover{color:var(--fg);border-color:var(--accent);background:var(--accent-subtle)}
+.kb-btn:focus-visible{
+  outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 var(--ring-w) color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.kb-btn[aria-pressed="true"],.kb-btn.kb-on{
+  background:var(--accent);border-color:var(--accent);
+  color:var(--bg);font-weight:600;
+}
+.kb-btn[aria-pressed="true"]:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:var(--bg)}
+.kb-btn .n{opacity:.6;font-size:.88em;margin-left:.2em}
+
+/* 图标按钮：方形、无文字（gxwtf 的 size-8 / size-9） */
+.kb-icon-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:var(--ctl-h);height:var(--ctl-h);padding:0;
+  color:var(--muted);background:transparent;
+  border:1px solid transparent;border-radius:var(--radius-btn);
+  cursor:pointer;line-height:1;font-size:15px;
+  transition:background var(--dur) var(--ease), color var(--dur) var(--ease),
+             border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.kb-icon-btn:hover{background:var(--panel2);color:var(--fg)}
+.kb-icon-btn:focus-visible{
+  outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 var(--ring-w) color-mix(in srgb, var(--accent) 22%, transparent);
+}
 
 /* ---------- tables ---------- */
 table{
@@ -259,14 +333,18 @@ footer{
 /* ---------- theme toggle ---------- */
 #theme-toggle{
   position:fixed;right:18px;top:12px;z-index:50;
-  width:34px;height:34px;border-radius:10px;cursor:pointer;
+  width:var(--ctl-h);height:var(--ctl-h);border-radius:var(--radius-btn);cursor:pointer;
   border:1px solid var(--border);background:var(--panel);color:var(--muted);
   font-size:15px;line-height:1;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 0 0 1px var(--border-muted);padding:0;
-  transition:background .16s ease,color .16s ease;
+  padding:0;
+  transition:background var(--dur) var(--ease),color var(--dur) var(--ease),
+             border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
 }
 #theme-toggle:hover{background:var(--panel3);color:var(--fg)}
-#theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#theme-toggle:focus-visible{
+  outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 var(--ring-w) color-mix(in srgb, var(--accent) 22%, transparent);
+}
 
 /* ---------- horizontal-scroll tables (mobile) ---------- */
 .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.35rem 0}

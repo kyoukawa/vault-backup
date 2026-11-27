@@ -16,6 +16,13 @@ html[data-theme="dark"]{
   --bg:#141413; --panel:#1c1b19; --panel2:#30302e; --text:#faf9f5; --muted:#b0aea5; --dim:#87867f;
   --border:#30302e; --accent:#d97757; --accent-hover:#e89372; --accent-subtle:#2a201c; --mark:#4a3d12;
 }
+/* 控件规格：与 assets/hermes.css 同一套，取值来自 gxwtf 线上实测。
+   本页是独立样式表（不引 hermes.css），所以这里复制一份，改时两边同步。 */
+:root{
+  --radius:10px; --radius-btn:8px; --radius-input:10px; --radius-card:14px;
+  --ctl-h:32px; --ctl-h-lg:36px; --ctl-px:12px; --ctl-text:.875rem;
+  --ring-w:3px; --ease:cubic-bezier(.4,0,.2,1); --dur:.15s;
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:76px}
 body{
@@ -39,10 +46,16 @@ body{
 #topbar .brand small{color:var(--muted);font-weight:400;margin-left:8px;font-size:.78rem}
 #topbar .spacer{flex:1}
 #topbar a.homelink{color:var(--muted);text-decoration:none;font-size:.82rem;padding:6px 10px;
-  border-radius:6px;white-space:nowrap;margin-right:52px}
+  border-radius:var(--radius-btn);white-space:nowrap;margin-right:52px;
+  transition:background var(--dur) var(--ease),color var(--dur) var(--ease)}
 #topbar a.homelink:hover{background:var(--panel2);color:var(--text)}
 #menu-btn{display:none;background:none;border:1px solid var(--border);color:var(--text);
-  border-radius:6px;width:34px;height:32px;font-size:1rem;cursor:pointer;padding:0;line-height:1}
+  border-radius:var(--radius-btn);width:var(--ctl-h);height:var(--ctl-h);font-size:1rem;
+  cursor:pointer;padding:0;line-height:1;
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+#menu-btn:hover{background:var(--panel2);border-color:var(--accent)}
+#menu-btn:focus-visible{outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 var(--ring-w) color-mix(in srgb,var(--accent) 22%,transparent)}
 
 /* 阅读进度 */
 #progress{position:fixed;top:56px;left:0;height:3px;width:0;z-index:51;
@@ -56,9 +69,11 @@ body{
   display:flex;flex-direction:column;
 }
 #search{position:sticky;top:0;padding:12px;background:var(--panel);border-bottom:1px solid var(--border);z-index:2}
-#q{width:100%;padding:9px 36px 9px 11px;background:var(--bg);border:1px solid var(--border);
-  border-radius:7px;color:var(--text);font:inherit;font-size:.86rem;outline:none;transition:border-color .15s}
-#q:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-subtle)}
+#q{width:100%;padding:0 36px 0 11px;height:var(--ctl-h);background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--radius-input);color:var(--text);font:inherit;font-size:.86rem;outline:none;
+  transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
+#q:focus{border-color:var(--accent);
+  box-shadow:0 0 0 var(--ring-w) color-mix(in srgb,var(--accent) 22%,transparent)}
 #kbd-hint{position:absolute;right:22px;top:50%;transform:translateY(-50%);color:var(--dim);
   font-size:.7rem;border:1px solid var(--border);border-radius:4px;padding:0 5px;pointer-events:none}
 #navscroll{overflow-y:auto;flex:1;padding-bottom:24px;overscroll-behavior:contain}
@@ -69,7 +84,7 @@ body{
   font-size:.72rem;font-weight:700;color:var(--dim);letter-spacing:.04em;
 }
 .nav-group-title .cnt{margin-left:auto;font-weight:400;background:var(--panel2);
-  border-radius:9px;padding:1px 7px;font-size:.68rem}
+  border-radius:4px;padding:1px 7px;font-size:.68rem}
 .nav-item{
   display:flex;gap:9px;padding:6px 14px;color:var(--muted);text-decoration:none;
   font-size:.83rem;line-height:1.5;border-left:3px solid transparent;transition:background .12s,color .12s;
@@ -151,9 +166,12 @@ html[data-theme="dark"] .ch-num{color:#141413}
 #totop{position:fixed;right:22px;bottom:26px;width:42px;height:42px;border-radius:50%;
   border:1px solid var(--border);background:var(--panel);color:var(--text);cursor:pointer;
   display:flex;align-items:center;justify-content:center;font-size:1.05rem;
-  box-shadow:0 2px 10px rgba(0,0,0,.12);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
+  box-shadow:0 2px 10px rgba(0,0,0,.12);opacity:0;pointer-events:none;
+  transition:opacity .2s,background var(--dur) var(--ease),border-color var(--dur) var(--ease);z-index:40}
 #totop.show{opacity:1;pointer-events:auto}
-#totop:hover{background:var(--panel2)}
+#totop:hover{background:var(--panel2);border-color:var(--accent)}
+#totop:focus-visible{outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 var(--ring-w) color-mix(in srgb,var(--accent) 22%,transparent)}
 
 /* 移动端 */
 @media(max-width:900px){

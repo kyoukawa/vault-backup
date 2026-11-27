@@ -1,6 +1,7 @@
 /* 全站共享交互组件：搜索框 + 移动端抽屉
    由 assets/kb-ui.js 注入，各页只需引入一次。
-   配色全部走 hermes.css 的 CSS 变量，深浅色自动跟随。 */
+   配色走 hermes.css 的 CSS 变量，控件规格走同一套 --radius-*/--ctl-* token
+   （取自 gxwtf 实测值），深浅色自动跟随。 */
 
 /* ---------- 搜索框 ---------- */
 /* 注意用 display:flex !important —— 有些页的通用容器规则会把 div 设成 block/grid */
@@ -11,12 +12,14 @@
 .kb-search input {
   flex: 1 1 auto; min-width: 0; font: inherit; font-size: 16px;
   color: var(--fg); background: var(--panel);
-  border: 1px solid var(--border); border-radius: 9px;
-  padding: .48rem .85rem;
+  border: 1px solid var(--border); border-radius: var(--radius-input);
+  padding: 0 var(--ctl-px); height: var(--ctl-h);
   -webkit-appearance: none; appearance: none;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 .kb-search input:focus {
-  outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent;
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 var(--ring-w) color-mix(in srgb, var(--accent) 22%, transparent);
 }
 .kb-search input::placeholder { color: var(--dim); }
 .kb-search .kbd {
@@ -27,7 +30,7 @@
 
 /* ---------- 搜索结果面板 ---------- */
 .kb-hits {
-  border: 1px solid var(--border); border-radius: 10px;
+  border: 1px solid var(--border); border-radius: var(--radius-input);
   background: var(--panel); overflow: hidden; margin-bottom: 1.4rem;
 }
 .kb-hits[hidden] { display: none; }
@@ -64,8 +67,15 @@
   width: 46px; height: 46px; border-radius: 50%;
   border: 1px solid var(--border); background: var(--panel);
   color: var(--fg); font-size: 19px; cursor: pointer;
-  box-shadow: 0 2px 12px rgba(0,0,0,.18);
+  box-shadow: var(--shadow-lift);
   align-items: center; justify-content: center; padding: 0;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.kb-drawer-btn:hover { border-color: var(--accent); }
+.kb-drawer-btn:focus-visible {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 var(--ring-w) color-mix(in srgb, var(--accent) 22%, transparent);
 }
 .kb-drawer-btn:active { transform: scale(.95); }
 .kb-drawer-mask {
@@ -92,6 +102,13 @@
 .kb-drawer .dh button {
   border: 0; background: none; color: var(--muted); font-size: 22px;
   cursor: pointer; line-height: 1; padding: 0 .2rem;
+  border-radius: var(--radius-btn);
+  transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.kb-drawer .dh button:hover { color: var(--fg); background: var(--panel2); }
+.kb-drawer .dh button:focus-visible {
+  outline: none; color: var(--fg);
+  box-shadow: 0 0 0 var(--ring-w) color-mix(in srgb, var(--accent) 22%, transparent);
 }
 .kb-drawer .grp { margin-bottom: 1.1rem; }
 .kb-drawer .grp > b {
@@ -111,9 +128,15 @@
 .kb-drawer .dsearch {
   width: 100%; font: inherit; font-size: 16px; box-sizing: border-box;
   color: var(--fg); background: var(--panel2);
-  border: 1px solid var(--border); border-radius: 8px;
-  padding: .5rem .7rem; margin-bottom: .9rem;
+  border: 1px solid var(--border); border-radius: var(--radius-input);
+  padding: 0 var(--ctl-px); height: var(--ctl-h);
   -webkit-appearance: none; appearance: none;
+  margin-bottom: .9rem;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.kb-drawer .dsearch:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 var(--ring-w) color-mix(in srgb, var(--accent) 22%, transparent);
 }
 
 /* 只在触屏 / 窄屏显示抽屉按钮 */

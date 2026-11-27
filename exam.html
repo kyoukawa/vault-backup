@@ -20,28 +20,29 @@
     border-bottom: 1px solid var(--border-muted);
   }
   .searchrow { display: flex; gap: .6rem; align-items: center; }
-  #q {
-    flex: 1 1 auto; min-width: 0;
-    font: inherit; font-size: 16px; color: var(--fg);
-    background: var(--panel); border: 1px solid var(--border);
-    border-radius: 10px; padding: .62rem .9rem;
-    -webkit-appearance: none; appearance: none;
-  }
-  #q:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: transparent; }
-  #q::placeholder { color: var(--dim); }
+  /* 控件规格统一走 hermes.css 的 .kb-input / .kb-btn；
+     这里只补本页特有的排版，不重复写圆角与颜色 */
+  #q { flex: 1 1 auto; min-width: 0; }
 
   .fc { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .65rem; }
   .fc .lbl {
     font-size: .74rem; color: var(--dim); align-self: center;
     min-width: 2.4em; letter-spacing: .02em;
   }
+  /* 筛选芯片：gxwtf 的 rounded-md + px-3 py-1.5 text-sm */
   .fc button {
-    font: inherit; font-size: .82rem; cursor: pointer;
-    padding: .26rem .72rem; border-radius: 999px;
+    font: inherit; font-size: var(--ctl-text); cursor: pointer;
+    height: 28px; padding: 0 10px; border-radius: var(--radius-btn);
     border: 1px solid var(--border); background: var(--panel);
-    color: var(--muted); transition: all .14s ease;
+    color: var(--muted);
+    transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease),
+                color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
   }
-  .fc button:hover { border-color: var(--accent); color: var(--fg); }
+  .fc button:hover { border-color: var(--accent); color: var(--fg); background: var(--accent-subtle); }
+  .fc button:focus-visible {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 var(--ring-w) color-mix(in srgb, var(--accent) 22%, transparent);
+  }
   .fc button[aria-pressed="true"] {
     background: var(--accent); border-color: var(--accent);
     color: var(--bg); font-weight: 600;
@@ -53,7 +54,13 @@
           font-size: .84rem; color: var(--dim); }
   .meta b { color: var(--fg); font-weight: 600; }
   .meta .clear { cursor: pointer; border: 0; background: none; color: var(--accent);
-                 font: inherit; font-size: .84rem; padding: 0; }
+                 font: inherit; font-size: .84rem; padding: .2rem .4rem;
+                 border-radius: 6px;
+                 transition: background var(--dur) var(--ease); }
+  .meta .clear:hover { background: var(--accent-subtle); }
+  .meta .clear:focus-visible {
+    outline: none; box-shadow: 0 0 0 var(--ring-w) color-mix(in srgb, var(--accent) 22%, transparent);
+  }
 
   ul.res { list-style: none; margin: 0; padding: 0; }
   ul.res > li {
@@ -84,11 +91,18 @@
          color: inherit; border-radius: 2px; padding: 0 .1em; }
 
   .empty { text-align: center; color: var(--dim); padding: 3rem 1rem; font-size: .92rem; }
-  .more { display: block; width: 100%; margin: 1.2rem 0 0; padding: .7rem;
-          font: inherit; font-size: .88rem; cursor: pointer;
+  .more { display: block; width: 100%; margin: 1.2rem 0 0; padding: 0;
+          font: inherit; font-size: var(--ctl-text); cursor: pointer;
+          height: var(--ctl-h);
           background: var(--panel); color: var(--muted);
-          border: 1px solid var(--border); border-radius: 10px; }
-  .more:hover { border-color: var(--accent); color: var(--fg); }
+          border: 1px solid var(--border); border-radius: var(--radius-btn);
+          transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease),
+                      color var(--dur) var(--ease), box-shadow var(--dur) var(--ease); }
+  .more:hover { border-color: var(--accent); color: var(--fg); background: var(--accent-subtle); }
+  .more:focus-visible {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 var(--ring-w) color-mix(in srgb, var(--accent) 22%, transparent);
+  }
   .hint { font-size: .78rem; color: var(--dim); margin: .2rem 0 0; }
 
   @media (max-width: 600px) {
@@ -106,7 +120,7 @@
 
 <div class="filters">
   <div class="searchrow">
-    <input id="q" type="search" placeholder="搜卷名、区县、学科…  例：海淀 语文 一模" autocomplete="off" spellcheck="false">
+    <input id="q" class="kb-input" type="search" placeholder="搜卷名、区县、学科…  例：海淀 语文 一模" autocomplete="off" spellcheck="false" aria-label="搜索试卷">
   </div>
   <div class="fc" id="f-year"><span class="lbl">年</span></div>
   <div class="fc" id="f-kind"><span class="lbl">卷别</span></div>
