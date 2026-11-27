@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="assets/kb-ui.css">
 <script src="assets/marked.min.js"></script>
 <link rel="stylesheet" href="assets/katex/katex.min.css">
-<script defer src="assets/katex/katex.min.js"></script>
+<script src="assets/katex/katex.min.js"></script>
+<script src="assets/math-render.js"></script>
 <script src="assets/theme.js" defer></script>
 <script src="assets/kb-ui.js" defer></script>
 <style>
@@ -161,72 +162,11 @@ function convertObsidian(text){
   return text;
 }
 
-// ---------- 公式：先摘出来，marked 渲染完再贴回去 ----------
-// 直接对渲染后的 DOM 跑正则有两个坑：
-//   1) 行内正则会把 $$…$$ 当成 $ + … + $ 匹配掉，块级公式变成行内，还留下两个孤零零的 $
-//   2) marked 会先吃掉公式里的 _ * 等字符
-// 所以先把公式换成占位符，让 marked 碰不到，最后在文本节点里还原。
-var MATH_SENTINEL = '\u0001';
+// ---------- 公式 ----------
+// 实现放在 assets/math-render.js（view.html 与 latest.html 共用）：
+// 先把 $…$ / $$…$$ 摘成占位符，marked 解析完再贴回 KaTeX。
+// 直接对渲染后的 DOM 跑行内正则有两个坑：$$ 会被拆成 $+…+$，且 marked 会吃掉公式里的 _ *。
 
-function extractMath(text){
-  var store = [];
-  function put(tex, display){
-    store.push({ tex: tex.trim(), display: display });
-    return MATH_SENTINEL + 'M' + (store.length - 1) + MATH_SENTINEL;
-  }
-  // 围栏代码块里的 $ 不是公式，按 ``` 切开，只处理非代码段
-  var parts = text.split(/(```[\s\S]*?```)/);
-  for (var i = 0; i < parts.length; i++) {
-    if (i % 2 === 1) continue;
-    var s = parts[i];
-    s = s.replace(/\$\$([\s\S]+?)\$\$/g, function(m, tex){ return put(tex, true); });
-    s = s.replace(/\$([^$\n]+?)\$/g, function(m, tex){ return put(tex, false); });
-    parts[i] = s;
-  }
-  return { text: parts.join(''), store: store };
-}
-
-function renderMathNodes(root, store){
-  if (!store || !store.length) return;
-  function go(){
-    if (!window.katex) return setTimeout(go, 100);
-    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
-    var nodes = [], n;
-    while ((n = walker.nextNode())) {
-      if (n.parentNode && /^(CODE|PRE|SCRIPT|STYLE)$/.test(n.parentNode.nodeName)) continue;
-      nodes.push(n);
-    }
-    var re = new RegExp(MATH_SENTINEL + 'M(\\d+)' + MATH_SENTINEL, 'g');
-    nodes.forEach(function(node){
-      var txt = node.nodeValue;
-      if (!txt || txt.indexOf(MATH_SENTINEL) < 0) return;
-      re.lastIndex = 0;
-      var frag = document.createDocumentFragment(), m, last = 0;
-      while ((m = re.exec(txt))) {
-        if (m.index > last) frag.appendChild(document.createTextNode(txt.slice(last, m.index)));
-        var item = store[+m[1]];
-        var span = document.createElement('span');
-        try {
-          katex.render(item.tex, span, { throwOnError: false, displayMode: item.display });
-        } catch (e) {
-          span.textContent = (item.display ? '$$' : '$') + item.tex + (item.display ? '$$' : '$');
-        }
-        frag.appendChild(span);
-        last = m.index + m[0].length;
-      }
-      if (last < txt.length) frag.appendChild(document.createTextNode(txt.slice(last)));
-      node.parentNode.replaceChild(frag, node);
-    });
-    // 只包了一个块级公式的 <p> 拆掉，免得公式外面多一层行距
-    root.querySelectorAll('p').forEach(function(p){
-      if (p.childNodes.length === 1 && p.firstChild.nodeType === 1
-          && p.firstChild.classList.contains('katex-display')) {
-        p.parentNode.replaceChild(p.firstChild, p);
-      }
-    });
-  }
-  go();
-}
 
 
 // ---------- 左侧目录 ----------
@@ -351,7 +291,7 @@ async function main(){
     document.getElementById('title').textContent=path;
     if(text.startsWith('---')){ let e=text.indexOf('\n---'); if(e>0) text=text.slice(e+4); }
     const converted=convertObsidian(text);
-    const math=extractMath(converted);
+    const math=kbMath.extract(converted);
     const html=marked.parse(math.text);
     const mdEl=document.getElementById('md');
     mdEl.innerHTML=html;
@@ -363,7 +303,7 @@ async function main(){
       hint.textContent='← 左右滑动查看完整表格 →';
       wrap.parentNode.insertBefore(hint,wrap.nextSibling);
     });
-    renderMathNodes(mdEl, math.store);
+    kbMath.render(mdEl, math.store);
     buildOutline(mdEl);
 
     buildToc();

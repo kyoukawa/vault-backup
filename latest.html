@@ -3,7 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>每日一题 · 2026-11-22</title>
 <link rel="stylesheet" href="assets/katex/katex.min.css">
-<script defer src="assets/katex/katex.min.js"></script>
+<script src="assets/katex/katex.min.js" defer></script>
+<script src="assets/math-render.js" defer></script>
 <link rel="stylesheet" href="assets/hermes.css">
 <link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="assets/kb-ui.css"><script src="assets/theme.js" defer></script>
@@ -183,24 +184,11 @@
 </section>
 <footer>由 vault 题集自动生成 · kyoungawa/vault-backup</footer>
 <script>
-function renderMath(){
-  if(!window.katex){ setTimeout(renderMath,100); return; }
-  document.querySelectorAll('#md, .qbody, .abody').forEach(root=>{});
-  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
-  const nodes=[];let n;while((n=walker.nextNode()))nodes.push(n);
-  nodes.forEach(node=>{
-    const t=node.nodeValue; if(!t||t.indexOf('$')<0)return;
-    const frag=document.createDocumentFragment();let i=0,re=/\$([^$]+?)\$/g,m,last=0;
-    while((m=re.exec(t))){
-      if(m.index>last)frag.appendChild(document.createTextNode(t.slice(last,m.index)));
-      try{const sp=document.createElement('span');katex.render(m[1],sp,{throwOnError:false});frag.appendChild(sp);}
-      catch(e){frag.appendChild(document.createTextNode(m[0]));}
-      last=m.index+m[0].length;
-    }
-    if(last<t.length)frag.appendChild(document.createTextNode(t.slice(last)));
-    if(last>0)node.parentNode.replaceChild(frag,node);
-  });
-}
-renderMath();
+// 公式渲染统一走 assets/math-render.js（先认 $$…$$ 再认 $…$，代码块跳过）。
+// 该脚本是 defer 加载的，这里轮询等它到位——原来轮询 window.katex 是同一个道理。
+(function wait(){
+  if (window.kbMath) kbMath.typeset(document.body);
+  else setTimeout(wait, 100);
+})();
 </script>
 </body></html>
