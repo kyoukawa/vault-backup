@@ -16,9 +16,15 @@ const EXP = {
   ringWidth: "3px"
 };
 
+// 首页是阅读型页面（assets/home.css 覆盖 token），搜索框按设计稿做成 44px 胶囊，
+// 不跟 gxwtf 的 32px/10px 走。只覆盖这一页，其他页仍按上面的规格断言。
+const OVERRIDE = {
+  "index.html": { inputRadius: "999px", inputHeight: "44px" }
+};
+
 const PAGES = [
   ["exam.html", "搜索框、筛选芯片、更多按钮"],
-  ["index.html", "搜索框、主入口卡片"],
+  ["index.html", "搜索框（胶囊 44px）、主入口卡片"],
   ["view.html?file=chem-elements", "搜索框"],
   ["writing-ocr.html", "搜索框、菜单按钮"],
   ["goal-board.html", "无控件"],
@@ -99,6 +105,7 @@ console.log("控件回归检查（gxwtf 规格）\n");
 for (const [page, desc] of PAGES) {
   let r;
   try { r = probe(page); } catch (e) { r = { error: e.message }; }
+  const exp = Object.assign({}, EXP, OVERRIDE[page] || {});
   const line = [];
   if (r.error) { line.push("  ✗ " + r.error); failures.push(page + ": " + r.error); }
   else {
@@ -107,12 +114,12 @@ for (const [page, desc] of PAGES) {
       failures.push(page + " display");
     }
     if (r.input_radius !== undefined) {
-      if (r.input_radius !== EXP.inputRadius) { line.push("  ✗ 输入框圆角 " + r.input_radius + "（应 " + EXP.inputRadius + "）"); failures.push(page + " input-radius"); }
-      if (r.input_height !== EXP.inputHeight) { line.push("  ✗ 输入框高 " + r.input_height + "（应 " + EXP.inputHeight + "）"); failures.push(page + " input-height"); }
-      if (r.input_radius === EXP.inputRadius && r.input_height === EXP.inputHeight) line.push("  ✓ 输入框#" + r.input_id + " " + r.input_height + " / 圆角 " + r.input_radius);
+      if (r.input_radius !== exp.inputRadius) { line.push("  ✗ 输入框圆角 " + r.input_radius + "（应 " + exp.inputRadius + "）"); failures.push(page + " input-radius"); }
+      if (r.input_height !== exp.inputHeight) { line.push("  ✗ 输入框高 " + r.input_height + "（应 " + exp.inputHeight + "）"); failures.push(page + " input-height"); }
+      if (r.input_radius === exp.inputRadius && r.input_height === exp.inputHeight) line.push("  ✓ 输入框#" + r.input_id + " " + r.input_height + " / 圆角 " + r.input_radius);
     }
     if (r.btn_radius !== undefined) {
-      if (r.btn_radius !== EXP.btnRadius) { line.push("  ✗ 按钮圆角 " + r.btn_radius + "（应 " + EXP.btnRadius + "）"); failures.push(page + " btn-radius"); }
+      if (r.btn_radius !== exp.btnRadius) { line.push("  ✗ 按钮圆角 " + r.btn_radius + "（应 " + exp.btnRadius + "）"); failures.push(page + " btn-radius"); }
       else line.push("  ✓ 按钮 " + r.btn_height + " / 圆角 " + r.btn_radius);
     }
     // 焦点环规则：样式表里必须有 3px ring，且不能有 2px outline

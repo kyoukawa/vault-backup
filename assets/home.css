@@ -411,14 +411,14 @@ html[data-theme="dark"] .term{border-bottom-color:var(--panel3)}
 .recent .rn{color:var(--muted);font-variant-numeric:tabular-nums;font-size:13px;text-align:right}
 
 /* 折叠细节 */
-details.more{margin-top:12px;font-size:13px}
-details.more > summary{
+details.fold{margin-top:12px;font-size:13px}
+details.fold > summary{
   cursor:pointer;color:var(--muted);font-size:13px;list-style:none;padding:4px 0;
 }
-details.more > summary::-webkit-details-marker{display:none}
-details.more > summary::before{content:"› ";display:inline-block;transition:transform var(--dur)}
-details.more[open] > summary::before{transform:rotate(90deg)}
-details.more > summary:hover{color:var(--accent-text)}
+details.fold > summary::-webkit-details-marker{display:none}
+details.fold > summary::before{content:"› ";display:inline-block;transition:transform var(--dur)}
+details.fold[open] > summary::before{transform:rotate(90deg)}
+details.fold > summary:hover{color:var(--accent-text)}
 
 .data-table{width:100%;display:table;border:0;border-radius:0;margin:8px 0 0;font-size:13px}
 .data-table th{

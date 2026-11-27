@@ -20,7 +20,7 @@
 | `阅读收集/` | 网页/公众号/视频 → 结构化笔记（12 篇） | [INDEX](阅读收集/INDEX.md) |
 | `学业档案/` | 大考成绩分析 + 学习日志/计划/个性化题目 | [INDEX](学业档案/INDEX.md) |
 
-网页件：`index.html`（总目录）· `view.html`（Markdown 渲染器，`?file=<ID|路径>`）· `latest.html`（每日一题最新）· `goal-board.html`（数字化看板）· `sw-1~4.html`（时文短链）· `writing-ocr.html`（写作经纬线二全文阅读器，124 篇）。
+网页件：`index.html`（**首页 = 看板**：今天做什么 / 备考进度 / 按用途找 / 正在读 / 待办）· `view.html`（Markdown 渲染器，`?file=<ID|路径>`）· `latest.html`（每日一题最新）· `goal-board.html`（数字化台账）· `sw-1~4.html`（时文短链）· `writing-ocr.html`（写作经纬线二全文阅读器，124 篇）。`dashboard.html` 已并入首页，现在只是跳转页。
 
 ## ⚙️ 维护约定
 
@@ -30,7 +30,7 @@
 - **文件名不要带 `[` `]`**（Obsidian 双链解析不了），用 `【】`；表格里的竖线写成 `\|`。
 - **教材式索引自动生成**：`试卷库/<年>/<卷别>` 页面由 `workspace/tools/gen_index.py` 扫描目录生成，`做题记录` 的统计块由 `gen_progress.py` 重算 —— 不要手改表格。
 - **提取失败的题集废稿**统一放 `试卷库/_待重提取/`（附清单），不参与题集导航、不计入数字化进度。
-- **三个导航页的分工**：`知识库导航.md` = Obsidian 权威；`index.html` / `index.md` = 网页镜像（两者内容一致，改一同步另一）；`README.md` = 仓库说明。
+- **三个导航页的分工**：`知识库导航.md` = Obsidian 权威；`index.html` = 网页首页（动态：进度、在读、入口都在这一页）；`index.md` = 网页目录的 Markdown 版（走 `view.html` 阅读器）；`README.md` = 仓库说明。
 
 ### 自检
 
