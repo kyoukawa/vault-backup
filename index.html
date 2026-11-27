@@ -310,36 +310,49 @@
       '</' + tag + '>';
   }
 
+  var FOOT_FROM_DASH = false;   // 页脚「数据更新于」以 dashboard.json 为准，weread 只补位
+
   // ---------- 进度（dashboard.json） ----------
+  // 注意：renderDash 中途抛异常也会落到这个 catch，所以这里先把各块状态复位，
+  // 否则 progress-empty 已被置 hidden，错误文案写进去也看不见。
   getJSON('assets/dashboard.json')
-    .then(function (d) { renderDash(d); })
-    .catch(function (e) {
-      $('progress-empty').innerHTML =
-        '进度数据没读到（' + esc(e.message) + '）。这一段的去处在下面「按用途找」里都还在。'
-        + '本机想看完整数据：<code>python tools/dashboard.py --serve</code>。';
-      $('gen-note').textContent = '进度数据暂不可用，数字先不显示。';
-      // 「今天做什么」不能一直停在「正在读取」
-      $('today-box').innerHTML =
-        '<p class="t-do"><a href="latest.html">先做今天的四道题</a></p>' +
-        '<p class="t-meta">今天的进度数据没取到，直接去题页；'
-        + '要看看板就等网络恢复后刷新。</p>';
-    });
+    .then(function (d) {
+      try { renderDash(d); }
+      catch (e) { showDashError(e); }
+    })
+    .catch(showDashError);
+
+  function showDashError(e) {
+    var body = $('progress-body'), kp = $('kpis'), empty = $('progress-empty');
+    if (body) body.hidden = true;
+    if (kp) kp.hidden = true;
+    if (empty) { empty.hidden = false; }
+    $('progress-empty').innerHTML =
+      '进度数据没读到（' + esc(e && e.message || e) + '）。这一段的去处在下面「按用途找」里都还在。'
+      + '本机想看完整数据：<code>python tools/dashboard.py --serve</code>。';
+    $('gen-note').textContent = '进度数据暂不可用，数字先不显示。';
+    // 「今天做什么」不能一直停在「正在读取」
+    $('today-box').innerHTML =
+      '<p class="t-do"><a href="latest.html">先做今天的四道题</a></p>' +
+      '<p class="t-meta">今天的进度数据没取到，直接去题页；数据恢复后刷新即可。</p>';
+  }
 
   function renderDash(d) {
     $('progress-empty').hidden = true;
     $('progress-body').hidden = false;
     $('kpis').hidden = false;
     $('upd').textContent = '更新于 ' + (d.generated || '—');
-    $('foot-upd').textContent = d.generated || '—';
     $('gen-note').textContent = '数字由仓库里的真实文件与 git 历史现算，生成于 ' + (d.generated || '—') + '。';
+    if (d.generated) { $('foot-upd').textContent = d.generated; FOOT_FROM_DASH = true; }
 
     var dl = d.daily || {}, rd = d.reading || null, co = d.coach || null;
+    var gap = (dl.days_ago == null) ? null : dl.days_ago;
 
     // ── 今天做什么 ──
     var bits = [];
     if (dl.latest) {
       bits.push('每日一题停在 <b>' + esc(dl.latest) + '</b>' +
-        (dl.days_ago > 1 ? '（' + dl.days_ago + ' 天前）' : '（就是今天）'));
+        (gap == null ? '' : (gap > 1 ? '（' + gap + ' 天前）' : '（就是今天）')));
     }
     if (co && co.state) {
       bits.push(co.state === '未开始' ? '带学还没开张' : '带学：' + esc(co.state));
@@ -354,18 +367,26 @@
       '<p class="t-meta">' + bits.join(' · ') + '</p>';
 
     // ── KPI（纯数据，不作为入口；入口统一放在「按用途找」） ──
-    var ex = d.exams || { pct: 0, done: 0, total: 0, by_subject: [] };
+    var ex0 = d.exams || {};
+    var ex = {
+      pct: +ex0.pct || 0, done: +ex0.done || 0, total: +ex0.total || 0,
+      by_subject: ex0.by_subject || []
+    };
     var act = (d.activity && d.activity.days) || [];
     var activeDays = act.filter(function (x) { return x.total > 0; }).length;
     var k = [];
-    k.push(kpi('试卷数字化', ex.pct.toFixed(0), '%', ex.done + ' / ' + ex.total + ' 份',
+    k.push(kpi('试卷数字化', (+ex.pct || 0).toFixed(0), '%', ex.done + ' / ' + ex.total + ' 份',
       ex.pct >= 100 ? 'is-good' : '', ''));
     k.push(kpi('每日一题', dl.total != null ? dl.total : 0, '期',
-      dl.latest ? '最近 ' + dl.latest + '（' + dl.days_ago + ' 天前）' : '还没有出题',
-      dl.days_ago != null && dl.days_ago > 2 ? 'is-warn' : '', ''));
+      dl.latest
+        ? ('最近 ' + dl.latest + (gap == null ? '' : '（' + gap + ' 天前）'))
+        : '还没有出题',
+      gap != null && gap > 2 ? 'is-warn' : '', ''));
     if (rd) {
-      k.push(kpi('本周阅读', rd.week >= 60 ? (rd.week / 60).toFixed(1) : rd.week,
-        rd.week >= 60 ? '小时' : '分钟', '书架 ' + rd.shelf + ' 本 · 在读 ' + rd.reading + ' 本',
+      var wk = +rd.week || 0;
+      k.push(kpi('本周阅读', wk >= 60 ? (wk / 60).toFixed(1) : wk,
+        wk >= 60 ? '小时' : '分钟',
+        '书架 ' + (+rd.shelf || 0) + ' 本 · 在读 ' + (+rd.reading || 0) + ' 本',
         '', ''));
     }
     if (co) {
@@ -424,7 +445,12 @@
     }
 
     // ── 活跃度 ──
-    if (act.length) {
+    if (!act.length) {
+      $('heat').innerHTML = '<p class="home-note" style="margin:0">最近还没有活动记录。</p>';
+      $('heat-months').innerHTML = '';
+      $('heat-recent').innerHTML = '';
+      $('heat-sum').textContent = '';
+    } else {
       var max = Math.max.apply(null, act.map(function (x) { return x.total; })) || 1;
       function level(v) {
         if (!v) return 0;
@@ -523,7 +549,7 @@
       + '<p class="rl-foot">更新于 ' + esc(d.updated || '—')
       + ' · <a href="view.html?file=reading-log">变化日志</a>'
       + ' · <a href="assets/weread.json">原始数据</a></p>';
-    if (d.updated) $('foot-upd').textContent = d.updated;
+    if (d.updated && !FOOT_FROM_DASH) $('foot-upd').textContent = d.updated;
   }
 
   // ---------- 待办：只有本机看得到 ----------

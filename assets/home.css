@@ -250,7 +250,9 @@ html[data-theme="dark"] .term{border-bottom-color:var(--panel3)}
 .kb-reading .rl-sum b{color:var(--fg);font-weight:600}
 .kb-reading table.rl{
   width:100%;display:table;border:0;border-radius:0;margin:0;font-size:14px;
+  table-layout:fixed;            /* 超长书名折行，不把整页撑宽 */
 }
+.kb-reading td, .kb-reading th{overflow-wrap:anywhere}
 .kb-reading table.rl th{
   background:transparent;border-bottom:1px solid var(--border);
   padding:8px 10px;font-size:12px;letter-spacing:.04em;color:var(--muted);
