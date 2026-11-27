@@ -3,105 +3,563 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>知识库 · vault-backup</title>
+<title>知识库 · 川</title>
+<meta name="description" content="高三学习知识库：今天做什么、刷试卷、练作文、查错题、读笔记、看进度。">
 <link rel="stylesheet" href="assets/hermes.css">
 <link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/home.css">
 <link rel="stylesheet" href="assets/kb-ui.css">
-
 <script src="assets/theme.js" defer></script>
 <script src="assets/kb-ui.js" defer></script>
 </head>
-<body>
-<p class="nav">
-🎛️ <b>看板</b>：<a href="dashboard.html">学习仪表盘（今天干什么 · 备考进度 · 活跃度 · 待办）</a><br>
-📝 <b>每日一题</b>：<a href="latest.html">最新一期</a> · <a href="view.html?file=daily-index">历次</a><br>
-📊 <b>试卷数字化看板</b>：<a href="goal-board.html">进度（goal + 428 份）</a><br>
-📖 <b>《写作经纬线二》整本精读（25 题 + 37 篇时文）</b>：<a href="view.html?file=report-book-full">打开报告</a> · <a href="view.html?file=book2-index">124 章索引</a><br>
-✍️ <b>写作经纬线（二）全文（124 篇 · 14.1 万字）</b>：<a href="writing-ocr.html">阅读器（全文搜索 · 上下篇 · 深浅色）</a> · <a href="writing-ocr.md">Markdown</a><br>
-📚 <b>写作方法书籍摘要（3 本）</b>：<a href="view.html?file=books-index">总览</a> · <a href="view.html?file=book-jinnzhen">欲觅金针度与人</a> · <a href="view.html?file=book-shuoli">说理与思辨</a> · <a href="view.html?file=book-15jiang">议论文写作十五讲</a><br>
-📖 <b>微信读书进度</b>：<a href="view.html?file=reading-progress">在读 / 读完 / 时长</a> · <a href="assets/weread.json">数据</a><br>
-🔍 <b>试卷搜索</b>：<a href="exam.html">428 份按年/卷别/学科/区县筛选</a>
-</p>
-<div data-kb-search></div>
-<h1>知识库 · vault-backup</h1>
-<blockquote>个人学习知识库的网页镜像：语文/英语作文语料、试卷原卷与题集、错题本、阅读笔记、学业档案。本地用 <b>Obsidian</b> 维护，本仓库由 obsidian-git 自动同步。</blockquote>
+<body class="home">
 
-<h2>📖 正在读</h2>
-<div id="weread-card" class="weread">
-  <p class="muted">加载中… <a href="assets/weread.json">原始数据</a></p>
+<p class="home-eyebrow">
+  <span>川 · 高三 · 北京</span>
+  <span>·</span>
+  <span id="upd">更新于 —</span>
+</p>
+
+<h1 class="home-h1">学习知识库</h1>
+<p class="home-lede">
+  试卷、题集、作文语料、错题与阅读笔记都在这里。<b>在 Obsidian 里写，自动同步到网页</b>；
+  这一页每天先告诉你去做什么，再按用途指路。
+</p>
+
+<div data-kb-search></div>
+
+<h2 class="home-h2" id="today">今天做什么</h2>
+<div class="today" id="today-box">
+  <p class="t-do">正在读取今天的安排…</p>
 </div>
+<div class="kb-cards">
+  <a class="kb-card" href="#progress">
+    <span class="t">看备考进度</span>
+    <span class="d">试卷数字化到哪了、期中标准分、最近的活跃天数</span>
+    <span class="ar" aria-hidden="true">→</span>
+  </a>
+  <a class="kb-card" href="latest.html">
+    <span class="t">做今天的四道题</span>
+    <span class="d">语文红楼梦两道、化学两道，先做后看答案</span>
+    <span class="ar" aria-hidden="true">→</span>
+  </a>
+  <a class="kb-card" href="exam.html">
+    <span class="t">搜一份卷子</span>
+    <span class="d">428 份原卷，按年、卷别、学科、区县筛选</span>
+    <span class="ar" aria-hidden="true">→</span>
+  </a>
+</div>
+
+<h2 class="home-h2" id="progress">备考进度</h2>
+<p class="home-note" id="gen-note">数字由仓库里的真实文件与 git 历史现算，不手工维护。</p>
+
+<div class="kpis" id="kpis" hidden></div>
+<div id="progress-empty" class="local-note">进度数据加载中…</div>
+
+<div id="progress-body" hidden>
+  <div class="panel">
+    <div class="p-head">
+      <h3>试卷数字化</h3>
+      <span class="hint" id="exam-hint"></span>
+    </div>
+    <div id="exam-kpi"></div>
+    <div class="hbars" id="exam-bars"></div>
+  </div>
+
+  <div class="panel">
+    <div class="p-head">
+      <h3>期中标准分</h3>
+      <span class="hint">0 = 群体平均，每格 0.5 个标准差</span>
+    </div>
+    <div class="zplot" id="zplot"></div>
+  </div>
+
+  <div class="panel">
+    <div class="p-head">
+      <h3>活跃度</h3>
+      <span class="hint">编辑提交 + 出的题 + 日志条目；已排除自动同步</span>
+    </div>
+    <div class="heat-flex">
+      <div>
+        <div class="heat-wrap">
+          <div class="heat-dow">
+            <span>一</span><span></span><span>三</span><span></span>
+            <span>五</span><span></span><span>日</span>
+          </div>
+          <div class="heat-col-wrap">
+            <div class="heat-months" id="heat-months"></div>
+            <div class="heat" id="heat"></div>
+          </div>
+        </div>
+        <div class="heat-legend">
+          <span>少</span>
+          <i style="background:var(--seq-0)"></i><i style="background:var(--seq-1)"></i>
+          <i style="background:var(--seq-2)"></i><i style="background:var(--seq-3)"></i>
+          <i style="background:var(--seq-4)"></i>
+          <span>多</span>
+          <span id="heat-sum" style="margin-left:8px"></span>
+        </div>
+      </div>
+      <div class="recent">
+        <h4>最近有动静的日子</h4>
+        <ol id="heat-recent"></ol>
+      </div>
+    </div>
+    <details class="more">
+      <summary>看表格（只有活动的日子）</summary>
+      <div class="table-wrap">
+        <table class="data-table" id="heat-table">
+          <thead><tr><th>日期</th><th class="num">编辑提交</th><th class="num">出题</th>
+          <th class="num">日志</th><th class="num">合计</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</div>
+
+<h2 class="home-h2" id="browse">按用途找</h2>
+<div class="kb-groups">
+
+  <div class="kb-group">
+    <h3>练作文</h3>
+    <ul>
+      <li>
+        <a class="lk" href="view.html?file=chinese-index">翻语文语料与范文<span class="kb-count">166 篇</span></a>
+        <span class="sub">六维判据是拆解作文的依据，先看 <a href="view.html?file=chinese-writing">跨篇通用招法</a>。</span>
+      </li>
+      <li>
+        <a class="lk" href="view.html?file=english-index">练英语作文句式<span class="kb-count">23 篇</span></a>
+        <span class="sub">按 What → How → Effect → Value 四步攒素材。</span>
+      </li>
+      <li>
+        <a class="lk" href="view.html?file=essay-cheatsheet">考前速查时文素材</a>
+        <span class="sub">一页纸，把可用的判断与金句压缩到能背。</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="kb-group">
+    <h3>刷试卷</h3>
+    <ul>
+      <li>
+        <a class="lk" href="view.html?file=exam-yw">用按题号拆好的题集<span class="kb-count">435 篇</span></a>
+        <span class="sub">已提取答案：<a href="view.html?file=exam-yy">英语</a> ·
+        <a href="view.html?file=exam-hx">化学</a> · <a href="view.html?file=exam-wl">物理</a> ·
+        <a href="view.html?file=exam-dl">地理</a>。找原卷用上面那张卡片。</span>
+      </li>
+      <li>
+        <a class="lk" href="view.html?file=math-index">找数学题<span class="kb-count">68 份</span></a>
+        <span class="sub">只有试卷的 OCR 全文，公式有损、未分题、没有答案，适合查措辞；
+        方法笔记看 <a href="view.html?file=analytic-geometry">解析几何常用方法</a>。</span>
+      </li>
+      <li>
+        <a class="lk" href="view.html?file=exam">看完卷子的做题记录</a>
+        <span class="sub">哪些卷做过、哪些还没开始，挑题从这里进。</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="kb-group">
+    <h3>看错题</h3>
+    <ul>
+      <li>
+        <a class="lk" href="view.html?file=chem-index">查化学错题本<span class="kb-count">37 + 204 道</span></a>
+        <span class="sub">选择题按主题聚类，大题按 6 模块归档。只整理，不排复习。</span>
+      </li>
+      <li>
+        <a class="lk" href="view.html?file=chem-big-index">翻化学大题解析</a>
+        <span class="sub">204 道大题按物质结构、反应原理、工艺流程、实验、有机、水溶液分模块。</span>
+      </li>
+      <li>
+        <a class="lk" href="view.html?file=exam-red">练红楼梦名著题<span class="kb-count">16 道</span></a>
+        <span class="sub">按 6 类考点分好，带解析。备考讲义见
+        <a href="view.html?file=honglou-han">红楼梦备考讲义</a>。</span>
+      </li>
+      <li>
+        <a class="lk" href="view.html?file=study-log">翻学习日志找短板</a>
+        <span class="sub">记下每天学了什么，以及带学发现的知识缺口。</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="kb-group">
+    <h3>读笔记</h3>
+    <ul>
+      <li>
+        <a class="lk" href="view.html?file=reading-index">读收集来的文章笔记<span class="kb-count">14 篇</span></a>
+        <span class="sub">网页、公众号、视频、播客，转成结构化笔记再入库。</span>
+      </li>
+      <li>
+        <a class="lk" href="writing-ocr.html">通读《写作经纬线（二）》<span class="kb-count">124 篇</span></a>
+        <span class="sub">全文阅读器，支持搜索与上下篇；另有
+        <a href="view.html?file=report-book-full">整本精读报告</a>。</span>
+      </li>
+      <li>
+        <a class="lk" href="view.html?file=books-index">看写作方法书摘要<span class="kb-count">3 本</span></a>
+        <span class="sub">漆永祥、余党绪、周曼云三本写作方法书的提炼。</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="kb-group">
+    <h3>看成绩与进度</h3>
+    <ul>
+      <li>
+        <a class="lk" href="view.html?file=record">看成绩与失分分析</a>
+        <span class="sub">原始分、<span class="term" title="赋分：把原始分按全省排名换算成计入总分的等级分">赋分</span>、
+        <span class="term" title="标准分：离群体平均多少个标准差，0 即平均线">标准分</span>，一场考试一篇。</span>
+      </li>
+      <li>
+        <a class="lk" href="view.html?file=reading-progress">看微信读书进度</a>
+        <span class="sub">在读、读完、本周与累计时长，脚本自动同步。</span>
+      </li>
+      <li>
+        <a class="lk" href="goal-board.html">看试卷数字化台账</a>
+        <span class="sub">每份原卷从 PDF 到题集笔记的进度。</span>
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<h2 class="home-h2" id="reading">正在读</h2>
+<div class="kb-reading loading" id="read-box">
+  <div class="sk-row"><div class="sk-bar w1"></div><div class="sk-bar w2"></div><div class="sk-bar w3"></div><div class="sk-bar"></div></div>
+  <div class="sk-row"><div class="sk-bar w1"></div><div class="sk-bar w3"></div><div class="sk-bar w2"></div><div class="sk-bar"></div></div>
+  <div class="sk-row"><div class="sk-bar w1"></div><div class="sk-bar w2"></div><div class="sk-bar w3"></div><div class="sk-bar"></div></div>
+</div>
+
+<h2 class="home-h2" id="todos">待办</h2>
+<div id="todos-box"><p class="loading-note">正在探测本地待办数据…</p></div>
+
+<h2 class="home-h2" id="code">在写的东西</h2>
+<div class="kb-groups">
+  <div class="kb-group">
+    <h3>仓库</h3>
+    <ul>
+      <li><a class="lk" href="https://github.com/kyoukawa/agent-system">agent-system</a>
+        <span class="sub">多 Agent 路由：Router 分派，Worker 隔离执行。</span></li>
+      <li><a class="lk" href="https://github.com/kyoukawa/reading-collector">reading-collector</a>
+        <span class="sub">链接 → 清洗 → Obsidian 笔记，本地转写零 key。</span></li>
+      <li><a class="lk" href="https://github.com/kyoukawa/vault-backup">vault-backup</a>
+        <span class="sub">这个知识库本身，obsidian-git 自动同步。<a href="README.md">仓库说明</a>。</span></li>
+    </ul>
+  </div>
+  <div class="kb-group">
+    <h3>工具</h3>
+    <ul>
+      <li><a class="lk" href="https://node.tailedc20c.ts.net:8443/">CloudCLI</a>
+        <span class="sub">在手机或平板上开 Claude Code 会话。</span></li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p class="meta-line">
+    <a href="https://kyoukawa.is-a.dev/">个人主页</a><span>·</span>
+    数据更新于 <span id="foot-upd">—</span>
+  </p>
+  <details>
+    <summary>关于这一页</summary>
+    <div class="tech">
+      <dl>
+        <dt>怎么写</dt><dd>Obsidian 里写 Markdown，obsidian-git 自动提交推送，网页由 GitHub Pages 托管。</dd>
+        <dt>条目链接</dt><dd>改为 <code>view.html?file=&lt;ID&gt;</code>，支持 <code>[[双链]]</code> 站内跳转与 KaTeX 公式。</dd>
+        <dt>ID 对照</dt><dd><a href="view.html?file=id-reference">英文 ID 对照表</a>；不常用的笔记直接用文件路径。</dd>
+        <dt>进度数字</dt><dd>由 <code>tools/dashboard.py</code> 读取仓库文件与 git 历史生成到 <code>assets/dashboard.json</code>。</dd>
+        <dt>待办</dt><dd>只在本机可见：含私人分组，数据不入库，需 <code>python tools/dashboard.py --serve</code>。</dd>
+      </dl>
+    </div>
+  </details>
+</footer>
+
 <script>
-(function(){
-  var box = document.getElementById('weread-card');
-  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
-    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
-  function dur(m){ if(!m) return '0 分'; var h=Math.floor(m/60), r=m%60;
-    return h ? (h+' 小时'+(r?' '+r+' 分':'')) : (r+' 分'); }
-  fetch('assets/weread.json?v='+Date.now()).then(function(r){
-    if(!r.ok) throw new Error('HTTP '+r.status); return r.json();
-  }).then(function(d){
-    var t=d.time||{}, c=d.counts||{};
-    var rows = (d.reading||[]).map(function(b){
-      var pos = b.chapter&&b.chapters ? (b.chapter+'/'+b.chapters+' 章') : '';
-      if(b.chapterName) pos += ' · '+b.chapterName;
-      var pct = b.progress||0;
-      return '<tr><td class="bk">'+esc(b.title)+'<br><small>'+esc(b.author)+'</small></td>'
-        + '<td class="bar"><span style="width:'+pct+'%"></span><i>'+pct+'%</i></td>'
-        + '<td class="pos">'+esc(pos)+'</td>'
-        + '<td class="num">'+dur(b.minutes)+'</td></tr>';
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+  function dur(m) {
+    m = Math.max(0, Math.round(m || 0));
+    if (!m) return '0 分';
+    var h = Math.floor(m / 60), r = m % 60;
+    return h ? (h + ' 小时' + (r ? ' ' + r + ' 分' : '')) : (r + ' 分');
+  }
+  // 统一超时：8 秒拿不到就当失败，不让页面挂在半截
+  function getJSON(url) {
+    var opt = {};
+    if (typeof AbortSignal !== 'undefined' && AbortSignal.timeout) {
+      opt.signal = AbortSignal.timeout(8000);
+    }
+    return fetch(url + '?v=' + Date.now(), opt).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    });
+  }
+  function kpi(label, value, unit, sub, cls, href) {
+    var tag = href ? 'a' : 'div';
+    return '<' + tag + ' class="kpi ' + (cls || '') + '"' +
+      (href ? ' href="' + esc(href) + '"' : '') + '>' +
+      '<span class="k-label">' + esc(label) + '</span>' +
+      '<span class="k-value">' + esc(value) +
+        (unit ? '<small>' + esc(unit) + '</small>' : '') + '</span>' +
+      (sub ? '<span class="k-sub">' + esc(sub) + '</span>' : '') +
+      '</' + tag + '>';
+  }
+
+  // ---------- 进度（dashboard.json） ----------
+  getJSON('assets/dashboard.json')
+    .then(function (d) { renderDash(d); })
+    .catch(function (e) {
+      $('progress-empty').innerHTML =
+        '进度数据没读到（' + esc(e.message) + '）。这一段的去处在下面「按用途找」里都还在。'
+        + '本机想看完整数据：<code>python tools/dashboard.py --serve</code>。';
+      $('gen-note').textContent = '进度数据暂不可用，数字先不显示。';
+      // 「今天做什么」不能一直停在「正在读取」
+      $('today-box').innerHTML =
+        '<p class="t-do"><a href="latest.html">先做今天的四道题</a></p>' +
+        '<p class="t-meta">今天的进度数据没取到，直接去题页；'
+        + '要看看板就等网络恢复后刷新。</p>';
+    });
+
+  function renderDash(d) {
+    $('progress-empty').hidden = true;
+    $('progress-body').hidden = false;
+    $('kpis').hidden = false;
+    $('upd').textContent = '更新于 ' + (d.generated || '—');
+    $('foot-upd').textContent = d.generated || '—';
+    $('gen-note').textContent = '数字由仓库里的真实文件与 git 历史现算，生成于 ' + (d.generated || '—') + '。';
+
+    var dl = d.daily || {}, rd = d.reading || null, co = d.coach || null;
+
+    // ── 今天做什么 ──
+    var bits = [];
+    if (dl.latest) {
+      bits.push('每日一题停在 <b>' + esc(dl.latest) + '</b>' +
+        (dl.days_ago > 1 ? '（' + dl.days_ago + ' 天前）' : '（就是今天）'));
+    }
+    if (co && co.state) {
+      bits.push(co.state === '未开始' ? '带学还没开张' : '带学：' + esc(co.state));
+    }
+    if (rd) bits.push('本周读了 <b>' + dur(rd.week) + '</b>（' + rd.week_days + ' 天）');
+
+    var action = '今天做 4 道题', actHref = 'latest.html';
+    if (dl.latest === d.today) { action = '今天的题已出好，去做'; }
+    else if (co && co.state === '未开始') { action = '今天开一轮带学'; actHref = 'view.html?file=coach-state'; }
+    $('today-box').innerHTML =
+      '<p class="t-do">' + esc(d.today || '') + '　<a href="' + actHref + '">' + esc(action) + '</a></p>' +
+      '<p class="t-meta">' + bits.join(' · ') + '</p>';
+
+    // ── KPI（纯数据，不作为入口；入口统一放在「按用途找」） ──
+    var ex = d.exams || { pct: 0, done: 0, total: 0, by_subject: [] };
+    var act = (d.activity && d.activity.days) || [];
+    var activeDays = act.filter(function (x) { return x.total > 0; }).length;
+    var k = [];
+    k.push(kpi('试卷数字化', ex.pct.toFixed(0), '%', ex.done + ' / ' + ex.total + ' 份',
+      ex.pct >= 100 ? 'is-good' : '', ''));
+    k.push(kpi('每日一题', dl.total != null ? dl.total : 0, '期',
+      dl.latest ? '最近 ' + dl.latest + '（' + dl.days_ago + ' 天前）' : '还没有出题',
+      dl.days_ago != null && dl.days_ago > 2 ? 'is-warn' : '', ''));
+    if (rd) {
+      k.push(kpi('本周阅读', rd.week >= 60 ? (rd.week / 60).toFixed(1) : rd.week,
+        rd.week >= 60 ? '小时' : '分钟', '书架 ' + rd.shelf + ' 本 · 在读 ' + rd.reading + ' 本',
+        '', ''));
+    }
+    if (co) {
+      var coachSub = (co.subject && co.subject !== '—')
+        ? co.subject
+        : (co.state === '未开始' ? '说「带我学」开一轮' : '在练习中');
+      k.push(kpi('带学', co.state, '', coachSub,
+        co.state === '未开始' ? 'is-warn' : 'is-good', ''));
+    }
+    k.push(kpi('活跃天', activeDays, '天', '近 ' + act.length + ' 天内', '', ''));
+    $('kpis').innerHTML = k.join('');
+
+    // ── 试卷数字化 ──
+    $('exam-hint').textContent = ex.done + ' / ' + ex.total + ' 份 · ' + ex.pct + '%';
+    $('exam-kpi').innerHTML =
+      '<div class="meter' + (ex.pct >= 100 ? ' is-good' : '') + '">' +
+      '<i style="width:' + Math.min(100, ex.pct) + '%"></i></div>' +
+      '<p class="k-sub" style="font-size:13px;color:var(--muted);margin:6px 0 0">' +
+      '口径：试卷库下非顶层导航的题集笔记数 ÷ 原卷 PDF 数。</p>';
+    if (ex.by_subject && ex.by_subject.length) {
+      var mx = Math.max.apply(null, ex.by_subject.map(function (s) { return s.value; }));
+      $('exam-bars').innerHTML = ex.by_subject.map(function (s) {
+        return '<div class="hbar"><span class="hname">' + esc(s.name) + '</span>' +
+          '<span class="htrack"><i style="width:' + (s.value / mx * 100) + '%"></i></span>' +
+          '<span class="hval">' + s.value + '</span></div>';
+      }).join('');
+    }
+
+    // ── 标准分 ──
+    var g = d.grades;
+    if (g && g.rows && g.rows.length) {
+      var zs = g.rows.map(function (r) { return r.z; });
+      var lo = Math.floor(Math.min(-1.5, Math.min.apply(null, zs)) * 2) / 2;
+      var hi = Math.ceil(Math.max(1.5, Math.max.apply(null, zs)) * 2) / 2;
+      var pos = function (z) { return (z - lo) / (hi - lo) * 100; };
+      var rowsHtml = g.rows.map(function (r) {
+        var key = r.z <= -1;
+        return '<div class="zrow' + (key ? ' is-key' : '') + '">' +
+          '<span class="zname">' + esc(r.subject) + '</span>' +
+          '<span class="ztrack" style="--zero:' + pos(0) + '%">' +
+            '<i class="dot" style="left:' + pos(r.z) + '%" ' +
+            'title="' + esc(r.subject) + ' 标准分 ' + r.z + '"></i></span>' +
+          '<span class="zval">' + (r.z > 0 ? '+' : '') + r.z.toFixed(2) + '</span></div>';
+      }).join('');
+      var ticks = '';
+      for (var t = lo; t <= hi + 0.001; t += 0.5) {
+        ticks += '<span style="left:' + pos(t) + '%">' + (t > 0 ? '+' : '') + t.toFixed(1) + '</span>';
+      }
+      $('zplot').innerHTML = rowsHtml +
+        '<div class="zaxis"><span></span><div class="ticks">' + ticks + '</div><span></span></div>' +
+        '<p class="home-note" style="margin:8px 0 0;font-size:13px">' +
+        esc(g.exam || '') + '。低于 −1 的一科单独着色：语数英里只有语文落在均线下方。' +
+        '</p>';
+    } else {
+      $('zplot').innerHTML = '<p class="home-note" style="margin:0">还没有成绩数据。</p>';
+    }
+
+    // ── 活跃度 ──
+    if (act.length) {
+      var max = Math.max.apply(null, act.map(function (x) { return x.total; })) || 1;
+      function level(v) {
+        if (!v) return 0;
+        var q = v / max;
+        return q > 0.66 ? 4 : q > 0.4 ? 3 : q > 0.18 ? 2 : 1;
+      }
+      var cols = [], col = [], firstDow = new Date(act[0].date + 'T00:00:00').getDay();
+      var pad = (firstDow + 6) % 7;
+      for (var p = 0; p < pad; p++) col.push(null);
+      act.forEach(function (x) {
+        col.push(x);
+        if (col.length === 7) { cols.push(col); col = []; }
+      });
+      if (col.length) { while (col.length < 7) col.push(null); cols.push(col); }
+
+      $('heat').innerHTML = cols.map(function (c) {
+        return '<div class="heat-col">' + c.map(function (x) {
+          if (!x) return '<i class="heat-cell is-empty"></i>';
+          var parts = [];
+          if (x.commit) parts.push(x.commit + ' 次编辑');
+          if (x.daily) parts.push(x.daily + ' 期题');
+          if (x.log) parts.push(x.log + ' 条日志');
+          return '<i class="heat-cell' + (x.date === d.today ? ' is-today' : '') +
+            '" data-l="' + level(x.total) + '" title="' + esc(x.date) + '：' +
+            esc(parts.length ? parts.join(' · ') : '无活动') + '"></i>';
+        }).join('') + '</div>';
+      }).join('');
+
+      var colStep = window.matchMedia('(max-width:700px)').matches ? 14 : 20;
+      var MON = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+      var lastM = -1, marks = [];
+      cols.forEach(function (c, i) {
+        var first = c.filter(Boolean)[0];
+        if (!first) return;
+        var m = new Date(first.date + 'T00:00:00').getMonth();
+        if (m !== lastM) { marks.push({ i: i, t: MON[m] }); lastM = m; }
+      });
+      $('heat-months').innerHTML = marks.map(function (mk) {
+        return '<span style="left:' + (mk.i * colStep) + 'px">' + mk.t + '</span>';
+      }).join('');
+
+      var sum = act.reduce(function (a, x) { return a + x.total; }, 0);
+      $('heat-sum').textContent = '共 ' + sum + ' 次 · 活跃 ' + activeDays + ' 天';
+
+      var DOW = ['日','一','二','三','四','五','六'];
+      var active = act.filter(function (x) { return x.total; })
+        .sort(function (a, b) { return b.date.localeCompare(a.date); });
+      $('heat-recent').innerHTML = active.slice(0, 7).map(function (x) {
+        var d2 = new Date(x.date + 'T00:00:00');
+        return '<li><span class="rd">' + x.date.slice(5) + ' 周' + DOW[d2.getDay()] + '</span>' +
+          '<span class="rb"><i style="width:' + (x.total / max * 100) + '%"></i></span>' +
+          '<span class="rn">' + x.total + '</span></li>';
+      }).join('');
+      $('heat-table').querySelector('tbody').innerHTML = active.map(function (x) {
+        return '<tr><td>' + esc(x.date) + '</td><td class="num">' + x.commit +
+          '</td><td class="num">' + x.daily + '</td><td class="num">' + x.log +
+          '</td><td class="num">' + x.total + '</td></tr>';
+      }).join('');
+    }
+  }
+
+  // ---------- 正在读（weread.json，独立兜底） ----------
+  getJSON('assets/weread.json')
+    .then(function (d) { renderReading(d); })
+    .catch(function () {
+      var box = $('read-box');
+      box.classList.remove('loading');
+      box.innerHTML = '<p class="rl-msg">暂时无法获取阅读进度。'
+        + '<a href="view.html?file=reading-progress">看上次同步的快照</a>，'
+        + '数据源：<a href="assets/weread.json">weread.json</a>。</p>';
+    });
+
+  function renderReading(d) {
+    var box = $('read-box');
+    box.classList.remove('loading');
+    var t = d.time || {}, c = d.counts || {};
+    var rows = (d.reading || []).map(function (b) {
+      var posTxt = b.chapter && b.chapters ? (b.chapter + '/' + b.chapters + ' 章') : '';
+      if (b.chapterName) posTxt += (posTxt ? ' · ' : '') + b.chapterName;
+      var pct = Math.max(0, Math.min(100, b.progress || 0));
+      return '<tr><td class="bk">' + esc(b.title) + '<small>' + esc(b.author) + '</small></td>' +
+        '<td class="bar"><span style="width:' + pct + '%"></span><i>' + pct + '%</i></td>' +
+        '<td class="pos">' + esc(posTxt) + '</td>' +
+        '<td class="num">' + dur(b.minutes) + '</td></tr>';
     }).join('');
-    var done = (d.done||[]).map(function(b){
-      return '<li>'+esc(b.title)+' <small>'+esc(b.author)+' · '+dur(b.minutes)+'</small></li>';
+    var done = (d.done || []).map(function (b) {
+      return '<li>' + esc(b.title) + ' <small>' + esc(b.author) + ' · ' + dur(b.minutes) + '</small></li>';
     }).join('');
+
     box.innerHTML =
-      '<p class="wl-sum">书架上 '+d.shelf+' 本 · <b>在读 '+c.reading+'</b> · 读完 '+c.done
-      + ' · 本周 <b>'+dur(t.week)+'</b>（'+t.weekDays+' 天）· 累计 '+dur(t.all)+'</p>'
-      + (rows ? '<table class="wl"><tr><th>书</th><th>进度</th><th>位置</th><th>已读</th></tr>'+rows+'</table>' : '')
-      + (done ? '<p class="wl-done"><b>读完</b></p><ul class="wl-list">'+done+'</ul>' : '')
-      + '<p class="wl-foot">更新于 '+esc(d.updated)+' · <a href="view.html?file=reading-progress">完整页面</a> · <a href="view.html?file=reading-log">变化日志</a></p>';
-  }).catch(function(e){
-    box.innerHTML = '<p class="muted">读书数据没加载出来（'+esc(e.message)+'）。<a href="view.html?file=reading-progress">看快照页</a></p>';
-  });
+      '<p class="rl-sum">书架 ' + (d.shelf || 0) + ' 本 <b>在读 ' + (c.reading || 0) + '</b>'
+      + ' · 读完 ' + (c.done || 0) + ' · 本周 <b>' + dur(t.week) + '</b>（' + (t.weekDays || 0) + ' 天）'
+      + ' · 累计 ' + dur(t.all) + '</p>'
+      + (rows ? '<table class="rl"><tr><th>书</th><th>进度</th><th>位置</th><th>已读</th></tr>' + rows + '</table>' : '')
+      + (done ? '<p class="rl-done">读完</p><ul class="rl-list">' + done + '</ul>' : '')
+      + '<p class="rl-foot">更新于 ' + esc(d.updated || '—')
+      + ' · <a href="view.html?file=reading-log">变化日志</a>'
+      + ' · <a href="assets/weread.json">原始数据</a></p>';
+    if (d.updated) $('foot-upd').textContent = d.updated;
+  }
+
+  // ---------- 待办：只有本机看得到 ----------
+  (function loadTodos() {
+    var box = $('todos-box');
+    var isLocal = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+    if (!isLocal) {
+      box.innerHTML = '<div class="local-note"><b>待办只在本机可见。</b>'
+        + '为了不把私人分组推到公开仓库，<code>todos.local.json</code> 不入库，'
+        + '页面只在本地服务器下读取。<br>本机打开：<code>python tools/dashboard.py --serve</code>'
+        + ' → <code>http://127.0.0.1:8765/index.html</code></div>';
+      return;
+    }
+    getJSON('assets/todos.local.json')
+      .then(function (t) {
+        var cols = (t.columns || []).filter(function (c) { return c.items.length; });
+        if (!cols.length) { box.innerHTML = '<p class="local-note">没有未完成的待办。</p>'; return; }
+        box.innerHTML = '<div class="kanban">' + cols.map(function (c) {
+          return '<div class="kcol">' +
+            '<div class="kcol-head"><span class="kdot" style="background:' + esc(c.color) + '"></span>' +
+            esc(c.name) + '<span class="kcount">' + c.items.length + '</span></div>' +
+            c.items.map(function (it) {
+              return '<div class="kitem' + (it.overdue ? ' is-overdue' : '') + '">' +
+                (it.due ? '<span class="kdue">' + esc(it.due) + '</span>' : '') +
+                esc(it.title) + '</div>';
+            }).join('') + '</div>';
+        }).join('') + '</div>' +
+        '<p class="home-note" style="margin:10px 0 0;font-size:13px">同步于 ' + esc(t.generated)
+        + ' · 已排除备忘分组（私人内容）</p>';
+      })
+      .catch(function (e) {
+        box.innerHTML = '<div class="local-note">没读到 <code>assets/todos.local.json</code>'
+          + '（' + esc(e.message) + '）。跑一次 <code>python tools/dashboard.py</code>。</div>';
+      });
+  })();
 })();
 </script>
-
-<h2>🚀 直接开始</h2>
-<table>
-<tr><th>想干的事</th><th>去哪</th></tr>
-<tr><td>一眼看今天该干什么</td><td><a href="dashboard.html">看板</a></td></tr>
-<tr><td>今天做 4 道题（先做后看答案）</td><td><a href="latest.html">最新一期</a></td></tr>
-<tr><td>找某年某区某科的卷子</td><td><a href="exam.html">试卷搜索（可筛选）</a> · <a href="view.html?file=exam">做题记录</a> · <a href="view.html?file=exam-index">试卷库</a></td></tr>
-<tr><td>要带答案、按题号拆好的题</td><td><a href="view.html?file=exam-yw">语文</a> · <a href="view.html?file=exam-yy">英语</a> · <a href="view.html?file=exam-hx">化学</a> · <a href="view.html?file=exam-wl">物理</a> · <a href="view.html?file=exam-dl">地理</a></td></tr>
-<tr><td>练作文（语文 / 英语）</td><td><a href="view.html?file=chinese-index">语文语料库</a> · <a href="view.html?file=english-index">英语语料库</a></td></tr>
-<tr><td>看错题、找短板</td><td><a href="view.html?file=chem-index">化学错题本</a> · <a href="view.html?file=study-log">学习日志</a></td></tr>
-</table>
-
-<h2>📚 七个库</h2>
-<table>
-<tr><th>库</th><th>内容</th><th>规模</th><th>入口</th></tr>
-<tr><td>试卷库</td><td>北京高考/一模/二模/期末教师版原卷 PDF（含答案）+ 分题题集</td><td>428 份 / 3 年 · 435 篇题集</td><td><a href="view.html?file=exam-index">INDEX</a></td></tr>
-<tr><td>化学错题本</td><td>选择题按主题聚类 + 大题按 6 模块（只整理不复习）</td><td>37 选择题 + 204 大题</td><td><a href="view.html?file=chem-index">INDEX</a></td></tr>
-<tr><td>语文语料库</td><td>作文素材、六维判据、整本精读、时文批注</td><td>5 语料 + 7 作文 + 4 组范文 + 6 篇批注</td><td><a href="view.html?file=chinese-index">INDEX</a></td></tr>
-<tr><td>英语语料库</td><td>作文素材，What→How→Effect→Value</td><td>8 份语料 / 40 单元 + 一页纸</td><td><a href="view.html?file=english-index">INDEX</a></td></tr>
-<tr><td>数学</td><td>解析几何方法总结与学案</td><td>2 篇</td><td><a href="view.html?file=analytic-geometry">方法总结</a></td></tr>
-<tr><td>阅读收集</td><td>网页/公众号/视频 → 结构化笔记</td><td>12 篇</td><td><a href="view.html?file=reading-index">INDEX</a></td></tr>
-<tr><td>学业档案</td><td>大考成绩、赋分、标准分与失分分析</td><td>1 场</td><td><a href="view.html?file=record">INDEX</a></td></tr>
-</table>
-
-<h2>📝 题集与专题</h2>
-<ul>
-<li><a href="view.html?file=exam-red">红楼梦名著阅读题集（16 道，含答案解析）</a> · <a href="view.html?file=honglou-han">红楼梦备考讲义（1123 版）</a></li>
-<li><a href="view.html?file=chem-big-index">化学大题集（204 道，6 模块）</a></li>
-<li><a href="view.html?file=math-index">数学题集（68 份，仅 OCR 全文，未分题未提取答案）</a></li>
-<li><a href="view.html?file=tw-index">时文批注库（6 篇）</a> · <a href="view.html?file=theme-index">主题索引 M1–M10</a> · <a href="view.html?file=essay-cheatsheet">时文素材一页速查</a></li>
-<li>时文短链：<a href="sw-1.html">冷门绝学</a> · <a href="sw-2.html">科研评价·敦煌</a> · <a href="sw-3.html">三处不能加速</a> · <a href="sw-4.html">三件被重新定价</a></li>
-</ul>
-
-<h2>🔁 复习</h2>
-<p>两个语料库已改为<b>对话抽背</b>（在 Obsidian 里说「复习 / 抽卡」）；旧的遗忘曲线队列仅存档。化学错题本只整理不复习。</p>
-
-<h2>⚙️ 说明</h2>
-<p>本页是静态入口；条目经 <code>view.html?file=ID</code> 渲染（支持 <code>[[双链]]</code> 站内跳转、KaTeX 公式、表格横向滚动）。原始 Markdown 在仓库中，可用 Obsidian 打开。ID 对照见 <a href="view.html?file=id-reference">英文ID对照表</a>。</p>
-<footer>obsidian-git 自动同步 · kyoukawa/vault-backup · GitHub Pages · <a href="https://kyoukawa.is-a.dev/">个人主页</a></footer>
 </body>
 </html>

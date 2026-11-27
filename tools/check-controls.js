@@ -18,10 +18,9 @@ const EXP = {
 
 const PAGES = [
   ["exam.html", "搜索框、筛选芯片、更多按钮"],
-  ["dashboard.html", "搜索框"],
+  ["index.html", "搜索框、主入口卡片"],
   ["view.html?file=chem-elements", "搜索框"],
   ["writing-ocr.html", "搜索框、菜单按钮"],
-  ["index.html", "搜索框"],
   ["goal-board.html", "无控件"],
   ["latest.html", "无控件"]
 ];

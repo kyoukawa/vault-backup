@@ -417,7 +417,7 @@ def main():
         port = 8765
         srv = ThreadingHTTPServer(("127.0.0.1", port),
                                   lambda *a, **k: SimpleHTTPRequestHandler(*a, directory=ROOT, **k))
-        url = f"http://127.0.0.1:{port}/dashboard.html"
+        url = f"http://127.0.0.1:{port}/index.html"
         print(f"\n  本地预览：{url}\n  Ctrl+C 结束")
         webbrowser.open(url)
         try:
