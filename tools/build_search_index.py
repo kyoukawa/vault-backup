@@ -24,7 +24,8 @@ VAULT = Path(r"C:\Users\chuan\Documents\知识库")
 OUT = VAULT / "assets" / "search-index.json"
 BODY_DIR = VAULT / "assets" / "search-body"
 
-SKIP_DIRS = {".git", ".obsidian", ".tmp", "_minis", "assets", "node_modules", "tools"}
+SKIP_DIRS = {".git", ".obsidian", ".tmp", "_minis", "assets", "node_modules", "tools",
+             "docs"}   # docs/ 放开发任务文件，不是笔记，不进全站搜索
 CHUNK = 8          # 每片篇数
 BODY_CHARS = 4000  # 每篇保留正文字符数
 
