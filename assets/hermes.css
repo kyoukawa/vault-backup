@@ -212,7 +212,7 @@ table{
   border-collapse:separate;border-spacing:0;width:100%;
   margin:1.35rem 0;font-size:.9em;
   display:block;overflow-x:auto;max-width:100%;
-  border:1px solid var(--border);border-radius:10px;
+  border:1px solid var(--border);border-radius:var(--radius);
 }
 th,td{
   border:0;border-bottom:1px solid var(--border-muted);
@@ -236,7 +236,7 @@ blockquote p{margin:.3em 0}
 
 /* ---------- cards / panels ---------- */
 .card{
-  background:var(--panel);border:1px solid var(--border);border-radius:12px;
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-card);
   padding:1.35em 1.5em;margin:1.3rem 0;box-shadow:var(--shadow-lift);
 }
 /* 卡片内的第一个/最后一个元素不该带外间距，否则卡片顶部会空一大块 */
@@ -247,7 +247,7 @@ blockquote p{margin:.3em 0}
 .card h2::after{display:none}
 .card p{margin:.55em 0}
 .nav{
-  background:var(--panel);border:1px solid var(--border);border-radius:12px;
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-card);
   padding:1em 1.25em;margin-bottom:1.9em;
 }
 .nav b{display:inline;color:var(--fg);margin-right:.35em;font-weight:600}
@@ -256,7 +256,7 @@ blockquote p{margin:.3em 0}
 
 /* ---------- callouts (Obsidian) ---------- */
 details.callout{
-  border-radius:10px;margin:1.3rem 0;overflow:hidden;
+  border-radius:var(--radius);margin:1.3rem 0;overflow:hidden;
   border:1px solid var(--border);border-left:2px solid var(--accent);
   background:var(--panel);
 }
@@ -285,7 +285,7 @@ details.callout .callout-body p:last-child{margin-bottom:0}
 
 details.ans{
   margin-top:1.1rem;background:var(--success-bg);
-  border:1px solid var(--success-border);border-radius:10px;overflow:hidden;
+  border:1px solid var(--success-border);border-radius:var(--radius);overflow:hidden;
 }
 details.ans summary{
   cursor:pointer;padding:.55em 1em;color:var(--success);
@@ -294,7 +294,7 @@ details.ans summary{
 .abody{padding:.7em 1.1em;font-size:.94em;border-top:1px solid var(--success-border)}
 
 details.orig{
-  margin:1rem 0 0;border:1px solid var(--border);border-radius:12px;
+  margin:1rem 0 0;border:1px solid var(--border);border-radius:var(--radius-card);
   overflow:hidden;background:var(--panel2);
 }
 details.orig summary{
@@ -314,7 +314,7 @@ code{
 }
 pre{
   background:var(--code-bg);border:1px solid var(--border);
-  border-radius:10px;padding:1em 1.1em;overflow-x:auto;color:var(--code-fg);
+  border-radius:var(--radius);padding:1em 1.1em;overflow-x:auto;color:var(--code-fg);
   line-height:1.55;
 }
 pre code{background:transparent;border:0;padding:0;font-size:1em}
@@ -353,7 +353,7 @@ footer{
 
 /* ---------- 首页「正在读」卡片 (assets/weread.json) ---------- */
 .weread{
-  background:var(--panel);border:1px solid var(--border);border-radius:12px;
+  background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-card);
   padding:1.3em 1.5em;margin:1.3rem 0;box-shadow:var(--shadow-lift);
 }
 .weread .muted,.wl-foot{color:var(--dim);font-size:.86em;margin:.5em 0}
