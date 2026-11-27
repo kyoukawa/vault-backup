@@ -1,6 +1,6 @@
 /* 全站共享交互组件：搜索框 + 移动端抽屉
    由 assets/kb-ui.js 注入，各页只需引入一次。
-   配色走 hermes.css 的 CSS 变量，控件规格走同一套 --radius-*/--ctl-* token
+   配色走 hermes.css 的 CSS 变量，控件规格走同一套 --radius-* / --ctl-* token
    （取自 gxwtf 实测值），深浅色自动跟随。 */
 
 /* ---------- 搜索框 ---------- */
