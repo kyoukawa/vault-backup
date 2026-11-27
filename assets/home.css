@@ -1,0 +1,328 @@
+/* 首页专用皮肤（index.html 独有）。
+   与 hermes.css 的关系：只在 <html> 上覆盖配色 token，其余（字体栈、表格、
+   callout、主题按钮）继续沿用全站那一套，所以不会出现两套组件。
+
+   配色取自设计稿的方案值；对比度实测（WCAG 2.1）：
+     浅色 正文 15.8 / 次要 5.3 / accent-text 5.4（张贴在白底 5.7）
+     深色 正文 14.8 / 次要 6.9 / accent 6.7
+   accent 本身（#C15F3C）当文字只有 4.01，不达 AA，所以另给 --accent-text
+   专供链接与徽标文字；--accent 只用于边框、焦点环、装饰短线。 */
+
+:root,
+html[data-theme="light"]{
+  --bg:#FAF9F6;
+  --canvas-subtle:#F4F1EA;
+  --canvas-inset:#FFFFFF;
+  --panel:#FFFFFF;
+  --panel2:#F4F1EA;
+  --panel3:#EDE9E1;
+  --fg:#1F1E1D;
+  --muted:#6B6862;
+  --dim:#6B6862;
+  --border:#E8E4DD;
+  --border-muted:#F0EDE7;
+  --accent:#C15F3C;
+  --accent-hover:#A94A28;
+  --accent-subtle:#F9F1EC;
+  --accent-soft:#F4E6DF;
+  --accent-text:#A94A28;
+  --link:#A94A28;
+  --shadow:none;
+  --shadow-lift:none;
+  /* 首页版式 token：8px 基准 */
+  --sp-1:8px; --sp-2:16px; --sp-3:24px; --sp-4:40px; --sp-5:64px;
+  --home-max:960px;
+  --line-width:720px;
+}
+
+html[data-theme="dark"]{
+  --bg:#1A1917;
+  --canvas-subtle:#211F1D;
+  --canvas-inset:#141312;
+  --panel:#242320;
+  --panel2:#2B2A26;
+  --panel3:#33312C;
+  --fg:#EDEBE6;
+  --muted:#A6A29A;
+  --dim:#A6A29A;
+  --border:#36342F;
+  --border-muted:#2B2A26;
+  --accent:#E08A66;
+  --accent-hover:#F0A183;
+  --accent-subtle:#2A211C;
+  --accent-soft:#3A2C25;
+  --accent-text:#E08A66;
+  --link:#E08A66;
+  --shadow:none;
+  --shadow-lift:none;
+}
+
+/* ---------- 版心 ---------- */
+body.home{
+  max-width:var(--home-max);
+  padding:0 24px var(--sp-5);
+  font-size:16px;
+  line-height:1.7;
+}
+body.home::before{margin:0 -24px var(--sp-4);padding:.85rem 24px}
+
+/* 首页不要全站那条「悬停下划线生长」的链接动画，用朴素下划线，减少动效面积 */
+body.home a{background-image:none}
+body.home a:hover{text-decoration:underline;text-underline-offset:2px;color:var(--accent-text)}
+
+/* 键盘焦点：2px accent 环 + 2px 偏移（全站控件用的是 3px 软环，这里按首页规范） */
+body.home a:focus-visible,
+body.home button:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+  border-radius:4px;
+}
+
+/* ---------- 首屏 ---------- */
+.home-h1{
+  font-size:32px;line-height:1.3;font-weight:500;letter-spacing:-.005em;
+  margin:var(--sp-4) 0 var(--sp-1);
+}
+.home-lede{
+  max-width:var(--line-width);
+  color:var(--muted);font-size:16px;line-height:1.7;
+  margin:0 0 var(--sp-3);
+}
+.home-lede b{color:var(--fg);font-weight:600}
+
+/* 搜索框：居中、胶囊形 */
+body.home .kb-search{
+  max-width:var(--line-width);
+  margin:0 0 var(--sp-2);
+}
+body.home .kb-search input{
+  border-radius:999px;
+  height:44px;
+  padding:0 20px;
+  background:var(--panel);
+  font-size:16px;
+}
+body.home .kb-search input:focus{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+  box-shadow:none;
+  border-color:var(--accent);
+}
+body.home .kb-search .kbd{
+  display:inline-flex;align-items:center;justify-content:center;
+  height:26px;min-width:26px;border-radius:999px;
+}
+
+/* ---------- 区块标题 ---------- */
+.home-h2{
+  font-size:18px;font-weight:500;line-height:1.4;letter-spacing:0;
+  margin:var(--sp-5) 0 var(--sp-2);
+}
+.home-h2::after{
+  content:"";display:block;width:24px;height:2px;margin-top:10px;
+  background:var(--accent);opacity:.55;border-radius:2px;
+}
+.home-note{
+  max-width:var(--line-width);
+  color:var(--muted);font-size:14px;line-height:1.7;
+  margin:calc(-1 * var(--sp-1)) 0 var(--sp-3);
+}
+
+/* ---------- 主入口卡片 ---------- */
+.kb-cards{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:var(--sp-2);
+}
+.kb-card{
+  position:relative;display:block;
+  min-height:120px;padding:20px 44px 20px 20px;
+  background:var(--panel);
+  border:1px solid var(--border);border-radius:12px;
+  color:var(--fg);text-decoration:none;
+  transition:border-color var(--dur) var(--ease);
+}
+.kb-card:hover{text-decoration:none;border-color:var(--accent)}
+.kb-card .t{
+  display:block;font-family:var(--serif);
+  font-size:18px;font-weight:500;line-height:1.4;color:var(--fg);
+}
+.kb-card .d{
+  display:block;margin-top:6px;font-size:14px;line-height:1.6;color:var(--muted);
+}
+.kb-card .ar{
+  position:absolute;right:18px;top:22px;
+  color:var(--accent);font-size:15px;line-height:1;
+  transition:color var(--dur) var(--ease);
+}
+.kb-card:hover .ar{color:var(--accent-text)}
+
+/* ---------- 按用途找 ---------- */
+.kb-groups{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:var(--sp-3) var(--sp-4);
+}
+.kb-group h3{
+  font-family:var(--serif);font-size:18px;font-weight:500;line-height:1.4;
+  margin:0 0 var(--sp-1);
+}
+.kb-group ul{list-style:none;margin:0;padding:0}
+.kb-group li{
+  padding:10px 0;
+  border-top:1px solid var(--border-muted);
+  line-height:1.55;
+}
+.kb-group li:first-child{border-top:0;padding-top:2px}
+.kb-group .lk{
+  font-size:16px;color:var(--fg);text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.kb-group .lk:hover{color:var(--accent-text);text-decoration:underline}
+.kb-group .sub{
+  display:block;margin-top:2px;
+  font-size:14px;color:var(--muted);line-height:1.6;
+}
+.kb-group .sub a{color:var(--link);text-decoration:none}
+.kb-group .sub a:hover{text-decoration:underline}
+
+/* 数字徽标 */
+.kb-count{
+  display:inline-block;padding:1px 8px;border-radius:999px;
+  background:var(--accent-soft);color:var(--accent-text);
+  font-size:12px;line-height:1.6;font-weight:500;letter-spacing:.01em;
+  white-space:nowrap;
+}
+
+/* 术语首次出现的解释：虚线下划线 + 悬停说明 */
+.term{
+  border-bottom:1px dashed var(--border);
+  cursor:help;text-decoration:none;
+}
+html[data-theme="dark"] .term{border-bottom-color:var(--panel3)}
+
+/* ---------- 正在读 ---------- */
+.kb-reading{
+  background:var(--panel);border:1px solid var(--border);border-radius:12px;
+  padding:20px 24px;margin-top:var(--sp-1);
+}
+.kb-reading .rl-sum{
+  margin:0 0 var(--sp-2);font-size:14px;color:var(--muted);
+  display:flex;flex-wrap:wrap;gap:4px 18px;
+}
+.kb-reading .rl-sum b{color:var(--fg);font-weight:600}
+
+.kb-reading table.rl{
+  width:100%;display:table;border:0;border-radius:0;margin:0;
+  font-size:14px;
+}
+.kb-reading table.rl th{
+  background:transparent;border-bottom:1px solid var(--border);
+  padding:8px 10px;font-size:12px;letter-spacing:.04em;color:var(--muted);
+}
+.kb-reading table.rl td{
+  border:0;border-bottom:1px solid var(--border-muted);
+  padding:12px 10px;vertical-align:middle;line-height:1.5;
+}
+.kb-reading table.rl tr:last-child td{border-bottom:0}
+.kb-reading table.rl tr:nth-child(even) td{background:transparent}
+.kb-reading td.bk{width:44%;color:var(--fg);font-weight:500}
+.kb-reading td.bk small{display:block;color:var(--muted);font-weight:400;font-size:13px;margin-top:1px}
+.kb-reading td.bar{width:22%;min-width:88px;position:relative}
+.kb-reading td.bar::before{
+  content:"";position:absolute;left:10px;right:10px;top:50%;margin-top:-10px;
+  height:4px;border-radius:2px;background:var(--panel3);
+}
+.kb-reading td.bar span{
+  position:relative;display:block;height:4px;border-radius:2px;
+  background:var(--accent);min-width:2px;
+}
+.kb-reading td.bar i{
+  display:block;font-style:normal;font-size:12px;color:var(--muted);
+  margin-top:3px;font-variant-numeric:tabular-nums;
+}
+.kb-reading td.pos{width:22%;color:var(--muted);font-size:13px}
+.kb-reading td.num{
+  width:12%;text-align:right;white-space:nowrap;
+  color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;
+}
+.kb-reading .rl-done{
+  margin:var(--sp-2) 0 4px;font-size:13px;color:var(--muted);letter-spacing:.02em;
+}
+.kb-reading ul.rl-list{list-style:none;margin:0;padding:0;font-size:14px;color:var(--muted)}
+.kb-reading ul.rl-list li{padding:4px 0;border:0}
+.kb-reading .rl-foot{
+  margin:var(--sp-2) 0 0;padding-top:12px;border-top:1px solid var(--border-muted);
+  font-size:13px;color:var(--muted);
+}
+.kb-reading .rl-msg{margin:0;font-size:14px;line-height:1.7;color:var(--muted)}
+.kb-reading .rl-msg a{color:var(--link)}
+
+/* 骨架屏：只用边框色块，不出现「加载中…」孤零零一行字 */
+.sk-row{
+  display:grid;grid-template-columns:44% 22% 22% 12%;
+  gap:12px;align-items:center;padding:12px 0;
+  border-bottom:1px solid var(--border-muted);
+}
+.sk-row:last-child{border-bottom:0}
+.sk-bar{
+  height:10px;border-radius:999px;background:var(--border-muted);
+}
+.sk-bar.w1{width:78%}
+.sk-bar.w2{width:56%}
+.sk-bar.w3{width:40%}
+@media (prefers-reduced-motion:no-preference){
+  .kb-reading.loading .sk-bar{animation:sk-pulse 1.6s ease-in-out infinite}
+  .kb-reading.loading .sk-row:nth-child(2) .sk-bar{animation-delay:.18s}
+  .kb-reading.loading .sk-row:nth-child(3) .sk-bar{animation-delay:.36s}
+}
+@keyframes sk-pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* ---------- 页脚 ---------- */
+body.home footer{
+  margin-top:var(--sp-5);padding-top:var(--sp-3);
+  border-top:1px solid var(--border-muted);
+  text-align:left;font-size:14px;line-height:1.8;color:var(--muted);
+}
+body.home footer a{color:var(--link)}
+body.home footer .meta-line{margin:0}
+body.home footer details{margin-top:var(--sp-2)}
+body.home footer summary{
+  cursor:pointer;font-size:14px;color:var(--muted);
+  list-style:none;padding:4px 0;
+}
+body.home footer summary::-webkit-details-marker{display:none}
+body.home footer summary::before{content:"› ";display:inline-block;transition:transform var(--dur)}
+body.home footer details[open] summary::before{transform:rotate(90deg)}
+body.home footer .tech{
+  margin-top:8px;padding:12px 16px;
+  border:1px solid var(--border-muted);border-radius:10px;
+  background:var(--canvas-subtle);
+  font-size:14px;line-height:1.75;color:var(--muted);
+}
+body.home footer .tech dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 16px}
+body.home footer .tech dt{color:var(--fg);font-weight:500}
+body.home footer .tech dd{margin:0;min-width:0;overflow-wrap:anywhere}
+
+/* ---------- 响应式 ---------- */
+@media (max-width:959px){
+  .kb-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kb-groups{grid-template-columns:minmax(0,1fr);gap:var(--sp-3)}
+}
+@media (max-width:639px){
+  body.home{padding:0 20px var(--sp-5)}
+  body.home::before{margin:0 -20px var(--sp-3);padding:.75rem 20px}
+  .home-h1{font-size:28px;margin-top:var(--sp-3)}
+  .kb-cards{grid-template-columns:minmax(0,1fr)}
+  .kb-card{min-height:0;padding:16px 40px 16px 16px}
+  .kb-card .d{display:block}
+  .kb-reading{padding:16px}
+  .kb-reading td.pos,.kb-reading th:nth-child(3){display:none}
+  .kb-reading td.bk{width:56%}
+  .kb-reading td.bar{width:28%}
+  .kb-group li{padding:12px 0}   /* 触控目标 ≥44px */
+  body.home footer .tech dl{grid-template-columns:1fr;gap:2px}
+  body.home footer .tech dd{margin-bottom:8px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  body.home *{transition:none !important;animation:none !important}
+}
