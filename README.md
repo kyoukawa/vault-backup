@@ -41,23 +41,6 @@
 3. `assets/ids.json` 里的路径都真实存在；新增常用页补一条 ID，其余交给 `view.html?file=<路径>` 兜底；
 4. `assets/linkmap.json` 由 `.tmp/gen_linkmap.py` 全量重生成（重名 basename 不建短键，避免 INDEX 串味）。
 
-## 🖥 在 Zed 里看 PDF
-
-Zed 没有内置 PDF 渲染器，官方扩展库里也没有 PDF 扩展（查 `extensions.toml` 为 0 条）。
-所以用 `tools/pdf_preview.py` 把 PDF 逐页渲成 PNG，拼成一篇 md 走 Markdown 预览：
-
-```bash
-python tools/pdf_preview.py                      # 弹文件选择框
-python tools/pdf_preview.py letter5salp.pdf      # 指定文件，渲染完自动在 Zed 打开
-python tools/pdf_preview.py x.pdf --pages 1-20   # 只渲部分页（可分次补）
-python tools/pdf_preview.py x.pdf --jpg --dpi 200
-```
-
-- 产物在 `.tmp/pdf-preview/<文件名>/`（`p001.png` … + `<文件名>.md`），`.tmp/` 已被 gitignore
-- Zed 里 `alt-p`，或命令面板 `task: spawn` 选「PDF: 预览（选择文件）」
-- 分次渲染会累积：后来只渲第 5 页，md 里仍是全部已渲页
-- PDF 没改动时重跑直接复用图片；`--force` 强制重渲
-
 ## 🗂 统计
 
 - Markdown 701 篇 · 原卷 PDF 428 份 · 分题题集 435 篇

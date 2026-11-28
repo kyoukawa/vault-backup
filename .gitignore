@@ -18,3 +18,7 @@ tmp_*
 
 # 看板的待办数据（含私人分组），只在本机 --serve 时读取
 assets/todos.local.json
+
+# 工程脚本与来路不明的大文件（不入库）
+letter5salp.pdf
+tools/
